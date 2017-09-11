@@ -8,6 +8,23 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="Sim">
+        <param name="android-package" value="com.pbakondy.Sim" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
     <allow-intent href="market:*" />
     <preference name="android-minSdkVersion" value="21" />
     <preference name="android-targetSdkVersion" value="21" />
@@ -17,12 +34,12 @@
         <uses-permission android:name="android.permission.CAMERA" />
         <uses-feature android:name="android.hardware.camera" />
     </config-file>
-    <name>QB Video Chat</name>
+    <name>BeautyCAM</name>
     <description>
-        QuickBlox Apache Cordova simple code sample for Web Video (WebRTC) Chat (via QuickBlox SDK + API)
+        BeautyCAM
     </description>
-    <author email="assist@quickblox.com" href="https://quickblox.com">
-       QuickBlox Team
+    <author email="soronto3603@gmail.com" href="">
+       BeautyCAM
     </author>
     <content src="index.html" />
     <access origin="*" />

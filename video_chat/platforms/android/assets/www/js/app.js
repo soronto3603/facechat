@@ -1,7 +1,7 @@
 
 ;(function(window, QB, app, CONFIG, $, Backbone) {
     'use strict';
-
+    var interval_var;
     $(function() {
         var sounds = {
             'call': 'callingSignal',
@@ -261,8 +261,11 @@
                           localStorage.setItem('isAuth', true);
                         }
                         app.router.navigate('dashboard', { trigger: true });
-                        GetMember();
-                        document.getElementById('iframe').style.display="block";
+                        //interval_var=setInterval(GetMember,1000);
+
+                        CheckMyid(user.id);
+                        document.getElementById('iframe').style.display="none";
+                        document.getElementById('iframe').src="http://hume.co.kr/facechat/";
 
                     }
                 });
@@ -317,13 +320,12 @@
         function CheckState(){
           if(state==2)
           {
+            alert(selId+"/"+selName );
             SetId(selId,selName);
             Calling();
             state=1;
           }
         }
-
-
 
         function SetId(id,name) {
             var $user = $(this),
@@ -410,10 +412,13 @@
                             }
                         });
                     } else {
+
                         app.currentSession.call({}, function(error) {
                             if(error) {
+                              alert(error.detail);
                                 console.warn(error.detail);
                             } else {
+                              alert("if false");
                                 var compiled = _.template( $('#callee_video').html() );
 
                                 app.helpers.stateBoard.update({'title': 'calling'});
@@ -440,15 +445,10 @@
             }
         }
 
-
         /** Check / uncheck user (callee) */
         $(document).on('click', '.j-user', SetId);
 
         /** Call / End of call */
-
-
-
-
 
         $(document).on('click', '.j-actions', Calling);
 

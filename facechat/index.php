@@ -20,6 +20,11 @@
       <div class=menu id=menu6 value=menu6 onclick="click_menu(5)">더보기</div>
     </div>
     <div class=navigator_line id=menu_line></div>
+    <div class=reload_icon_container onclick="reload_data()">
+      <tag>새로고침</tag>
+      <img src="./img/iconmonstr-refresh-3-240.png" width=20 height=20>
+    </div>
+
   </div>
   <div class=card_container>
     <div class="swiper-container">
@@ -27,7 +32,7 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
               <center>
                 <img src="./img/hyojin.JPG" width=200 height=200>
                 <div>여/공효진/36</div>
@@ -47,7 +52,7 @@
                 <div>여/한예슬/32</div>
                 <div class=request_face_chat onclick="click_face_chat_btn()">영상통화신청하기</div>
               </center>
-            </div>
+            </div> -->
         </div>
         <div class="swiper-pagination"></div>
     </div>
