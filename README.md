@@ -1,6 +1,6 @@
 #### facechat 
 
-> This is <Beauty Cam> project.
+> This is 'Beauty Cam' project.
 
 ## 1. menu
 ```html
