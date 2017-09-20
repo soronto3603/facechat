@@ -1,0 +1,32 @@
+#contents{
+  margin-top:160px;
+  width:100%;
+  height:auto;
+}
+.option_menu{
+  width:16.6%;
+  float:left;
+  text-align:center;
+}
+.line{
+  width:100%;
+  height:50px;
+}
+.img_left{
+  width:40px;
+  height:100%;
+  background-color:black;
+  float:left;
+}
+.line_contents{
+  width:200px;
+  height:100%;
+  background-color:green;
+  float:left;
+}
+.icon_box{
+  width:100px;
+  height:100%;
+  background-color:blue;
+  float:right;
+}

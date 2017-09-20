@@ -205,6 +205,8 @@
         app.router = new Router();
         Backbone.history.start();
 
+        //cordova auto_login
+        auto_login();
         /**
          * JOIN
          */
@@ -261,7 +263,8 @@
 
                         CheckMyid(user.id);
 
-                        document.getElementById('iframe').src="http://hume.co.kr/facechat/";
+                        document.getElementById('iframe').src="http://hume.co.kr/facechat/live.php";
+                        document.getElementById('load').style.display="none";
                     }
                 });
             }).catch(function(error) {
@@ -285,6 +288,7 @@
         }
         var Istate;
         Istate=setInterval(CheckState,1000);
+
         function CheckState(){
           if(state==2)
           {
@@ -293,8 +297,9 @@
             Calling();
             state=1;
           }else if(state==3){
-            Calling();
+            unCalling();
             state=1;
+            $('#iframe').css("display","block");
           }
         }
         function SetId(id,name) {
@@ -310,6 +315,29 @@
                 app.callees[user.id] = user.name;
                 $user.addClass('active');
             }
+        }
+        function unCalling(){
+          if(!_.isEmpty(app.currentSession)) {
+
+              if(recorder) {
+                  recorder.stop();
+              }
+
+              app.currentSession.stop({});
+              app.currentSession = {};
+
+              app.helpers.stateBoard.update({
+                  'title': 'tpl_default',
+                  'property': {
+                      'tag': app.caller.user_tags,
+                      'name':  app.caller.full_name,
+                  }
+              });
+
+              app.helpers.setFooterPosition();
+
+              return false;
+          }
         }
         function Calling(){
             var $btn = $(this),
@@ -525,6 +553,7 @@
                     });
                     app.helpers.setFooterPosition();
                     app.currentSession.accept({});
+                    document.getElementById('iframe').style.display="none";
                 }
             });
         });

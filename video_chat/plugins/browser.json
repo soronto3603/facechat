@@ -24,6 +24,12 @@
         },
         "cordova-plugin-sim": {
             "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-sqlite-2": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
         }
     },
     "dependent_plugins": {}

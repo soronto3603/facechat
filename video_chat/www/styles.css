@@ -44,6 +44,7 @@ b {
   top:0px;
   z-index:10;
 }
+#
 #splash{
   position:absolute;
   width:100%;
@@ -51,6 +52,34 @@ b {
   left:0px;
   top:0px;
   z-index:20;
+}
+#load{
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  left:0px;
+  top:0px;
+  z-index:30;
+}
+.uncalling_btn{
+  line-height: 70px;
+	font-size: 20px;
+	position:  fixed;
+	bottom: 0;
+	width:100%;
+	height: 70px;
+	background-color: #d35886;
+	color:white;
+  text-align:center;
+}
+.camera_page{
+  display:none;
+  position:absolute;
+  left:0px;
+  top:40px;
+  width:100%;
+  height:90%;
 }
 .splash_image{
   width:100%;

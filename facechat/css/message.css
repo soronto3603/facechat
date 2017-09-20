@@ -1,0 +1,27 @@
+.line{
+  height:120px;
+  width:100%;
+}
+.left_photo{
+  width:20%;
+  height:100%;
+  float:left;
+}
+.right_bubble{
+  width:80%;
+  height:100%;
+  float:left;
+}
+.line_text_nickname{
+  color:red;
+  font-size:14px;
+}
+.line_text_normal{
+
+}
+.line_text_time{
+  float:right;
+}
+.clear{
+  clear:both;
+}

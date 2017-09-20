@@ -1,0 +1,74 @@
+.content_img{
+  border-radius:10px;
+}
+.reload_icon_container{
+  background-color:#3D3D3D;
+  padding:20px;
+}
+.reload_icon{
+  position: relative;
+  top: 4px;
+  left: 5px;
+}
+.reload_icon_text{
+  color:#fcfcfc;
+  text-align:right;
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    background-color:#3D3D3D;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #3D3D3D;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.card_container{
+  width:100%;
+  height:50%;
+}
+
+
+.request_face_chat{
+  line-height: 70px;
+  font-size: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #d35886;
+  color: #fcfcfc;
+  z-index:1;
+  text-align:center;
+}
+ .profile_text{
+   width:200px;
+   height:40px;
+   line-height:40px;
+   font-size:25px;
+ }
+.swiper-button-next{
+
+}
+ .content_contanier{
+
+
+ }
+ .content_select{
+   border-radius:10px;
+   box-shadow: -1px -1px 16px 3px;
+ }

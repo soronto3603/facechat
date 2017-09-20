@@ -16,12 +16,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div id=load>
+    <center>
+      <div style="width:1px;height:1px;margin-top:45%"></div>
+      <img src="./images/Spinner.gif" width=100 height=100>
+    </center>
+  </div>
   <div id=splash>
-    <img class=splash_image src="./images/splash.png">
-    <p class=splash_text>Beauty<br>CAM</p>
+    <!-- <img class=splash_image src="./images/splash.png"> -->
+    <!-- <p class=splash_text>Beauty<br>CAM</p> -->
 
   </div>
-  <iframe id=iframe style="display:block;" src="http://hume.co.kr/facechat/signin/"></iframe>
+  <iframe id=iframe style="display:block;"></iframe>
     <div class="wrapper j-wrapper">
         <header style="display:none;" class="header">
             <div class="inner">
@@ -127,7 +133,7 @@
         </div>
     </div>
 
-    <div style="display:none;" class="modal fade" id="error_no_calles" tabindex="-1">
+    <div class="modal fade" id="error_no_calles" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
@@ -157,6 +163,15 @@
         </div>
     </div>
 
+    <div class=camera_page id=camera_page>
+      <div class="qb-video">
+          <video id="main_video" class="frames__main_v qb-video_source"></video>
+      </div>
+      <div class="qb-video" style="width:50%;height:50%;position:relative;left:25%;">
+          <video id="localVideo" class="qb-video_source"></video>
+      </div>
+      <div class=uncalling_btn onclick="state=3;">전화끊기</div>
+    </div>
     <!-- TEMPLATES -->
         <!-- stateBoard -->
         <script type="text/template" id="tpl_default">
@@ -204,24 +219,15 @@
     <script type="text/template" id="dashboard_tpl">
         <div class="state_board j-state_board"></div>
 
-        <div class="dashboard__inner inner">
+        <div style="display:none" class="dashboard__inner inner">
             <div class="users j-users_wrap"></div>
 
             <div class="board clearfix j-board"></div>
         </div>
     </script>
-    <div style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
-      <div class="qb-video">
-          <video id="main_video" class="frames__main_v qb-video_source"></video>
-      </div>
-      <div class="qb-video">
-          <video id="localVideo" class="qb-video_source"></video>
-      </div>
-    </div>
+
     <script type="text/template" id="frames_tpl">
-
-
-        <div style="display:none;" class="frames">
+        <div style="display:none" class="frames">
             <div class="frames__main">
                 <div class="frames__main_timer invisible" id="timer">
                 </div>
@@ -232,10 +238,8 @@
             <div class="frames__callees j-callees"></div>
         </div>
 
-        <div style="display:none;" class="caller">
-            <div class="caller__ctrl">
-                <button class="caller__ctrl_btn j-actions"></button>
-            </div>
+        <div style="display:none" class="caller">
+
 
             <h4 class="caller__name">
                 <b>You</b>
@@ -298,7 +302,7 @@
     </script>
 
     <script type="text/template" id="users_tpl">
-        <div style="display:none;" class="users__title" title="Choose a user to call">
+        <div class="users__title" title="Choose a user to call">
             Choose a user to call
             <button class="users__refresh j-users__refresh" title="click to refresh">
                 <svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -321,7 +325,7 @@
     </script>
 
     <script type="text/template" id="user_tpl">
-        <div style="display:none;" class="users__item">
+        <div class="users__item">
             <button class="users__user j-user" data-id="<%= id %>" data-login="<%= login %>" data-name="<%= full_name %>">
                 <i class="user__icon"></i>
                 <span class="user__name"><%= full_name %></span>
@@ -331,7 +335,7 @@
     </script>
 
     <script type="text/template" id="callee_video">
-        <div style="display:none;" class="frames_callee callees__callee j-callee">
+        <div class="frames_callee callees__callee j-callee">
             <div class="frames_callee__inner">
                 <p class="frames_callee__status j-callee_status_<%=userID%>">
                     <%=state%>
@@ -360,7 +364,7 @@
 
     <script>
       document.addEventListener('deviceready', onDeviceReady, false);
-      var my_name;
+
       var phone_number;
       function splash_animation(duration){
         setTimeout(()=>{$('#splash').fadeOut(1000,()=>{});},duration);
@@ -368,11 +372,50 @@
       function login(nick,sex){
         $('#input_name').val(nick);
         $('#input_sex').val(sex);
-        submit_sign();
+        submit_sign(nick,sex);
       }
-      function submit_sign(){
-        my_name=document.getElementById('input_name').value;
-        var sex=document.getElementById('input_sex').value;
+      //////////////////////////////////////////////////////
+      ///////////////////DB MODULE//////////////////////////
+      //////////////////////////////////////////////////////
+      var myid;
+      function checkLoginStatus(success){
+          db.transaction(function (txn) {
+              txn.executeSql('select * from login', [], function (tx, res) {
+                  var id=res.rows.item(0).id;
+                  myid=id;
+                  success(id);
+              });
+          });
+      }
+      function setLoginStatus(id){
+          db.transaction(function (txn) {
+              txn.executeSql('update login set id=?', [id], function (tx, res) {
+                  myid=id;
+              });
+          });
+      }
+
+      function dropTable(){
+          db.transaction(function (txn) {
+              txn.executeSql('drop table login', [], function (tx, res) {
+              });
+          });
+      }
+      function dbinit(){ //database init.
+          db = sqlitePlugin.openDatabase('login.db', '1.0', '', 1);
+          db.transaction(function (txn) {
+              txn.executeSql('create table if not exists login(id text)', [], function (tx, res) {
+              });
+              txn.executeSql('insert into login values(?)', [''], function (tx, res) {
+      	     });
+          });
+      }
+      //////////////////////////////////////////////////////
+      ///////////////////DB MODULE//////////////////////////
+      //////////////////////////////////////////////////////
+      function submit_sign(nick,sex){
+        document.getElementById('load').style.display="block";
+
         //중복 이름 제거
         // $.get("http://hume.co.kr/facechat/sql/select_overap_name.php",{name:name}).done((r)=>{
         //   if(r=="true"){
@@ -383,14 +426,16 @@
         // });
         $.post("http://hume.co.kr/facechat/sql/insert_user.php",{
           id:'',
-          name:name,
+          name:nick,
           tag:'Hume',
           sex:sex,
           loc:'',
           imguri:'',
-          phone:''
+          phone:phone_number
         }).done((r)=>{
+          setLoginStatus(nick);
           $("#submit_log").click();
+          document.getElementById('camera_page').style.display="block";
         });
       }
       function onBackFunction(){
@@ -403,9 +448,11 @@
           state=3;
         }
       }
+
       function onDeviceReady() {
           console.log("onDeviceReady");
           document.addEventListener("backbutton", onBackFunction, false);
+          StatusBar.backgroundColorByHexString("#3D3D3D");
           splash_animation(100);
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
@@ -429,11 +476,8 @@
           loadScriptAsync("js/helpers.js");
           loadScriptAsync("js/stateBoard.js");
           loadScriptAsync("js/app.js");
+          dbinit();
 
-          window.plugins.sim.requestReadPermission((r)=>{
-            window.plugins.sim.getSimInfo((r)=>{
-              phone_number=r.phoneNumber;
-            },()=>{})}, (er)=>{alert(er);});
 
           window.onmessage=function(e){
             if(e.data=="reload"){
@@ -447,6 +491,10 @@
                 state=2;
               }else if(JSONDATA.title=="signin"){
                 login(JSONDATA.name,JSONDATA.sex);
+              }else if(JSONDATA.title=="move"){
+                document.getElementById('iframe').src=JSONDATA.move+"?phone="+phone_number;
+              }else if(JSONDATA.title=="talk"){
+                document.getElementById('iframe').src=JSONDATA.talk;
               }
             }
           }
