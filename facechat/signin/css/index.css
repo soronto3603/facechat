@@ -28,7 +28,10 @@ body{
 	border-right:0px;
 	border-bottom:0.5px solid #d3b158;
 	color:#d3b158;
+<<<<<<< HEAD
 	ime-mode:disabled;
+=======
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 }
 input:focus{
 	outline:none;

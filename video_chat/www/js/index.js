@@ -8,6 +8,13 @@ var my_id;
 function init(){
   Imember=setInterval(CheckMember,1000);
 }
+<<<<<<< HEAD
+=======
+
+function get_user_list(){
+  $('#query')
+}
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 function CheckMember(){
   if(user_list){
       //to-do
@@ -15,6 +22,7 @@ function CheckMember(){
       clearInterval(Imember);
   }
 }
+<<<<<<< HEAD
 function auto_login(){
   window.plugins.sim.requestReadPermission((r)=>{
     window.plugins.sim.getSimInfo((r)=>{
@@ -36,6 +44,10 @@ function auto_login(){
 function load_all_var(){
   for(var i=0;i<user_list.length;i++){
 
+=======
+function load_all_var(){
+  for(var i=0;i<user_list.length;i++){
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
     if(user_list[i]==null)continue;
     if(my_id==user_list[i].id){
       delete user_list[i];
@@ -51,5 +63,12 @@ function CheckMyid(id){
 
     //alert(r);
   });
+<<<<<<< HEAD
 }
+=======
+
+}
+
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 window.onload=init();

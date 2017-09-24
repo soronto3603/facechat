@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<<<<<<< HEAD
     <title></title>
+=======
+    <title>QuickBlox JavaScript WebRTC sample</title>
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 
     <link rel="canonical" href="https://quickblox.github.io/quickblox-javascript-sdk/samples/webrtc"/>
     <link rel="shortcut icon" href="https://quickblox.com/favicon.ico">
@@ -16,6 +20,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<<<<<<< HEAD
   <div id=load>
     <center>
       <div style="width:1px;height:1px;margin-top:45%"></div>
@@ -65,6 +70,49 @@
                         <div class="join__row">
                             <button id=submit_log type="submit" class="join__btn">Login</button>
                         </div>
+=======
+
+    <div id=main>
+      <iframe id=iframe style="display:none;" src="http://hume.co.kr/facechat/signin/"></iframe>
+    </div>
+    <div id=join_move_dashboard class=join_move_dashboard></div>
+    <div class="wrapper j-wrapper">
+        <div id=intro>
+          <img src="./images/intro.png" class=intro_photo>
+          <div class=intro_topmargin><font class=intro_font>Beauty</font><br><font class=intro_font>CAM</font></div>
+        </div>
+
+        <main class="app" id="app">
+
+            <div class="page">
+
+                <!-- JOIN -->
+                <form style="display:none" class="join j-join">
+
+                    <div class="join__body">
+                        <div class=camera_img><img id=camera_img width=300 height=300></div>
+                        <div class=camera onclick="getCamera();">Camera</div>
+                        <div class=photo onclick="getPhoto();">Photo</div>
+                        <div class="line">
+                          <div class=line_tag><p>이름</p></div>
+                          <div class=line_input><input type="text" id=input_name class="join__input" name="username" placeholder="Username" value='Lee' autofocus required title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$"></div></div>
+                        <div class="line">
+                          <div class=line_tag><p>성별</p></div>
+                          <div class=line_input><input id=input_sex value="여"></div>
+                        </div>
+                        <div>
+                          <div class=line_tag><p>지역</p></div>
+                          <div class=line_input><input id=input_loc value="전북/전주"></div>
+                        </div>
+                        <div class="join__row">
+                            <input style="display:none;" type="text" class="join__input" name="room" value='Hume' placeholder="Chat room name" required title="Field should contain alphanumeric characters only in a range 3 to 15, without space. The first character must be a letter." pattern="^[a-zA-Z][a-zA-Z0-9]{2,14}$">
+                        </div>
+                        <div class=line><div onclick="submit_sign();">test</div></div>
+                        <div class="join__row" >
+                          <button style="display:none;" id=submit_log type="submit" class="join__btn" >Login</button>
+                        </div>
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
                     </div>
                 </form>
 
@@ -73,12 +121,16 @@
             </div>
         </main>
 
+<<<<<<< HEAD
         <footer style="display:none;" class="footer j-footer invisible">
             <h4>
                 <a class="fw-link" href="https://github.com/QuickBlox/quickblox-javascript-sdk/tree/gh-pages/samples/webrtc">
                     Source code
                 </a>
             </h4>
+=======
+        <footer class="footer j-footer invisible">
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         </footer>
 
         <!-- SOUNDS -->
@@ -163,6 +215,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class=camera_page id=camera_page>
       <div class="qb-video">
           <video id="main_video" class="frames__main_v qb-video_source"></video>
@@ -172,6 +225,8 @@
       </div>
       <div class=uncalling_btn onclick="state=3;">전화끊기</div>
     </div>
+=======
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
     <!-- TEMPLATES -->
         <!-- stateBoard -->
         <script type="text/template" id="tpl_default">
@@ -219,7 +274,11 @@
     <script type="text/template" id="dashboard_tpl">
         <div class="state_board j-state_board"></div>
 
+<<<<<<< HEAD
         <div style="display:none" class="dashboard__inner inner">
+=======
+        <div class="dashboard__inner inner">
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
             <div class="users j-users_wrap"></div>
 
             <div class="board clearfix j-board"></div>
@@ -227,19 +286,36 @@
     </script>
 
     <script type="text/template" id="frames_tpl">
+<<<<<<< HEAD
         <div style="display:none" class="frames">
+=======
+        <div class="frames">
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
             <div class="frames__main">
                 <div class="frames__main_timer invisible" id="timer">
                 </div>
 
+<<<<<<< HEAD
 
+=======
+                <div class="qb-video">
+                    <video id="main_video" class="frames__main_v qb-video_source"></video>
+                </div>
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
             </div>
 
             <div class="frames__callees j-callees"></div>
         </div>
 
+<<<<<<< HEAD
         <div style="display:none" class="caller">
 
+=======
+        <div class="caller">
+            <div class="caller__ctrl">
+                <button class="caller__ctrl_btn j-actions"></button>
+            </div>
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 
             <h4 class="caller__name">
                 <b>You</b>
@@ -247,7 +323,13 @@
             </h4>
 
             <div class="caller__frames">
+<<<<<<< HEAD
 
+=======
+                <div class="qb-video">
+                    <video id="localVideo" class="qb-video_source"></video>
+                </div>
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 
                 <div class="caller__frames_acts">
                     <button class="caller__frames_acts_btn j-caller__ctrl" data-target="video">
@@ -364,14 +446,23 @@
 
     <script>
       document.addEventListener('deviceready', onDeviceReady, false);
+<<<<<<< HEAD
 
       var phone_number;
       function splash_animation(duration){
         setTimeout(()=>{$('#splash').fadeOut(1000,()=>{});},duration);
+=======
+      document.getElementById('iframe').style.display="block";
+      var phone_number;
+      var imguri;
+      function intro_fadeout(){
+        setTimeout(()=>{$("#intro").fadeOut("slow",()=>{});},1);
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
       }
       function login(nick,sex){
         $('#input_name').val(nick);
         $('#input_sex').val(sex);
+<<<<<<< HEAD
         submit_sign(nick,sex);
       }
       //////////////////////////////////////////////////////
@@ -416,6 +507,14 @@
       function submit_sign(nick,sex){
         document.getElementById('load').style.display="block";
 
+=======
+        submit_sign();
+      }
+      function submit_sign(){
+        var name=document.getElementById('input_name').value;
+        var sex=document.getElementById('input_sex').value;
+        var loc=document.getElementById('input_loc').value;
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         //중복 이름 제거
         // $.get("http://hume.co.kr/facechat/sql/select_overap_name.php",{name:name}).done((r)=>{
         //   if(r=="true"){
@@ -426,6 +525,7 @@
         // });
         $.post("http://hume.co.kr/facechat/sql/insert_user.php",{
           id:'',
+<<<<<<< HEAD
           name:nick,
           tag:'Hume',
           sex:sex,
@@ -500,6 +600,108 @@
           }
       }
 
+=======
+          name:name,
+          tag:'Hume',
+          sex:sex,
+          loc:loc,
+          imguri:imguri,
+          phone:phone_number
+        }).done((r)=>{
+          $("#submit_log").click();
+        });
+      }
+      var win = function (r) {
+        alert(r.response);
+        imguri=r.response;
+      }
+      var options = new FileUploadOptions();
+      options.fileKey = "upload";
+      options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+      options.mimeType = "image/jpeg";
+
+      var params = {};
+      params.value1 = "test";
+      params.value2 = "param";
+
+
+      options.params = params;
+      function getCamera(){
+        navigator.camera.getPicture((imgUri)=>{
+          document.getElementById('camera_img').src=imgUri;
+          var ft = new FileTransfer();
+          ft.upload(imgUri, encodeURI("http://hume.co.kr/facechat/upload.php"), win, ()=>{alert("imguploadfail");}, options);
+        }, ()=>{
+          //alert("cameara fail");
+        },
+        {
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            popoverOptions: new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY)
+        });
+      }
+      function getPhoto(){
+        navigator.camera.getPicture((imgUri)=>{
+          document.getElementById('camera_img').src=imgUri;
+          var ft = new FileTransfer();
+          ft.upload(imgUri, encodeURI("http://hume.co.kr/facechat/upload.php"), win, ()=>{alert("imguploadfail");}, options);
+        }, ()=>{
+          //alert("cameara fail");
+        },
+        {
+            destinationType: Camera.DestinationType.FILE_URI,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            popoverOptions: new CameraPopoverOptions(300, 300, 100, 100, Camera.PopoverArrowDirection.ARROW_ANY)
+        });
+      }
+
+      function onDeviceReady() {
+        // Load JavaScript files async
+        //
+
+        StatusBar.backgroundColorByHexString("#333333");
+        var mminterval;
+        var loadScriptAsync = function(path){
+            var jsScript = document.createElement("script");
+            jsScript.type = "text/javascript";
+            jsScript.async = false; //async is being set to false so that script will not immediately fire.
+            jsScript.src = path;
+            document.getElementsByTagName("body")[0].appendChild(jsScript);
+        }
+        loadScriptAsync("https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.4.0/quickblox.min.js");
+        loadScriptAsync("config.js");
+        loadScriptAsync("js/helpers.js");
+        loadScriptAsync("js/stateBoard.js");
+        loadScriptAsync("js/app.js");
+        intro_fadeout();
+        //login('ABC');
+
+
+
+        window.plugins.sim.requestReadPermission((r)=>{
+          window.plugins.sim.getSimInfo((r)=>{
+            phone_number=r.phoneNumber;
+          },()=>{})}, (er)=>{alert(er);});
+
+
+        window.onmessage=function(e){
+          if(e.data=="reload"){
+            load_all_var();
+          }else{
+            var JSONDATA=JSON.parse(e.data);
+            if(JSONDATA.title=="facechat"){
+              document.getElementById('iframe').style.display="none";
+              selId=JSONDATA.id;
+              selName=JSONDATA.name;
+              state=2;
+            }else if(JSONDATA.title=="signin"){
+              login(JSONDATA.name,JSONDATA.sex);
+            }
+          }
+        }
+
+      }//온디바이스레디끝
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
       // Listen for orientation changes and scroll
       //
       window.addEventListener('orientationchange', updatedVideoFrames);
@@ -510,6 +712,10 @@
             cordova.plugins.iosrtc.refreshVideos();
         }
       }
+<<<<<<< HEAD
+=======
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
     </script>
 
     <!-- hack for github Pages -->
@@ -519,5 +725,9 @@
         window.location.protocol = "https";
     </script>
     <script src='js/index.js'></script>
+<<<<<<< HEAD
+=======
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 </body>
 </html>

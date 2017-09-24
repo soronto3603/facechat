@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 ;(function(window, QB, app, CONFIG, $, Backbone) {
     'use strict';
 
+=======
+
+;(function(window, QB, app, CONFIG, $, Backbone) {
+    'use strict';
+    var interval_var;
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
     $(function() {
         var sounds = {
             'call': 'callingSignal',
@@ -95,6 +102,10 @@
             'routes': {
                 'join': 'join',
                 'dashboard': 'dashboard',
+<<<<<<< HEAD
+=======
+                'main' : 'main',
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
                 '*query': 'relocated'
             },
             'container': $('.page'),
@@ -126,7 +137,14 @@
                 app.calleesAnwered = [];
                 app.users = [];
             },
+<<<<<<< HEAD
             'dashboard': function() {
+=======
+
+            'dashboard': function() {
+              //document.getElementById('iframe').style.display="none";
+              //document.getElementById('app').style.display="block";
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
                 if(_.isEmpty(app.caller)) {
                     app.router.navigate('join', { 'trigger': true });
                     return false;
@@ -205,8 +223,11 @@
         app.router = new Router();
         Backbone.history.start();
 
+<<<<<<< HEAD
         //cordova auto_login
         auto_login();
+=======
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         /**
          * JOIN
          */
@@ -215,7 +236,10 @@
                 data = _.object( _.map( $form.serializeArray(), function(item) {
                     return [item.name, item.value.trim()];
                 }));
+<<<<<<< HEAD
 
+=======
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
             if (window.device.platform === 'browser') {
               if(localStorage.getItem('isAuth')) {
                   $('#already_auth').modal();
@@ -259,12 +283,21 @@
                           localStorage.setItem('isAuth', true);
                         }
                         app.router.navigate('dashboard', { trigger: true });
+<<<<<<< HEAD
                         GetMember();
 
                         CheckMyid(user.id);
 
                         document.getElementById('iframe').src="http://hume.co.kr/facechat/live.php?phone"+phone_number;
                         document.getElementById('load').style.display="none";
+=======
+                        //interval_var=setInterval(GetMember,1000);
+
+                        CheckMyid(user.id);
+                        document.getElementById('iframe').style.display="none";
+                        document.getElementById('iframe').src="http://hume.co.kr/facechat/";
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
                     }
                 });
             }).catch(function(error) {
@@ -274,6 +307,32 @@
             return false;
         });
 
+<<<<<<< HEAD
+=======
+        /**
+         * DASHBOARD
+         */
+        /** REFRESH USERS */
+        $(document).on('click', '.j-users__refresh', function() {
+            var $btn = $(this);
+
+            app.callees = {};
+            $btn.prop('disabled', true);
+
+            ui.insertOccupants().then(function(users) {
+                user_list=users;
+                app.users = users;
+                $btn.prop('disabled', false);
+                app.helpers.setFooterPosition();
+            }, function() {
+                $btn.prop('disabled', false);
+                app.helpers.setFooterPosition();
+            });
+
+        });
+
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         function GetMember()
         {
           ui.insertOccupants().then(function(users) {
@@ -286,6 +345,7 @@
               app.helpers.setFooterPosition();
           });
         }
+<<<<<<< HEAD
         var Istate;
         Istate=setInterval(CheckState,1000);
 
@@ -302,6 +362,24 @@
             $('#iframe').css("display","block");
           }
         }
+=======
+
+
+
+
+        var Istate;
+        Istate=setInterval(CheckState,1000);
+        function CheckState(){
+          if(state==2)
+          {
+            alert(selId+"/"+selName );
+            SetId(selId,selName);
+            Calling();
+            state=1;
+          }
+        }
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         function SetId(id,name) {
             var $user = $(this),
                 user = {
@@ -316,6 +394,7 @@
                 $user.addClass('active');
             }
         }
+<<<<<<< HEAD
         function unCalling(){
           if(!_.isEmpty(app.currentSession)) {
 
@@ -339,6 +418,9 @@
               return false;
           }
         }
+=======
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         function Calling(){
             var $btn = $(this),
                 $videoSourceFilter = $(ui.sourceFilter),
@@ -412,8 +494,15 @@
 
                         app.currentSession.call({}, function(error) {
                             if(error) {
+<<<<<<< HEAD
                                 console.warn(error.detail);
                             } else {
+=======
+                              alert(error.detail);
+                                console.warn(error.detail);
+                            } else {
+                              alert("if false");
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
                                 var compiled = _.template( $('#callee_video').html() );
 
                                 app.helpers.stateBoard.update({'title': 'calling'});
@@ -439,6 +528,7 @@
                 });
             }
         }
+<<<<<<< HEAD
         /**
          * DASHBOARD
          */
@@ -459,11 +549,17 @@
                 app.helpers.setFooterPosition();
             });
         });
+=======
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 
         /** Check / uncheck user (callee) */
         $(document).on('click', '.j-user', SetId);
 
         /** Call / End of call */
+<<<<<<< HEAD
+=======
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         $(document).on('click', '.j-actions', Calling);
 
         /** DECLINE */
@@ -553,7 +649,10 @@
                     });
                     app.helpers.setFooterPosition();
                     app.currentSession.accept({});
+<<<<<<< HEAD
                     document.getElementById('iframe').style.display="none";
+=======
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
                 }
             });
         });

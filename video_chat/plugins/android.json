@@ -22,15 +22,37 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
         },
+<<<<<<< HEAD
+=======
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         "cordova-plugin-sim": {
             "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+<<<<<<< HEAD
         },
         "cordova-plugin-sqlite-2": {
             "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
         }
     },
     "dependent_plugins": {}
+=======
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        }
+    }
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 }

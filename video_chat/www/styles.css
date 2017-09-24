@@ -21,6 +21,7 @@ time, mark, audio, video {
     font: inherit;
     vertical-align: baseline;
 }
+<<<<<<< HEAD
 
 body {
     font: 400 15px/1 'Open Sans', sans-serif;
@@ -38,18 +39,42 @@ b {
 }
 #iframe{
   position:absolute;
+=======
+/*.line{
+  width:100%;
+  margin:10px;
+  height:60px;
+}
+.line_tag{
+  width:100%;
+  height:20px;
+}
+.line_input{
+  width:100%;
+  height:40px;
+}*/
+#intro{
+  position:absolute;
+  z-index:20;
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
   width:100%;
   height:100%;
   left:0px;
   top:0px;
+<<<<<<< HEAD
   z-index:10;
 }
 #splash{
+=======
+}
+.intro_photo{
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
   position:absolute;
   width:100%;
   height:100%;
   left:0px;
   top:0px;
+<<<<<<< HEAD
   z-index:20;
   background-color:#bc7f80;
 }
@@ -101,6 +126,43 @@ b {
 .wrapper{
   /*margin-top:600px;*/
 }
+=======
+}
+.intro_topmargin{
+  position:absolute;
+  top:30%;
+  width:100%;
+  text-align:center;
+  color:#fcfcfc;
+  z-index:30;
+}
+.intro_font{
+  font-size:40px;
+}
+#iframe{
+  background-color:#333333;
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+  z-index:10;
+}
+body {
+    font: 400 15px/1 'Open Sans', sans-serif;
+    color: #808080;
+}
+
+button {
+    padding: 0;
+    outline: none;
+}
+
+b {
+    font-weight: 700;
+}
+
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 .qb-select {
     width: 100%;
     padding: 6px;
@@ -114,7 +176,11 @@ b {
 .qb-video {
     position: relative;
     padding: 0 0 75% 0; /* 4:3 */
+<<<<<<< HEAD
     background-color: #3D3D3D;
+=======
+    background: #bfbfbf;
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 }
 .qb-video_source {
     position: absolute;
@@ -201,6 +267,7 @@ b {
  */
 .header {
     display: block;
+<<<<<<< HEAD
     padding: 32px 0;
     border-bottom: 1px solid #efeff4;
 }
@@ -239,6 +306,18 @@ b {
     }
 }
 
+=======
+    height:60px;
+    width:100%;
+    background-color:#333333;
+    line-height:60px;
+}
+.header_text{
+  color:#fcfcfc;
+  margin-left:10px;
+  font-size:
+}
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 /**
  * FOOTER
  */
@@ -670,7 +749,11 @@ b {
 .frames_callee {
     display: inline-block;
     position: relative;
+<<<<<<< HEAD
     width: 50%;
+=======
+    width: 33%;
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
 
     margin-bottom: 15px;
 

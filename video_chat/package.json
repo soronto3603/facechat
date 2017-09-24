@@ -4,15 +4,20 @@
     "displayName": "QB Video Chat",
     "cordova": {
         "platforms": [
+<<<<<<< HEAD
             "android",
             "browser",
             "ios"
+=======
+            "android"
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         ],
         "plugins": {
             "cordova-custom-config": {},
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-iosrtc": {},
+<<<<<<< HEAD
             "cordova-plugin-whitelist": {}
         }
     },
@@ -26,6 +31,25 @@
         "cordova-plugin-iosrtc": "~3.1.0",
         "cordova-plugin-sim": "^1.3.3",
         "cordova-plugin-sqlite-2": "^1.0.4",
+=======
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-sim": {},
+            "cordova-plugin-statusbar": {}
+        }
+    },
+    "dependencies": {
+        "cordova-android": "~6.1.1",
+        "cordova-custom-config": "~3.0.14",
+        "cordova-plugin-camera": "^2.4.1",
+        "cordova-plugin-compat": "^1.1.0",
+        "cordova-plugin-console": "~1.0.4",
+        "cordova-plugin-device": "~1.1.3",
+        "cordova-plugin-file": "^4.0.0",
+        "cordova-plugin-file-transfer": "^1.6.3",
+        "cordova-plugin-iosrtc": "~3.1.0",
+        "cordova-plugin-sim": "^1.3.3",
+        "cordova-plugin-sim2": "^1.0.19",
+>>>>>>> fa57fe9a151023583f91ccf139cd595933264f96
         "cordova-plugin-statusbar": "^2.2.3",
         "cordova-plugin-whitelist": "1"
     }
