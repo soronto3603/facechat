@@ -17,14 +17,14 @@
   </div>
   <div class=top>
     <div class=title_container>
-      <p class=title_text>BeautyCAM</p>
+      <p class=title_text>뷰티캠</p>
     </div>
     <div class=navigator_container>
       <div class="menu selected_menu" id=menu1 value=menu1 onclick="">라이브</div>
       <div class=menu id=menu2 value=menu2 onclick="click_menu('talk')">토크</div>
       <div class=menu id=menu3 value=menu3 onclick="click_menu('rank')">순위</div>
       <div class=menu id=menu4 value=menu4 onclick="click_menu('message')">쪽지함</div>
-      <div class=menu id=menu5 value=menu5 onclick="click_menu('more')">더보기</div
+      <div class=menu id=menu5 value=menu5 onclick="click_menu('more')">더보기</div>
     </div>
     <div class=reload_icon_container onclick="reload_data()">
       <p class=reload_icon_text>새로고침<img class=reload_icon src="./img/iconmonstr-refresh-3-240.png" width=20 height=20></p>

@@ -6,7 +6,6 @@ var Imember;
 var my_id;
 
 function init(){
-
   Imember=setInterval(CheckMember,1000);
 }
 function CheckMember(){
@@ -20,12 +19,11 @@ function auto_login(){
   window.plugins.sim.requestReadPermission((r)=>{
     window.plugins.sim.getSimInfo((r)=>{
       checkLoginStatus((e)=>{
-        phone_number=r.phoneNumber;
+        phone_number=r.phoneNumber.replace("+","");
         if(phone_number==""){
           alert("핸드폰 번호를 알 수 없습니다.");
         }
         if(e){
-          e=e.replace("+","");
           $('#input_name').val(e);
           $("#submit_log").click();
         }else{

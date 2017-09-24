@@ -5,22 +5,23 @@ body{
   background-color:#bed1dd;
 }
 .header{
+  background-color:#ff999a;
   position:fixed;
   top:0px;
   left:0px;
   width:100%;
   height:60px;
   line-height:60px;
-  border:1px solid #afc1cb;
+  border:1px solid #e9e9e9;
   border-left:none;
   border-right:none;
   border-top:none;
+  z-index:30;
 }
 .footer{
   position:fixed;
   bottom:0px;
   left:0px;
-  width:100%;
   height:60px;
 }
 
@@ -29,8 +30,13 @@ body{
   width:100%;
   height:auto;
 }
+.line_left{
+  margin-left:40px;
+  display:inline-block;
+}
 .reverse_arrow{
   margin-top:10px;
+  margin-left: 20px;
   -ms-transform: rotate(180deg); /* IE 9 */
   -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
   transform: rotate(180deg);
@@ -38,9 +44,9 @@ body{
 .header_title{
   color:#47494a;
   display: inline-block;
-  font-size: 25px;
+  font-size: 20px;
   position: relative;
-  bottom: 10px;
+  bottom: 2.5px;
 }
 .plus_icon_box{
   width:60px;
@@ -87,18 +93,21 @@ body{
   clear:both;
 }
 .chatbubble_target{
-  width:50px;
-  height:50px;
   padding:10px;
   border-radius:10px;
   background-color:#fdf01b;
 }
 .chatbubble_me{
-  width:50px;
-  height:50px;
   padding:10PX;
   border-radius:10px;
   background-color:#fafbfc;
+}
+.profile_me{
+  right:0px;
+}
+.line_left_me{
+  float:right;
+  margin-right:40px;
 }
 .content_me{
   width:45%;
@@ -114,6 +123,19 @@ body{
 .endline{
   width:100%;
   height:1px;
+}
+.next_day_line{
+  width:90%;
+  margin:10px;
+  border-radius:10px;
+  background-color:#aba8a2;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  color:#fafbfc;
+}
+.profile_photo{
+  position:absolute;
 }
 /*#fdf01b
 /*#fafbfc;

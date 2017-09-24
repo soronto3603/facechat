@@ -2,11 +2,18 @@ var get_data_interval;
 window.onload=()=>{
   $('#talk_input_box').css("width",$(window).width()-140+"px");
   add_chat("안녕안녕","2017/09/18",0,"현운용","./img/iconmonstr-user-1-240.png");
+  add_next_day_line("2017년 09월 21일 화요일");
   add_chat("방ㄱ가방가","2017/08/34",1,"이정헌","./img/iconmonstr-user-1-240.png");
   get_data_interval=setInterval(get_talk_data,1000);
 }
 function stop_to_get_data(){
   clearInterval(get_data_interval);
+}
+function add_next_day_line(date){
+  var line_width=$(window).width()-20;
+  var html='';
+  html+="<div class='next_day_line' style='width:"+line_width+"px'>"+date+"</div>";
+  document.getElementById('content_container').innerHTML+=html;
 }
 function add_chat(text,date,target,nickname,imguri){
   var html='';
@@ -17,10 +24,17 @@ function add_chat(text,date,target,nickname,imguri){
     type="target";
   }
   html+="<div class=content_"+type+">";
-  html+="<img src='"+imguri+"' class=profile_photo width=30 height=30>";
-  html+="<div class=nickname>"+nickname+"</div>";
-  html+="<div class=chatbubble_"+type+">"+text+"</div>";
-  html+="<div class=time>"+date+"</div></div>";
+  html+="<img src='"+imguri+"' class='profile_photo ";
+  if(target==0){
+    html+="profile_me";
+  }
+  html+="' width=40 height=40>";
+  html+="<div class='line_left ";
+  if(target==0){
+    html+="line_left_me";
+  }
+  html+="'><div class=chatbubble_"+type+">"+text+"</div>";
+  html+="<div class=time>"+date+"</div></div></div>";
   html+="<div class=clear></div><div class=endline></div>";
   document.getElementById('content_container').innerHTML+=html;
 }

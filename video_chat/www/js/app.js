@@ -263,7 +263,7 @@
 
                         CheckMyid(user.id);
 
-                        document.getElementById('iframe').src="http://hume.co.kr/facechat/live.php";
+                        document.getElementById('iframe').src="http://hume.co.kr/facechat/live.php?phone"+phone_number;
                         document.getElementById('load').style.display="none";
                     }
                 });

@@ -15,7 +15,7 @@
   </div>
   <div class=top>
     <div class=title_container>
-      <p class=title_text>BeautyCAM</p>
+      <p class=title_text>뷰티캠</p>
     </div>
     <div class=navigator_container>
       <div class=menu id=menu1 value=menu1 onclick="click_menu('live')">라이브</div>
@@ -28,10 +28,23 @@
   <div class=option_container>
 
   </div>
-  <div class=contents>
-    <div class=line onclick="move_talk_room('821031857630')">
+  <div id=contents class=contents>
+    <div class=line onclick="move_talk_room('821097709339')">
       <div class=left_photo>
-
+        사진없음
+      </div>
+      <div class=right_bubble>
+        <div class=line_text_first>
+          <font class=line_text_nickname>와플</font>
+          <font class=line_text_normal>여27세???km</font>
+          <font class=line_text_time>59분전</font><</div>
+          <div class=clear></div>
+        <div class=line_text_second>영상채팅요청</div>
+      </div>
+    </div>
+    <div class=line onclick="move_talk_room('821058837630')">
+      <div class=left_photo>
+        사진없음
       </div>
       <div class=right_bubble>
         <div class=line_text_first>

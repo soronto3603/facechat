@@ -8,10 +8,11 @@
     <input id=phone type=hidden value='<?echo $_GET['phone']?>'/>
     <input id=target type=hidden value='<?echo $_GET['target']?>'/>
     <header class=header>
-      <img class=reverse_arrow src="./img/iconmonstr-arrow-25-240.png" width=40 height=40>
+      <img class=reverse_arrow src="./img/iconmonstr-arrow-25-240.png" width=20 height=20>
       <div class=header_title>채팅방</div>
     </header>
     <div id=content_container class=content_container>
+
       <!-- <div class=content_target>
         <img class=profile_photo width=30 height=30>
         <div class=nickname>nickname</div>
@@ -28,6 +29,7 @@
       </div>
       <div class=clear></div>
       <div class=endline></div> -->
+
     </div>
     <footer class=footer>
       <div class=plus_icon_box><img class=plus_icon src="./img/iconmonstr-plus-1-240.png" width=30 height=30></div>
