@@ -1,0 +1,55 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-custom-config": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-iosrtc": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-sim": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-sqlite-2": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-fcm": {
+            "PACKAGE_NAME": "com.hume.facechat"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.quickblox.cordova.video_chat"
+        }
+    }
+}

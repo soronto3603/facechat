@@ -1,0 +1,46 @@
+body{
+  margin:0px;
+}
+.half_input_dash{
+  width:20px;
+  height:100%;
+  display:inline-block;
+}
+.half_input{
+  height:100%;
+  background-color:#e9e9e9;
+  border:none;
+}
+.normal_input{
+  width:100%;
+  height:100%;
+  background-color:#e9e9e9;
+  border:none;
+}
+.line_input{
+  height:50px;
+}
+.line_tag{
+  margin-left:10px;
+  margin-top:10px;
+}
+.full_width{
+  margin:10px;
+  margin-top:5px;
+}
+.header{
+  line-height:60px;
+  background-color:#cfced7;
+  height:60px;
+}
+.header_left_text{
+  float:left;
+  margin-left:10px;
+}
+.header_right_text{
+  float:right;
+  margin-right:10px;
+}
+.clear{
+  clear:both;
+}

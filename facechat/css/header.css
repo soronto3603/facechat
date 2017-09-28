@@ -1,0 +1,118 @@
+*{
+  margin:0px;
+  padding:0px;
+}
+html, body {
+    position: relative;
+    height: 100%;
+    background-color:#ffffff;
+}
+body {
+    background: #ffffff;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#ffffff;
+    margin: 0;
+    padding: 0;
+}
+#load{
+  position:fixed;
+  z-index:30;
+  width:100%;
+  height:100%;
+  left:0px;
+  top:0px;
+  display:none;
+}
+.title_container{
+  background-color:#ff999a;
+  width:100%;
+  height:60px;
+  line-height:40px;
+}
+.title_text{
+  color: white;
+  font-weight: bold;
+  position: relative;
+  top: 8px;
+  left:5px;
+  text-align:left;
+  margin-left:10px;
+  font-size:20px;
+  display:inline;
+}
+.navigator_container{
+  height:60px;
+  background-color:#ffffff;
+  width:100%;
+  color:black;
+  border: 2px solid #e9e9e9;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.menu{
+  display:inline-block;
+  width:20%;
+  float:left;
+  text-align:center;
+  position: relative;
+  top: 18px;
+}
+.selected_menu{
+  color:#6379FF;
+}
+#content_iframe{
+  width:100%;
+  height:100%;
+}
+.modal{
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  position:fixed;
+  z-index:30;
+  background-color:rgba(0,0,0,0.3);
+  display:none;
+}
+.modal_sex_contents{
+  margin-top:45%;
+  width:200px;
+  height:120px;
+  background-color:#ffffff;
+  border-radius:10px;
+}
+.modal_camera_contents{
+  margin-top:45%;
+  width:200px;
+  height:120px;
+  background-color:#ffffff;
+  border-radius:10px;
+}
+.modal_title_contents{
+  margin-top:45%;
+  width:200px;
+  height:300px;
+  background-color:#ffffff;
+  border-radius:10px;
+  overflow:auto;
+}
+.modal_exit_contents{
+  margin-top:45%;
+  width:200px;
+  height:300px;
+  background-color:#ffffff;
+  border-radius:10px;
+}
+.modal_line{
+  width:100%;
+  height:60px;
+  line-height:60px;
+  color:#000000;
+  font-size:20px;
+}
+.modal_line:hover{
+  background-color:#ff999a;
+}

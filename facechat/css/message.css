@@ -1,0 +1,58 @@
+.line{
+  height:120px;
+  border:4px solid #e9e9e9;
+  border-left:none;
+  border-right:none;
+  border-top:none;
+}
+.left_photo{
+  text-align:center;
+  background-color:#e9e9e9;
+  color:#ffffff;
+  line-height:80px;
+  margin-top:20px;
+  margin-left:20px;
+  width:80px;
+  height:80px;
+  float:left;
+}
+.right_bubble{
+  margin-top:20px;
+  margin-left:20px;
+  border: 1px solid #e9e9e9;
+  border-radius: 10px;
+  height: 80px;
+  float:left;
+}
+.line_text_nickname{
+  margin-left:10px;
+  color:#ff6c6c;
+  font-size:20px;
+}
+.line_text_normal{
+  color:#c9c9c9;
+}
+.line_text_time{
+  color:#c9c9c9;
+  margin-right:20px;
+  float:right;
+}
+.line_text_second{
+  margin-left: 20px;
+  font-size: 16px;
+  color: #000000;
+  margin-top: 5px;
+}
+.line_text_first{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.clear{
+  clear:both;
+}
+.girl{
+  color:#ff6c6c;
+}
+.man{
+  color:#6379FF;
+}

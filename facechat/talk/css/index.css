@@ -1,0 +1,141 @@
+html,body{
+  margin:0px;
+}
+body{
+  background-color:#bed1dd;
+}
+.header{
+  background-color:#ff999a;
+  position:fixed;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:60px;
+  line-height:60px;
+  border:1px solid #e9e9e9;
+  border-left:none;
+  border-right:none;
+  border-top:none;
+  z-index:30;
+}
+.footer{
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  height:60px;
+}
+
+.content_container{
+  margin-top:60px;
+  width:100%;
+  height:auto;
+}
+.line_left{
+  margin-left:40px;
+  display:inline-block;
+}
+.reverse_arrow{
+  margin-top:10px;
+  margin-left: 20px;
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+  transform: rotate(180deg);
+}
+.header_title{
+  color:#47494a;
+  display: inline-block;
+  font-size: 20px;
+  position: relative;
+  bottom: 2.5px;
+}
+.plus_icon_box{
+  width:60px;
+  height:60px;
+  background-color:#d1d1d1;
+  float:left;
+}
+.plus_icon{
+  margin-top:15px;
+  margin-left:15px;
+}
+.talk_input_box{
+  width:100%;
+  background-color:white;
+  height:60px;
+  float:left;
+}
+.talk_input{
+  width:inherit;
+  height:inherit;
+  margin-top:10px;
+  height:40px;
+  border:none;
+}
+.confirm_box{
+  width:80px;
+  height:60px;
+  float:left;
+  background-color:white;
+}
+.confirm{
+  width:70px;
+  height:40px;
+  margin-left:5px;
+  background-color:#ddd485;
+  position: relative;
+  bottom: 5px;
+  line-height:40px;
+}
+.confirm_text{
+  text-align:center;
+}
+.clear{
+  clear:both;
+}
+.chatbubble_target{
+  padding:10px;
+  border-radius:10px;
+  background-color:#fdf01b;
+}
+.chatbubble_me{
+  padding:10PX;
+  border-radius:10px;
+  background-color:#fafbfc;
+}
+.profile_me{
+  right:0px;
+}
+.line_left_me{
+  float:right;
+  margin-right:40px;
+}
+.content_me{
+  width:45%;
+  float:right;
+}
+.content_target{
+  width:45%;
+  float:left;
+}
+.nickname{
+  display:inline-block;
+}
+.endline{
+  width:100%;
+  height:1px;
+}
+.next_day_line{
+  width:90%;
+  margin:10px;
+  border-radius:10px;
+  background-color:#aba8a2;
+  height:30px;
+  line-height:30px;
+  text-align:center;
+  color:#fafbfc;
+}
+.profile_photo{
+  position:absolute;
+}
+/*#fdf01b
+/*#fafbfc;
