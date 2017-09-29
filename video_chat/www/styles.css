@@ -25,7 +25,7 @@ time, mark, audio, video {
 body {
     font: 400 15px/1 'Open Sans', sans-serif;
     color: #808080;
-    background-color: #3D3D3D;
+    background-color: #000000;
 }
 
 button {
@@ -54,13 +54,12 @@ b {
   background-color:#bc7f80;
 }
 .splash_image{
-  position:absolute;
-  top:40%;
-  left:30%;
+  margin-top:60%;
   width:200px;
   height:200px;
   background-color:white;
   z-index:30;
+  border-radius:20px;
 }
 #load{
   display:none;
@@ -71,26 +70,37 @@ b {
   top:0px;
   z-index:30;
 }
-.uncalling_btn{
-  line-height: 70px;
-	font-size: 20px;
-	position:  fixed;
-	bottom: 0;
-	width:100%;
-	height: 70px;
-	background-color: #d35886;
-	color:white;
-  text-align:center;
-}
+
 .camera_page{
   display:none;
   position:absolute;
   left:0px;
-  top:40px;
+  top:0px;
   width:100%;
-  height:90%;
+  height:100%;
 }
-
+.icon_box{
+  position:absolute;
+  top:20px;
+  left:20px;
+}
+.send_point{
+  width:150px;
+  height:40px;
+  display:inline-block;
+  position:absolute;
+  right:-20px;
+  bottom:50px;
+}
+.send_point_text{
+  color:#f1c40f;
+}
+.end_call{
+  width:40px;
+  height:40px;
+  border-radius:20px;
+  background-color:rgba(255,43,43,0.8);
+}
 .splash_text{
   position:relative;
   bottom:70%;
@@ -112,9 +122,9 @@ b {
 }
 
 .qb-video {
-    position: relative;
-    padding: 0 0 75% 0; /* 4:3 */
-    background-color: #3D3D3D;
+
+
+    background-color: #000000;
 }
 .qb-video_source {
     position: absolute;
@@ -646,12 +656,6 @@ b {
 }
 
 .frames__main_timer {
-    display: inline-block;
-    position: absolute;
-    top: 8px;
-    left: 10px;
-    padding: 10px;
-
     border-radius: 8px;
     background: rgba(0,0,0, .5);
     color: #fff;
@@ -732,4 +736,74 @@ b {
     white-space: nowrap;
     font-size: 15px;
     line-height: 1.2;
+}
+/*.modal{
+  width:100%;
+  height:100%;
+  top:0px;
+  left:0px;
+  position:fixed;
+  z-index:30;
+  background-color:rgba(0,0,0,0.3);
+  display:none;
+}*/
+.modal_send_point_contents{
+  width:250px;
+  height: 210px;
+  background-color:white;
+  border-radius:20px;
+  margin-top:40%;
+}
+.modal_send_point_header{
+  background-color:#ff999a;
+  color:white;
+  height:50px;
+  line-height:50px;
+  font-size:20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  color:#000000;
+}
+.modal_send_point_list{
+  width:210px;
+}
+.send_point_box{
+  width:65px;
+  height:20px;
+  border:1px solid #e9e9e9;
+  color:black;
+  display:inline-block;
+  font-size:11px;
+  line-height:20px;
+}
+.modal_send_point_title{
+  height:40px;
+  line-height:40px;
+  color:#000000;
+}
+.modal_send_point_img{
+  margin-top:10px;
+  margin-bottom:10px;
+  height:100px;
+}
+.modal_send_point_icon_box{
+  margin-top:20px;
+}
+.modal_send_btn{
+  display:inline-block;
+  width:155px;
+  height:40px;
+  line-height:40px;
+  background-color:#ff999a;
+  border-radius:10px;
+  color:black;
+}
+.modal_send_close_btn{
+  display:inline-block;
+  width:80px;
+  height:40px;
+  line-height:40px;
+  background-color:gray;
+  border-radius:10px;
+  color:#ffffff;
 }

@@ -4,7 +4,22 @@ var selName='abc';
 var user_list; //user_list[0].id  full_name
 var Imember;
 var my_id;
-
+var gift_point;
+function send_point_modal(){
+  alert(123);
+  document.getElementById('modal_send_point').style.display='block';
+}
+function send_point(){
+  $.get("http://hume.co.kr/facechat/sql/select_user_by_id.php",{id:selId}).done((r)=>{
+    alert(r);
+  });
+}
+function select_gift_point(str,me){
+  gift_point=str;
+}
+function close_send_modal(){
+  document.getElementById('modal_send_point').style.display="none";
+}
 function init(){
 
   Imember=setInterval(CheckMember,1000);
@@ -21,13 +36,15 @@ function auto_login(){
       checkLoginStatus((e)=>{
         phone_number=r.phoneNumber.replace("+","");
         if(phone_number==""){
-          alert("핸드폰 번호를 알 수 없습니다.");
+          alert("핸드폰 번호를 알 수 없습니다. (Permission Error)");
+          navigator.app.exitApp();
         }
         if(e){
           $('#input_name').val(e);
           $("#submit_log").click();
         }else{
-          document.getElementById('iframe').src="http://hume.co.kr/facechat/signin/";
+          document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php?back_url=update";
+          splash_animation(100);
         }
       });
 

@@ -262,9 +262,11 @@
                         GetMember();
 
                         CheckMyid(user.id);
-
-                        document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php";
-                        document.getElementById('load').style.display="none";
+                        splash_animation(100);
+                        if(document.getElementById('iframe').src.indexOf("http://hume.co.kr/facechat/index.php")==-1){
+                          document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php";
+                        }
+                        //document.getElementById('iframe').contentWindow.postMessage('LoadOff','*');
                     }
                 });
             }).catch(function(error) {
@@ -294,9 +296,11 @@
           {
             //alert(selId+"/"+selName );
             SetId(selId,selName);
+            $('#camera_page').css("display","block");
             Calling();
             state=1;
           }else if(state==3){
+            $('#camera_page').css("display","none");
             unCalling();
             state=1;
             $('#iframe').css("display","block");
@@ -478,6 +482,7 @@
 
         /** ACCEPT */
         $(document).on('click', '.j-accept', function() {
+          $('#camera_page').css("display","block");
             var $videoSourceFilter = $(ui.sourceFilter),
                 mediaParams = {
                     audio: true,

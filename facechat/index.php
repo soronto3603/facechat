@@ -7,33 +7,70 @@
 <body>
   <input id=back_url type=hidden value='<?echo $_GET['back_url']?>'/>
   <input id=phone type=hidden value='<?echo $_GET['phone']?>'/>
-  <div id=load>
+  <!-- <div id=load>
     <center>
-      <div style="width:1px;height:1px;top-margin:45%;"></div>
+      <div style="width:1px;height:1px;margin-top:45%;"></div>
       <img src="./img/Spinner.gif" width=100 height=100>
     </center>
-  </div>
+  </div> -->
   <div class=top>
     <div class=title_container>
       <p class=title_text>뷰티캠</p>
+      <p id=my_point class=title_point></p>
     </div>
     <div class=navigator_container>
-      <div class=menu id=menu1 value=menu1 onclick="click_menu('live')">라이브</div>
-      <div class=menu id=menu2 value=menu2 onclick="click_menu('talk')">토크</div>
-      <div class=menu id=menu3 value=menu3 onclick="click_menu('rank')">순위</div>
-      <div class=menu id=menu4 value=menu4 onclick="click_menu('message')">쪽지함</div>
-      <div class=menu id=menu5 value=menu5 onclick="click_menu('more')">더보기</div>
+      <div class=menu id=menu1 value=menu1 onclick="click_menu('live')">
+        <div class=menu_icon_box><img class=icon_img src="./img/live.png"></div>
+        <div class=menu_text>라이브</div>
+      </div>
+      <div class=menu id=menu2 value=menu2 onclick="click_menu('talk')">
+        <div class=menu_icon_box><img class=icon_img src="./img/msg.png"></div>
+        <div class=menu_text>토크</div>
+      </div>
+      <div class=menu id=menu3 value=menu3 onclick="click_menu('rank')">
+        <div class=menu_icon_box><img class=icon_img src="./img/rank.png"></div>
+        <div class=menu_text>순위</div>
+      </div>
+      <div class=menu id=menu4 value=menu4 onclick="click_menu('message')">
+        <div class=menu_icon_box><img class=icon_img src="./img/talk.png"></div>
+        <div class=menu_text>쪽지함</div>
+      </div>
+      <div class=menu id=menu5 value=menu5 onclick="click_menu('more')">
+        <div class=menu_icon_box><img class=icon_img src="./img/more.png"></div>
+        <div class=menu_text>더보기</div>
+      </div>
     </div>
+  </div>
+  <div id=modal_send_msg class=modal>
+    <center>
+        <div class=modal_send_msg_contents>
+          <div class=modal_send_msg_header>쪽지보내기</div>
+          <div  class=modal_send_msg_img style="border-radius:50px;">
+            <img id=send_msg_img src="" width=100 height=100 style="border-radius:50px;">
+          </div>
+          <div class=modal_send_msg_input>
+            <input id=input_send_msg>
+            <input type=hidden id=input_send_msg_phone>
+          </div>
+          <div class=modal_send_msg_icon_box>
+            <div class=modal_send_btn onclick="send_message()">쪽지보내기</div>
+            <div class=modal_send_close_btn onclick="close_send_message()">닫기</div>
+          </div>
+        </div>
+    </center>
   </div>
   <div id=modal_exit class=modal onclick="modal_exit();">
     <center>
       <div class=modal_exit_contents>
-        <div class=modal_line onclick='modal_exit_line("exit")'>종료</div>
-        <div class=modal_line onclick='modal_exit_line("PhotoLibrary")'>취소</div>
+        <div class=modal_exit_title>종료하시겠습니까?</div>
+        <div>
+          <div class="modal_exit_btn" style="background-color:#f5c33f;color:black" onclick='modal_exit_line("exit")'>종료</div>
+          <div class=modal_exit_btn style="background-color:gray" onclick='modal_exit_line("")'>취소</div>
+        </div>
       </div>
     </center>
   </div>
-  <div id=modal_camera class=modal onclick="camera_modal();">
+  <div id=modal_camera class=modal onclick="modal_camera();">
     <center>
       <div class=modal_camera_contents>
         <div class=modal_line onclick='modal_camera_line("Camera")'>카메라</div>

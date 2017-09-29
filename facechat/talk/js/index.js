@@ -1,14 +1,32 @@
 var get_data_interval;
+var phone;
+var target_phone;
+var target_info;
 window.onload=()=>{
-  $('#talk_input_box').css("width",$(window).width()-140+"px");
-  // add_chat("안녕안녕","2017/09/18",0,"현운용","./img/iconmonstr-user-1-240.png");
-  // add_next_day_line("2017년 09월 21일 화요일");
-  // add_chat("방ㄱ가방가","2017/08/34",1,"이정헌","./img/iconmonstr-user-1-240.png");
+  $('#talk_input_box').css("width",$(window).width()-80+"px");
+  get_user_data();
   get_data_interval=setInterval(get_talk_data,1000);
+}
+function request_facechat(){
+  window.parent.postMessage('{"title":"facechat","id":"'+target_info[1]+'","name":"'+target_info[2]+'"}',"*");
+}
+function get_user_data(){
+  phone=document.getElementById('phone').value;
+  target=document.getElementById('target').value;
+  $.get("http://hume.co.kr/facechat/sql/select_user_one_by_phone.php",{phone:target}).done((r)=>{
+    target_info=JSON.parse(r);
+  });
 }
 window.onmessage=(e)=>{
   if(e.data=="backbutton"){
     backbutton();
+  }else{
+    var obj=JSON.parse(e.data);
+    if(obj.title==""){
+
+    }else if(obj.title=="Phone"){
+      phone=obj.Phone;
+    }
   }
 }
 function backbutton(){
@@ -32,11 +50,10 @@ function add_chat(text,date,target,nickname,imguri){
     type="target";
   }
   html+="<div class=content_"+type+">";
-  html+="<img src='"+imguri+"' class='profile_photo ";
-  if(target==0){
-    html+="profile_me";
+  if(target==1){
+    html+="<img src='"+imguri+"' class='profile_photo ";
+    html+="' width=40 height=40>";
   }
-  html+="' width=40 height=40>";
   html+="<div class='line_left ";
   if(target==0){
     html+="line_left_me";
@@ -62,7 +79,7 @@ function get_talk_data(){
       var type=0;
       if(phone==obj[i][1]){type=0;}
       else{type=1;}
-      add_chat(obj[i][4],obj[i][3],type,obj[i][1],"./img/iconmonstr-user-1-240.png");
+      add_chat(obj[i][4],obj[i][3],type,obj[i][1],target_info[7]);
     }
   });
 }

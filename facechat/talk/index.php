@@ -11,6 +11,7 @@
       <div id=backbutton style="display:inline-block" onclick="backbutton()">
         <img class=reverse_arrow src="./img/iconmonstr-arrow-25-240.png" width=20 height=20>
         <div class=header_title>채팅방</div>
+        <div class=facechat_btn onclick="request_facechat()">영상통화</div>
       </div>
     </header>
     <div id=content_container class=content_container>
@@ -34,7 +35,6 @@
 
     </div>
     <footer class=footer>
-      <div class=plus_icon_box><img class=plus_icon src="./img/iconmonstr-plus-1-240.png" width=30 height=30></div>
       <div id=talk_input_box class=talk_input_box><input id=talk_input class=talk_input type=text/></div>
       <div class=confirm_box><div class=confirm onclick="send_message();"><p class=confirm_text>전송</p></div>
       </div>

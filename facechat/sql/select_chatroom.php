@@ -2,7 +2,7 @@
   include("dbconnect.php");
   $id=$_POST['id'];
 
-  $query="SELECT * FROM facechat_chatroom WHERE (fromid=$id OR toid=$id)";
+  echo $query="SELECT * FROM facechat_chatroom WHERE (fromid=$id OR toid=$id)";
 
   $result_array=array();
   if ($result=mysqli_query($con,$query))

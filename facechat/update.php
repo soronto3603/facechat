@@ -3,49 +3,45 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="./css/update.css">
-  <link rel="stylesheet" type="text/css" href="./css/header.css">
 </head>
-<body>
+<body style="background-color:#efefef">
   <div>
     <center>
       <div class=profile_img onclick="camera_modal();">
-        <img id=input_profile src="">
+        <img id=input_profile src="./img/man.png">
       </div>
     </center>
-    <div class="points_box left_title">
-        <div class=points>
-          <div class=points_box_text>포인트</div>
-          <div id=input_points></div>
-        </div>
-        <div class=likes>
-          <div class=points_box_text>좋아요</div>
-          <div id=input_likes></div>
-        </div>
+
+  </div>
+  <div class=content>
+    <div id=point_line class=normal_line>
+      <div class=normal_title>포인트</div>
+      <div id=point class=normal_div>3000</div>
     </div>
-    <div class=nickname>
-      <div class=left_title>닉네임</div>
-      <div class=right_text><input id=input_nickname type=text value=현운용></div>
-      <div class=clear></div>
+    <div id=nickname_line class=normal_line>
+      <div class=normal_title>닉네임</div>
+      <input type=text id=nickname class=normal placeholder="닉네임을 입력해주세요.">
     </div>
-    <div class=age>
-      <div class=left_title>나이</div>
-      <div class=right_text><input id=input_age type=text value=25 maxlength=2 onkeydown='$(this).val($(this).val().replace(/[^0-9]/g,""));'></div>
-      <div class=clear></div>
+    <div id=age_line class=normal_line>
+      <div class=normal_title>나이</div>
+      <!-- <input type=text id=age class=normal value=24세> -->
+      <input type=number id=age class=normal max="99" maxlength=2 placeholder=20>
     </div>
-    <div class=sex>
-      <div class=left_title>성별</div>
-      <div class=right_text onclick="sex_modal();"><p id=input_sex>남성</p></div>
-      <div class=clear></div>
+    <div id=sex_line class=normal_line>
+      <div class=normal_title>성별</div>
+      <!-- <input type=text id=sex class=normal value=남성> -->
+      <div class="label man">남자</div><input id=man onclick="reset_check_box('girl')" type=checkbox checked>
+      &nbsp&nbsp&nbsp&nbsp
+      <div class="label girl">여자</div><input id=girl onclick="reset_check_box('man')" type=checkbox>
     </div>
-    <div class=loc>
-      <div class=left_title>주제</div>
-      <div class=right_text onclick="title_modal();"><p id=input_title>지금만나요~</p></div>
-      <div class=clear></div>
+    <div id=title_line class=normal_line style="display:none;">
+      <div class=normal_title>주제</div>
+      <input type=text id=title class=normal value=친구주세요>
     </div>
   </div>
-  <div class=update_button onclick="update_user_info();">
-    수정하기
-  </div>
+  <div id=update_button><div class=update_button onclick="update_user_info();">
+    회원가입
+  </div></div>
 
   <script src="./js/update.js"></script>
 </body>

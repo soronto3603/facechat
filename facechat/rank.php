@@ -3,44 +3,31 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="./css/rank.css">
-  <link rel="stylesheet" type="text/css" href="./css/header.css">
 </head>
 <body>
+  <div class=option_container style="display:none">
+    <div class="option_menu select_option">전체</div>
+    <div class=option_menu>지역</div>
+    <div class=option_menu>동네</div>
+    <div class=option_menu>근처</div>
+    <div class=option_menu>마이톡</div>
+    <div class=option_menu>토크등록</div>
+  </div>
   <div id=contents>
     <!-- <div class=line>
-      <div class=line_rank>
-        <div class=triangle_top_left></div>
-        <div class=line_rank_text>01위</div>
+      <div class=img_left>
+        <div class=image_box>사진없음</div>
       </div>
-      <div class=line_image>이미지</div>
-      <div class=line_contents>
-        <div class=line_nickname>비밀스럽게</div>
-        <div class=line_normal>(여 25세)</div>
+      <div class="line_contents line_left_margin">
+        <div class=line_text>ㄱㄱㄱ</div>
+        <div class=line_nickname>합시다</div>
+        <div class=line_normal>여22세 44.8km 42초전</div>
       </div>
       <div class=icon_box>
         <div class=send_message>쪽지대화</div>
         <div class=call_facechat>영상신청</div>
       </div>
     </div> -->
-
-  </div>
-  <div id=modal_rank class=modal onclick="rank_modal();">
-    <center>
-      <div class=modal_rank_contents>
-        <div class=modal_line>일일랭킹<div>
-        <div class=modal_line>주간랭킹</div>
-        <div class=modal_line>월간랭킹</div>
-        <div class=modal_line>베스트</div>
-      </div>
-    </center>
-  </div>
-  <div id=modal_sex class=modal onclick="sex_modal();">
-    <center>
-      <div class=modal_sex_contents>
-        <div class=modal_line>여성<div>
-        <div class=modal_line>남성</div>
-      </div>
-    </center>
   </div>
   <script src="./js/rank.js"></script>
 </body>

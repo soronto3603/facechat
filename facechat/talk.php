@@ -3,10 +3,9 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="./css/talk.css">
-  <link rel="stylesheet" type="text/css" href="./css/header.css">
 </head>
 <body>
-  <div class=option_container>
+  <div class=option_container style="display:none">
     <div class="option_menu select_option">전체</div>
     <div class=option_menu>지역</div>
     <div class=option_menu>동네</div>

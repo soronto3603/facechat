@@ -12,24 +12,26 @@ var my_phone;
 var my_lat;
 var my_lng;
 function get_users_info(){
-  $.post("http://hume.co.kr/facechat/sql/select_user.php",{lat:my_lat,lng:my_lng}).done((r)=>{
+  $.post("http://hume.co.kr/facechat/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:my_phone}).done((r)=>{
     var user_json=JSON.parse(r);
     for(var i=0;i<user_json.length;i++){
       add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][14],user_json[i][6],user_json[i][1],user_json[i][8]);
     }
   });
 }
-function request_talk_val(phone){
-  window.parent.postMessage('{"title":"talk","talk":"'+phone+'"}',"*");
+function request_talk_val(phone,img){
+  window.parent.postMessage('{"title":"talk","phone":"'+phone+'","img":"'+img+'"}',"*");
 }
 function request_face_chat_val(id,name){
-  select_it(id,name);
   window.parent.postMessage('{"title":"facechat","id":"'+id+'","name":"'+name+'"}',"*");
 }
 function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   var line_text_width=$(window).width()-260;
   var sex_color;
   var sex_text;
+
+  var a_loc=Math.round(parseFloat(loc));
+
   if(sex==0){
     sex_color="man";
     sex_text="남자";
@@ -39,16 +41,16 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   }
   var html="<div class=line>";
   html+="<div class=img_left>";
-  html+="<div class='image_box line_left_margin'><img src='"+imguri+"' width=100% height=100%></div>";
+  html+="<div class='image_box line_left_margin'><img class=img src='"+imguri+"' width=100% height=100%></div>";
   html+="</div>";
   html+="<div class=line_contents style='width:"+line_text_width+"'>";
-  html+="<div class=line_text>"+text+"</div>";
   html+="<div class='line_nickname "+sex_color+"'>"+nickname+"</div>";
-  html+="<div class=line_normal>"+sex_text+" "+age+" "+Math.round(loc)+"Km</div>";
+  html+="<div class=line_text>"+text+"</div>";
+  html+="<div class=line_normal>"+sex_text+" / "+age+"세 / "+a_loc+"Km</div>";
   html+="</div>";
   html+="<div class=icon_box>";
-  html+="<div class=send_message onclick='request_talk_val(\""+phone+"\")'>쪽지대화</div>";
-  html+="<div class=call_facechat onclick='request_face_chat_val(\""+id+"\",\""+nickname+"\")'>영상신청</div>";
+  html+="<div class=send_message onclick='request_talk_val(\""+phone+"\",\""+imguri+"\")'><img src='./img/chat.png' width=50 height=50></div>";
+  html+="<div class=call_facechat onclick='request_face_chat_val(\""+id+"\",\""+nickname+"\")'><img src='./img/video.png' width=50 height=50></div>";
   html+="</div>";
   html+="</div>";
   document.getElementById('contents').innerHTML+=html;

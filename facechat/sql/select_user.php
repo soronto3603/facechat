@@ -2,7 +2,14 @@
   include("dbconnect.php");
   $lat=$_POST['lat'];
   $lng=$_POST['lng'];
-  $query="SELECT *,( 3959 * acos ( cos ( radians($lat) ) * cos( radians( geo_loc_x ) ) * cos( radians($lng ) - radians(64.363333) ) + sin ( radians(31.589167) ) * sin( radians( $lat ) ) ) ) AS `distance`,TIMESTAMPDIFF(hour,date,now()) AS 'hour',TIMESTAMPDIFF(minute,date,now()) AS 'minute' FROM facechat_user";
+  $phone=$_POST['phone'];
+  $type=$_POST['type'];
+  $query;
+  if($type=="rank"){
+    $query="SELECT *,round(sqrt(pow(abs(geo_loc_y-$lat),2)+pow(abs(geo_loc_x-$lng),2)),2) AS `distance`,TIMESTAMPDIFF(hour,date,now()) AS 'hour',TIMESTAMPDIFF(minute,date,now()) AS 'minute' FROM facechat_user WHERE phone<>'$phone' ORDER BY points desc";
+  }else{
+    $query="SELECT *,round(sqrt(pow(abs(geo_loc_y-$lat),2)+pow(abs(geo_loc_x-$lng),2)),2) AS `distance`,TIMESTAMPDIFF(hour,date,now()) AS 'hour',TIMESTAMPDIFF(minute,date,now()) AS 'minute' FROM facechat_user WHERE phone<>'$phone' ORDER BY distance asc";
+  }
   $result_array=array();
   if($result=mysqli_query($con,$query)){
     while($row=mysqli_fetch_row($result)){

@@ -7,7 +7,7 @@
   $towasread=$_POST['towasread'];
 
   $query="SELECT * FROM facechat_chatroom WHERE ((fromid='$fromid' AND toid='$toid') OR (fromid='$toid' AND toid='$fromid'))";
-  $roomnumber;
+
   if($result=mysqli_query($con,$query)){
     $query="INSERT INTO facechat_chatroom(no,fromid,toid,date,last_update) VALUES(NULL,'$fromid','$toid',now(),'$content')";
     while($row=mysqli_fetch_row($result)){

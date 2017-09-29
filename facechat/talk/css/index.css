@@ -10,8 +10,8 @@ body{
   top:0px;
   left:0px;
   width:100%;
-  height:60px;
-  line-height:60px;
+  height:40px;
+  line-height:40px;
   border:1px solid #e9e9e9;
   border-left:none;
   border-right:none;
@@ -31,7 +31,7 @@ body{
   height:auto;
 }
 .line_left{
-  margin-left:40px;
+  margin-left:55px;
   display:inline-block;
 }
 .reverse_arrow{
@@ -42,7 +42,7 @@ body{
   transform: rotate(180deg);
 }
 .header_title{
-  color:#47494a;
+  color:#ffffff;
   display: inline-block;
   font-size: 20px;
   position: relative;
@@ -114,6 +114,8 @@ body{
   float:right;
 }
 .content_target{
+  position: relative;
+  left: 20px;
   width:45%;
   float:left;
 }
@@ -136,6 +138,23 @@ body{
 }
 .profile_photo{
   position:absolute;
+  border-radius:20px;
+}
+.time{
+  color: gray;
+font-size: 10;
+margin-top:3px;
+}
+.facechat_btn{
+  position:fixed;
+  right:30px;
+  width:100px;
+  height:30px;
+  line-height:30px;
+  background-color:#ac4d2d;
+  color:#ffffff;
+  top:6px;
+  text-align:center;
 }
 /*#fdf01b
 /*#fafbfc;

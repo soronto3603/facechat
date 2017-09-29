@@ -8,15 +8,12 @@
   <script src="./Swiper-3.4.2/dist/js/swiper.js"></script>
 </head>
 <body>
-  <div class=reload_icon_box  onclick="reload_data()">
-    <p class=reload_icon_text>새로고침</p>
-  </div>
   <div class=card_container>
     <div class="swiper-container">
         <!-- <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div> -->
         <div class="swiper-wrapper">
-            <div class="swiper-slide">
+            <!-- <div class="swiper-slide">
 
               <center>
                 <div id=content_container class=content_container onclick="alert('테스트유저로서 선택할 수 없습니다.')">
@@ -34,15 +31,17 @@
                   <div class=profile_title>그린라이트일까요?</div>
                 </div>
               </center>
-            </div>
+            </div> -->
         </div>
     </div>
   </div>
   <div class=profile_button_box>
     <center>
-      <div class=profile_btn  onclick="request_face_chat()">영상통화</div>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <div class=profile_btn onclick="request_talk()">쪽지</div>
+      <div class=profile_btn  onclick="request_face_chat()"><img src="./img/live.png" width=16 height=16>영상통화</div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class=profile_btn onclick="request_talk()"><img src="./img/msg.png" width=16 height=16>&nbsp;&nbsp;쪽지</div>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <div class=profile_btn onclick="reload_data()">새로고침</div>
     </center>
   </div>
   <div id=rank_box class=rank_list_box>
@@ -54,18 +53,9 @@
   <script>
 
       var swiper = new Swiper('.swiper-container',{
-        pagination: '.swiper-pagination',
-        effect: 'coverflow',
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
-        coverflow: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows : true
-        }
       });
   </script>
   <script src="./js/live.js"></script>

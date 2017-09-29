@@ -8,8 +8,9 @@
   $imguri=$_POST['imguri'];
   $phone=$_POST['phone'];
   $age=$_POST['age'];
-  $geo_loc_x=$_POST['x'];
-  $geo_loc_y=$_POST['y'];
+  echo $lat=$_POST['lat'];
+  echo $lng=$_POST['lng'];
+  $point=$POST['point'];
 
   echo $query="SELECT * FROM facechat_user WHERE phone='$phone'";
   if($result=mysqli_query($con,$query)){
@@ -20,7 +21,7 @@
       return;
     }
   }
-  echo $query="INSERT INTO facechat_user(no,id,name,tag,sex,loc,date,imguri,phone,points,likes,age,geo_loc_x,geo_loc_y) VALUES(NULL,'$id','$name','$tag','$sex','$loc',now(),'$imguri','$phone',0,0,'$age',0,0)";
+  echo $query="INSERT INTO facechat_user(no,id,name,tag,sex,loc,date,imguri,phone,points,likes,age,geo_loc_x,geo_loc_y) VALUES(NULL,'$id','$name','$tag','$sex','$loc',now(),'$imguri','$phone',$point,0,'$age',$geo_loc_x,$geo_loc_y)";
   mysqli_query($con,$query);
 
 ?>
