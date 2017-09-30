@@ -6,14 +6,14 @@
 </head>
 <body>
   <div class=header>포인트 충전하기</div>
-  <div id=point>p2050</div>
+  <div id=point>2050P</div>
   <div class=contents_title_line>
     <div class=contents_title>포인트 구매하기</div>
   </div>
   <center>
     <div class=contents>
       <div class="cash_box">
-        <div class=cash_help>포인트 충전으로<br>즐거운 화상태칭을<br>즐겨보세요.</div>
+        <div class=cash_help>포인트 충전으로<br>즐거운 화상채팅을<br>즐겨보세요.</div>
       </div>
       <div class=cash_box>
         3,700P

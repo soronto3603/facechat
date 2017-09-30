@@ -38,7 +38,7 @@
           </div>
         </div>
     </center>
-  </div> --> -->
+  </div> -->
   <!-- <div id=load>
     <center>
       <div style="width:1px;height:1px;margin-top:45%"></div>
@@ -196,17 +196,16 @@
           <img src="./images/phone.png" width=20 height=20 style="position:relative;left:10px;top:10px;">
         </div>
       </div>
-      <div class=send_point onclick="send_point_modal()zz">
+      <!-- <div class=send_point onclick="send_point_modal()zz">
         <img src="./images/if_star_285661.png" width=50 height=50>
         <div class=send_point_text>선물하기</div>
-      </div>
+      </div> -->
       <div class="qb-video">
           <video id="main_video" style="width:100%;height:100%;position:absolute;left:0px;top:0px;" class="frames__main_v qb-video_source" poster="./images/black.jpg"></video>
       </div>
-      <div class="qb-video" style="width:25%;height:25%;position:absolute;right:10px;top:30px;">
-          <video id="localVideo" class="qb-video_source" poster="./images/black.jpg">
-
-          </video>
+      <div class="qb-video" style="width:25%;height:25%;position:absolute;right:10px;top:30px;border:1px solid #ffffff">
+          <!-- <video id="localVideo" class="qb-video_source" poster="./images/black.jpg"></video> -->
+          <video id="localVideo" class="qb-video_source"></video>
           <div class="frames__main_timer invisible" id="timer">
           </div>
       </div>
@@ -405,8 +404,8 @@
       document.addEventListener('deviceready', onDeviceReady, false);
 
       var phone_number;
-      var lat;
-      var lng;
+      var lat='';
+      var lng='';
       var talk_before_url;
       function splash_animation(duration){
         setTimeout(()=>{$('#splash').fadeOut(1000,()=>{});},duration);
@@ -473,11 +472,12 @@
         if(status=="block"){
           document.getElementById('iframe').contentWindow.postMessage("backbutton",'*');
         }else{
+          document.getElementById('iframe').src=facechat_back_url;
           $('#iframe').css("display","block");
           state=3;
         }
       }
-
+      var facechat_back_url='';
       function onDeviceReady() {
           console.log("onDeviceReady");
           document.addEventListener("backbutton", onBackFunction, false);
@@ -517,6 +517,10 @@
             if(e.data=="Reload"){
               load_all_var();
             }else if(e.data=="GetPst"){
+              if(lat=="" || lng==""){
+                alert("뷰티캠은 GPS를 켜야 올바르게 작동합니다.");
+                navigator.app.exitApp();
+              }
               document.getElementById('iframe').contentWindow.postMessage('{"title":"location","x":"'+lat+'","y":"'+lng+'"}','*');
             }else if(e.data=="exit"){
               navigator.app.exitApp();
@@ -527,7 +531,10 @@
                 });
               });
             }else if(e.data=="location"){
-
+              if(lat=="" || lng==""){
+                alert("뷰티캠은 GPS를 켜야 올바르게 작동합니다.");
+                navigator.app.exitApp();
+              }
               var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
               document.getElementById('iframe').contentWindow.postMessage(json,'*');
             }else if(e.data=="chatback"){
@@ -586,6 +593,7 @@
             }else{
               var JSONDATA=JSON.parse(e.data);
               if(JSONDATA.title=="facechat"){
+                facechat_back_url=document.getElementById('iframe').src;
                 document.getElementById('iframe').style.display="none";
                 selId=JSONDATA.id;
                 selName=JSONDATA.name;

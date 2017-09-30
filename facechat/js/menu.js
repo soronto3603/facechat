@@ -107,6 +107,10 @@ window.onmessage=(e)=>{
       window.parent.postMessage('{"title":"signin","name":"'+obj.name+'"}',"*");
     }else if(obj.title=="chatroom"){
       window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat/talk/index.php?phone='+phone+'&target='+obj.phone+'","back_url":"message"}',"*");
+    }else if(obj.title=="imageView"){
+      // alert(123);
+      // document.getElementById('imageViewIframe').src="http://hume.co.kr/facechat/imageView.php?image="+obj.img+"?backurl="+obj.backurl;
+      // document.getElementById('imageView').style.display="block";
     }else{
       user_array=e.data;
       document.getElementById('content_iframe').contentWindow.postMessage(user_array,"*");

@@ -49,12 +49,15 @@ function swiperAppendSlide(imguri,sex,name,loc,id,point,age){
   html+='<center>';
   html+='<div id=content_container'+id+' class=content_container">';
 
-  html+='<img class=content_img src="'+imguri+'" width=200 height=200>';
+  html+='<img class=content_img src="'+imguri+'" width=200 height=200">';
   html+='<div class=profile_text><div class=text_detail>'+sex_text+" / "+age+"세 / "+point+"P</div><div class=text_name>"+name+'</div></div>';
   html+='</div></center></div>';
   swiper.appendSlide(html);
 }
-
+function imageView(img,backurl){
+  // window.location.href="http://hume.co.kr/facechat/imageView.php?image="+img+"?backurl="+backurl;
+  window.parent.postMessage('{"title":"imageView","img":"'+img+'","backurl":"'+backurl+'"}',"*");
+}
 function add_testuser(){
   var iu='<div class="swiper-slide"><center><div id=content_container class=content_container onclick="alert(\"테스트유저로서 선택할 수 없습니다.\")"><div class=profile_text>아이유</div><img  class=content_img src="./profileimg/iu.JPG" width=200 height=200><div class=profile_title>그린라이트일까요?</div></div></center></div>'
   swiper.appendSlide(iu);

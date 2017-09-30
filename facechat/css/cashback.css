@@ -18,9 +18,11 @@ body{
   border:none;
 }
 .line_input{
-  height:50px;
+  height:40px;
 }
 .line_tag{
+  color:gray;
+  font-size:12px;
   margin-left:10px;
   margin-top:10px;
 }

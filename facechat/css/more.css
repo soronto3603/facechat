@@ -10,6 +10,9 @@ body{
   border: 5px solid #e9e9e9;
 }
 .profile_image{
+  margin-left: 7.5px;
+    margin-top: 2.5px;
+    border-radius: 30px;
   background-color:#e9e9e9;
   width:60px;
   height:60px;
@@ -18,20 +21,32 @@ body{
 .profile_text{
   width:350px;
   height:80px;
+  position: relative;
+left: 10px;
+bottom: 10px;
 }
 .profile_help{
   font-size:12;
+  color:gray;
 }
 #profile_nickname{
   color:#6379FF;
 }
+#profile_img{
+  border-radius:30px;
+}
 .icon{
-  width:25%;
-  box-sizing:border-box;
-  height:80px;
-  background-color:#ffffff;
-  border:5px solid #e9e9e9;
-  float:left;
+  width: 20%;
+  box-sizing: border-box;
+  height: 80px;
+  background-color: #ffffff;
+  border: 1px solid #ff999a;
+  float: left;
+  text-align: center;
+  line-height: 80px;
+  border-radius: 10px;
+  color:gray;
+  margin: 2.5%;
 }
 .girl{
   color:#ff6c6c;

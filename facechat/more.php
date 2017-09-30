@@ -6,7 +6,7 @@
 </head>
 <body>
   <div class=profile onclick="click_menu('update')">
-    <div class=profile_image></div>
+    <div class=profile_image><img id=profile_img src="" width=100% height=100%></div>
     <div class=profile_text>
       <p id=profile_nickname>soronto<font>(남 20세)</font></p>
       <p class=profile_help>프로필을 수정하려면 터치 해주세요.</p>
@@ -23,11 +23,11 @@
     <div class=icon onclick="daydaycheck()">
       출석체크
     </div>
-    <div class=icon onclick="click_menu('point_log')">
+    <!-- <div class=icon onclick="click_menu('point_log')">
       포인트 사용내역
-    </div>
+    </div> -->
     <div class=icon onclick="click_menu('notice')">
-      이용안내 및 공지사항
+      공지사항
     </div>
   </div>
   <script src="./js/more.js"></script>

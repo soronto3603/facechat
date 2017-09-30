@@ -111,6 +111,9 @@
       </div>
     </center>
   </div>
+  <div id=imageView>
+    <iframe id=imageViewIframe></iframe>
+  </div>
   <iframe id=content_iframe></iframe>
   <script src="./js/menu.js"></script>
 </body>

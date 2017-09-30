@@ -42,11 +42,13 @@ body{
   transform: rotate(180deg);
 }
 .header_title{
-  color:#ffffff;
+  color: #ffffff;
   display: inline-block;
   font-size: 20px;
   position: relative;
-  bottom: 2.5px;
+  bottom: 0px;
+  font-weight: bold;
+  font-size: 16px;
 }
 .plus_icon_box{
   width:60px;
@@ -70,6 +72,8 @@ body{
   margin-top:10px;
   height:40px;
   border:none;
+  outline: none;
+  padding: 10px;
 }
 .confirm_box{
   width:80px;
@@ -81,13 +85,14 @@ body{
   width:70px;
   height:40px;
   margin-left:5px;
-  background-color:#ddd485;
+  background-color:#ffec42;
   position: relative;
   bottom: 5px;
   line-height:40px;
 }
 .confirm_text{
   text-align:center;
+  color:#4d3636;
 }
 .clear{
   clear:both;
@@ -96,11 +101,13 @@ body{
   padding:10px;
   border-radius:10px;
   background-color:#fdf01b;
+  font-size: 14;
 }
 .chatbubble_me{
   padding:10PX;
   border-radius:10px;
   background-color:#fafbfc;
+  font-size: 14;
 }
 .profile_me{
   right:0px;
@@ -146,15 +153,12 @@ font-size: 10;
 margin-top:3px;
 }
 .facechat_btn{
-  position:fixed;
-  right:30px;
-  width:100px;
-  height:30px;
-  line-height:30px;
-  background-color:#ac4d2d;
-  color:#ffffff;
-  top:6px;
-  text-align:center;
+  background-color: white;
+width: 96px;
+height: 40px;
+  position: fixed;
+right: 0px;
+top: 0px;
 }
 /*#fdf01b
 /*#fafbfc;

@@ -482,6 +482,7 @@
 
         /** ACCEPT */
         $(document).on('click', '.j-accept', function() {
+          facechat_back_url=document.getElementById('iframe').src;
           $('#camera_page').css("display","block");
             var $videoSourceFilter = $(ui.sourceFilter),
                 mediaParams = {
