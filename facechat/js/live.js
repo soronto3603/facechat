@@ -3,7 +3,11 @@ var sel_name;
 var phone;
 var my_lat;
 var my_lng;
+var my_sex;
 
+function request_sex(){
+  window.parent.postMessage("sex","*");
+}
 function select_it(id,name){
   sel_id=id;
   sel_name=name;
@@ -49,7 +53,7 @@ function swiperAppendSlide(imguri,sex,name,loc,id,point,age){
   html+='<center>';
   html+='<div id=content_container'+id+' class=content_container">';
 
-  html+='<img class=content_img src="'+imguri+'" width=200 height=200">';
+  html+='<div class=content_img_box><img class=content_img src="'+imguri+'" width=200 height=200"></div>';
   html+='<div class=profile_text><div class=text_detail>'+sex_text+" / "+age+"세 / "+point+"P</div><div class=text_name>"+name+'</div></div>';
   html+='</div></center></div>';
   swiper.appendSlide(html);
@@ -64,6 +68,7 @@ function add_testuser(){
 }
 window.onload=()=>{
   rank_box_size();
+  request_sex();
   window.parent.postMessage("Reload","*");
   window.parent.postMessage("Phone","*");
   window.parent.postMessage("location","*");
@@ -106,8 +111,22 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
 }
 function get_users_info(){
   $.post("http://hume.co.kr/facechat/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:phone,type:"rank"}).done((r)=>{
+    console.log("live.js:get_users_info function"+r);
     var user_json=JSON.parse(r);
+
+    //user가 20명 이상일경우 20명이 될때까지 랜덤으로 자름
+    while(user_json.length>20){
+      user_json.splice(Math.floor((Math.random*user_json.length-1)),1);
+    }
+    ///////////////////////
+
     for(var i=0;i<user_json.length;i++){
+
+      //같은 성별인 경우를 다 자름
+      if(user_json[i][4]==my_sex)continue;
+      else{}
+      //////////////////////////
+      
       add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][14],user_json[i][6],user_json[i][1],user_json[i][8]);
     }
   });
@@ -122,6 +141,8 @@ function get_user_data(){
   $.post("http://hume.co.kr/facechat/sql/select_user_point.php",{phone:phone}).done((r)=>{
     var user_json=JSON.parse(r);
     for(var i=0;i<user_json.length;i++){
+      if(user_json[i][4]==my_sex)continue;
+      else{}
       swiperAppendSlide(user_json[i][7],user_json[i][4],user_json[i][2],'',user_json[i][1],user_json[i][9],user_json[i][11]);
       //user_info_array[user_info_array.length]=JSON.parse('{"id":"'+user_json[i][1]+'","name":"'+user_json[2]+'"}');
       user_info_array[user_info_array.length]={'id':user_json[i][1],'name':user_json[i][2],'img':user_json[i][7],'phone':user_json[i][8]};
@@ -132,6 +153,7 @@ function get_user_data(){
 var user_array;
 var user_info_array=[];
 window.onmessage=(e)=>{
+  console.log("live.js:"+e.data);
   if(e.data==""){
 
   }else{
@@ -144,6 +166,9 @@ window.onmessage=(e)=>{
       my_lng=JSONDATA.lng;
       rank_count=1;
       get_users_info();
+    }else if(JSONDATA.title=="sex"){
+      my_sex=JSONDATA.sex;
+      console.log("my_sex:"+my_sex);
     }
     // user_array=new Array();
     // for(var i=0;i<JSONDATA.length;i++){

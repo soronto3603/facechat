@@ -1,13 +1,13 @@
 var user_array='';
 var phone='';
-var lat;
-var lng;
-var is_signing=0;
+var lat=0;
+var lng=0;
+var sex;
 window.onload=()=>{
   document.getElementById('modal_exit').style.display="none";
   menu_size();
   request_phone_number();
-  //request_loc();
+  setTimeout(request_loc,3000);
   cordova_get_token();
   if(document.getElementById('back_url').value==""){
     click_menu("live");
@@ -25,27 +25,31 @@ function request_loc(){
 function request_phone_number(){
   window.parent.postMessage("Phone","*");
 }
+function togotosettings(){
+  $('#modal_location').css('display','none');
+  window.parent.postMessage("location_settings","*");
+}
 function click_menu(btn){
-  if(is_signing==1){
-    alert("회원가입을 해야 이용 가능 합니다.");
-  }else{
-    var url="http://hume.co.kr/facechat/"+btn+".php";
-    document.getElementById('content_iframe').src=url;
-  }
+  var url="http://hume.co.kr/facechat/"+btn+".php";
+  document.getElementById('content_iframe').src=url;
 }
 function menu_size(){
   var height=$(window).height()-93;
   $('#content_iframe').css("height",height);
 }
 function get_my_point(){
-
-  $.get("http://hume.co.kr/facechat/sql/select_user_one_by_phone",{phone:phone}).done((r)=>{
-    alert(r);
+  $.get("http://hume.co.kr/facechat/sql/select_user_one_by_phone.php",{phone:phone}).done((r)=>{
+    var json=JSON.parse(r);
+    $('#my_point').html(json[9]+"P");
+    sex=json[4];
+    console.log("sex:"+sex);
   });
 }
 window.onmessage=(e)=>{
   if(e.data=="Camera"){
     window.parent.postMessage("Camera","*");
+  }else if(e.data=="sex"){
+    document.getElementById('content_iframe').contentWindow.postMessage('{"title":"sex","sex":"'+sex+'"}',"*");
   }else if(e.data=="CameraModal"){
     document.getElementById('modal_camera').style.display="block";
   }else if(e.data=="PhotoLibrary"){
@@ -57,7 +61,7 @@ window.onmessage=(e)=>{
   }else if(e.data=="Reload"){
     window.parent.postMessage("Reload","*");
   }else if(e.data=="location"){
-    request_loc();
+    document.getElementById('content_iframe').contentWindow.postMessage('{"title":"location","lat":"'+lat+'","lng":"'+lng+'"}',"*");
   }else if(e.data=="backbutton"){
     var current_url=document.getElementById('content_iframe').src;
     if(current_url.indexOf("cashback.php")!=-1 || current_url.indexOf("charge.php")!=-1 || current_url.indexOf("notice.php")!=-1 || current_url.indexOf("point_log.php")!=-1){
@@ -81,24 +85,17 @@ window.onmessage=(e)=>{
       window.parent.postMessage('{"title":"facechat","id":"'+obj.id+'","name":"'+obj.name+'"}',"*");
     }else if(obj.title=="Phone"){
       phone=obj.Phone;
-      alet(phone);
       get_my_point();
     }else if(obj.title=="talk"){
       modal_send_msg(obj.phone,obj.img);
       //window.parent.postMessage('{"title":"talk","talk":"'+obj.talk+'","back_url":"'+obj.back_url+'"}',"*");
     }else if(obj.title=="location"){
+      console.log("Menu.js:Location / LAT:"+obj.x+"/LNG:"+obj.y);
       lat=obj.x;
       lng=obj.y;
-      //alert(lat+lng);
-      // $.get("http://hume.co.kr/facechat/sql/update_user_loc.php",{
-      //   x:lat,
-      //   y:lng,
-      //   phone:phone
-      // }).done((r)=>{
-
-      //   document.getElementById('content_iframe').contentWindow.postMessage('{"title":"location","lat":"'+lat+'","lng":"'+lng+'"}',"*");
-      // });
-      document.getElementById('content_iframe').contentWindow.postMessage('{"title":"location","lat":"'+lat+'","lng":"'+lng+'"}',"*");
+      if(obj.x==0 || obj.y==0){
+        $('#modal_location').css("display","block");
+      }
     }else if(obj.title=="more"){
       document.getElementById('content_iframe').src=obj.more;
     }else if(obj.title=="SigingEnd"){

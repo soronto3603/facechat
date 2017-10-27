@@ -86,7 +86,7 @@
 
 
 .content_img{
-  border: 5px solid #ffe1e9;
+  border: 5px solid #DDB8FE;
   border-radius:100px;
 }
 
@@ -100,7 +100,7 @@
 .swiper-container {
     width: 100%;
     height: 100%;
-    background:linear-gradient(0deg,#ffffff 50%,#ffe1e9 50%);
+    background:linear-gradient(0deg,#ffffff 50%,#DDB8FE 50%);
 }
 .swiper-slide {
     text-align: center;
@@ -161,8 +161,8 @@
   display:inline-block;
   line-height:40px;
   border-radius:5px;
-  background-color:#ffe1e9;
-  color:gray;
+  background-color:#AE5BFC;
+  color:#ffffff;
 }
 
 .swiper-button-next{
@@ -180,11 +180,15 @@
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  background-color: #ff999a;
+  background-color: #AE5BFC;
   color: #ffffff;
   position: absolute;
 }
 .rank_text{
   position: relative;
   bottom: 24px;
+}
+.content_img_box{
+  border:5px solid #ffffff;
+  border-radius:105px;
 }

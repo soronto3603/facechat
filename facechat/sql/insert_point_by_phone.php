@@ -4,7 +4,7 @@
   $value=$_POST['value'];
   $why=$_POST['why'];
 
-  echo $query="INSERT INTO facechat_point_log(no,id,date,value) VALUES(NULL,'$phone',now(),$value)";
+  echo $query="INSERT INTO facechat_point_log(no,id,date,value,why) VALUES(NULL,'$phone',now(),$value,'$why')";
   mysqli_query($con,$query);
   $query="UPDATE facechat_user SET points=points+$value WHERE phone='$phone'";
   mysqli_query($con,$query);

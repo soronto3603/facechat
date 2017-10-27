@@ -226,6 +226,7 @@
             $form.addClass('join-wait');
 
             app.helpers.join(data).then(function (user) {
+              console.log("JoinBtnClicked");
                 app.caller = user;
 
                 QB.chat.connect({
@@ -263,9 +264,8 @@
 
                         CheckMyid(user.id);
                         splash_animation(100);
-                        if(document.getElementById('iframe').src.indexOf("http://hume.co.kr/facechat/index.php")==-1){
-                          document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php";
-                        }
+                        console.log("123");
+                        document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php";
                         //document.getElementById('iframe').contentWindow.postMessage('LoadOff','*');
                     }
                 });
@@ -281,10 +281,10 @@
           ui.insertOccupants().then(function(users) {
               user_list=users;
               app.users = users;
-              $btn.prop('disabled', false);
+              //$btn.prop('disabled', false);
               app.helpers.setFooterPosition();
           }, function() {
-              $btn.prop('disabled', false);
+              //$btn.prop('disabled', false);
               app.helpers.setFooterPosition();
           });
         }
@@ -606,6 +606,7 @@
             }
         });
 
+        //음소거
         $(document).on('click', '.j-caller__ctrl', function() {
            var $btn = $(this),
                isActive = $btn.hasClass('active');

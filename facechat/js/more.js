@@ -7,8 +7,17 @@ function click_menu(str){
 }
 function daydaycheck(){
   var value=50;
-  $.post("http://hume.co.kr/facechat/sql/insert_point_by_phone.php",{phone:my_phone,value:value,why:"출석체크"}).done((r)=>{
-    alert("50포인트 출첵완료");
+  $.post("http://hume.co.kr/facechat/sql/select_daydaycheck.php",{id:my_phone}).done((r)=>{
+    console.log("more.js:daydaycheck Function"+r);
+    if(r=="False"){
+      $.post("http://hume.co.kr/facechat/sql/insert_point_by_phone.php",{phone:my_phone,value:value,why:"3"}).done((r)=>{
+
+        alert("50포인트 출첵완료");
+      });
+    }else{
+      alert("하루에 한 번만 할 수 있습니다.");
+    }
+
   });
 }
 function get_user_data(){

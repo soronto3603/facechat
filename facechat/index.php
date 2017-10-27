@@ -7,16 +7,11 @@
 <body>
   <input id=back_url type=hidden value='<?echo $_GET['back_url']?>'/>
   <input id=phone type=hidden value='<?echo $_GET['phone']?>'/>
-  <!-- <div id=load>
-    <center>
-      <div style="width:1px;height:1px;margin-top:45%;"></div>
-      <img src="./img/Spinner.gif" width=100 height=100>
-    </center>
-  </div> -->
+  </div>
   <div class=top>
     <div class=title_container>
       <p class=title_text>뷰티캠</p>
-      <p id=my_point class=title_point></p>
+      <p id=my_point class=title_point>50P</p>
     </div>
     <div class=navigator_container>
       <div class=menu id=menu1 value=menu1 onclick="click_menu('live')">
@@ -83,6 +78,18 @@
       <div class=modal_sex_contents>
         <div class=modal_line onclick='modal_sex_line("여성")'>여성</div>
         <div class=modal_line onclick='modal_sex_line("남성")'>남성</div>
+      </div>
+    </center>
+  </div>
+  <div id=modal_location class=modal>
+    <center>
+      <div class=modal_location>
+        <div class=modal_location_line style="line-height:65px;">위치정보를 가져올 수 없습니다!</div>
+        <div class=modal_location_line  style="line-height:45px;">위치 설정을 확인해주세요!</div>
+        <div class=modal_location_btn onclick="togotosettings();">설정하러 가기</div>
+        <div class=close_btn_box onclick="$('#modal_location').css('display','none')">
+          <img class=close_btn src="./img/iconmonstr-x-mark-1-240.png" width=20 height=20>
+        </div>
       </div>
     </center>
   </div>

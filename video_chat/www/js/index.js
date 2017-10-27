@@ -6,13 +6,11 @@ var Imember;
 var my_id;
 var gift_point;
 function send_point_modal(){
-  alert(123);
   document.getElementById('modal_send_point').style.display='block';
 }
-function send_point(){
-  $.get("http://hume.co.kr/facechat/sql/select_user_by_id.php",{id:selId}).done((r)=>{
-    alert(r);
-  });
+function send_point(howmuch){
+  //alert(howmuch);
+  $('#give_point_modal').css('display','none');
 }
 function select_gift_point(str,me){
   gift_point=str;
@@ -21,7 +19,6 @@ function close_send_modal(){
   document.getElementById('modal_send_point').style.display="none";
 }
 function init(){
-
   Imember=setInterval(CheckMember,1000);
 }
 function CheckMember(){
@@ -43,7 +40,7 @@ function auto_login(){
           $('#input_name').val(e);
           $("#submit_log").click();
         }else{
-          document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php?back_url=update";
+          document.getElementById('iframe').src="http://hume.co.kr/facechat/signin.php";
           splash_animation(100);
         }
       });
@@ -51,16 +48,18 @@ function auto_login(){
     },()=>{})}, (er)=>{alert(er);});
 }
 function load_all_var(){
-  for(var i=0;i<user_list.length;i++){
+  if(user_list){
+    for(var i=0;i<user_list.length;i++){
 
-    if(user_list[i]==null)continue;
-    if(my_id==user_list[i].id){
-      delete user_list[i];
+      if(user_list[i]==null)continue;
+      if(my_id==user_list[i].id){
+        delete user_list[i];
+      }
     }
-  }
 
-  var json=JSON.stringify(user_list);
-  document.getElementById('iframe').contentWindow.postMessage(json,'*');
+    var json=JSON.stringify(user_list);
+    document.getElementById('iframe').contentWindow.postMessage(json,'*');
+  }
 }
 function CheckMyid(id){
   my_id=id;

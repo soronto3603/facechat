@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>QuickBlox JavaScript WebRTC sample</title>
+    <title></title>
 
     <link rel="canonical" href="https://quickblox.github.io/quickblox-javascript-sdk/samples/webrtc"/>
     <link rel="shortcut icon" href="https://quickblox.com/favicon.ico">
@@ -16,19 +16,58 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- <div id=modal_send_point class=modal>
+    <center>
+        <div class=modal_send_point_contents>
+          <div class=modal_send_point_header>포인트 선물하기</div>
+          <div class=modal_send_point_title>화이트 (여27세)님에게 선물하세요!</div>
+          <!-- <div  class=modal_send_point_img style="border-radius:50px;">
+            <img id=send_point_img src="" width=100 height=100 style="border-radius:50px;">
+          </div> -->
+          <!-- <div class=modal_send_point_list>
+            <div class=send_point_box>100포인트</div>
+            <div class=send_point_box>300포인트</div>
+            <div class=send_point_box>500포인트</div>
+            <div class=send_point_box>1,000포인트</div>
+            <div class=send_point_box>3,000포인트</div>
+            <div class=send_point_box>5,000포인트</div>
+          </div>
+          <div class=modal_send_point_icon_box>
+            <div class=modal_send_btn onclick="send_point()">선물하기</div>
+            <div class=modal_send_close_btn onclick="close_send_modal()">닫기</div>
+          </div>
+        </div>
+    </center>
+  </div> -->
+  <!-- <div id=load>
+    <center>
+      <div style="width:1px;height:1px;margin-top:45%"></div>
+    </center>
+  </div> -->
+  <div id=splash>
+    <!-- <img class=splash_image src="./images/splash.png"> -->
+    <!-- <p class=splash_text>Beauty<br>CAM</p> -->
+    <center>
+      <div class=splash_image>
+        <img src="./images/splash_logo.png" wdith=100% height=100%>
+        <img src="./images/Spinnerbc7f80.gif" width=100 height=100>
+      </div>
+    </center>
+  </div>
+  <iframe id=iframe style="display:block;"></iframe>
     <div class="wrapper j-wrapper">
-        <header class="header">
+        <header style="display:none;" class="header">
             <div class="inner">
                 <div class="header__logo">
                     <img class="header__logo_img" src="images/Logo_qb.svg"></img>
                 </div>
 
-                <h2 class="header__title">JavaScript WebRTC Sample</h2>
+                <h2 class="header__title"></h2>
             </div>
         </header>
 
         <main class="app" id="app">
-            <div class="page">
+            <div class="page" style="display:none">
                 <!-- JOIN -->
                 <form class="join j-join">
                     <h3 class="join__title">
@@ -40,16 +79,18 @@
                     </h3>
 
                     <div class="join__body">
+
                         <div class="join__row">
-                            <input type="text" class="join__input" name="username" placeholder="Username" autofocus required title="Field should contain alphanumeric characters only in a range 3 to 20. The first character must be a letter." pattern="^[a-zA-Z][\w]{2,19}$">
+                            <input id=input_name type="text" class="join__input" name="username" placeholder="Username">
+                            <input id=input_sex type="text">
                         </div>
 
                         <div class="join__row">
-                            <input type="text" class="join__input" name="room" placeholder="Chat room name" required title="Field should contain alphanumeric characters only in a range 3 to 15, without space. The first character must be a letter." pattern="^[a-zA-Z][a-zA-Z0-9]{2,14}$">
+                            <input type="text" class="join__input" name="room" value="Hume" placeholder="Chat room name" required title="Field should contain alphanumeric characters only in a range 3 to 15, without space. The first character must be a letter." pattern="^[a-zA-Z][a-zA-Z0-9]{2,14}$">
                         </div>
 
                         <div class="join__row">
-                            <button type="submit" class="join__btn">Login</button>
+                            <button id=submit_log type="submit" class="join__btn">Login</button>
                         </div>
                     </div>
                 </form>
@@ -59,7 +100,7 @@
             </div>
         </main>
 
-        <footer class="footer j-footer invisible">
+        <footer style="display:none;" class="footer j-footer invisible">
             <h4>
                 <a class="fw-link" href="https://github.com/QuickBlox/quickblox-javascript-sdk/tree/gh-pages/samples/webrtc">
                     Source code
@@ -149,6 +190,27 @@
         </div>
     </div>
 
+    <div class=camera_page id=camera_page>
+      <div class=icon_box>
+        <div class=end_call onclick="state=3;">
+          <img src="./images/phone.png" width=20 height=20 style="position:relative;left:10px;top:10px;">
+        </div>
+      </div>
+      <!-- <div class=send_point onclick="send_point_modal()zz">
+        <img src="./images/if_star_285661.png" width=50 height=50>
+        <div class=send_point_text>선물하기</div>
+      </div> -->
+      <div class="qb-video">
+          <video id="main_video" style="width:100%;height:100%;position:absolute;left:0px;top:0px;" class="frames__main_v qb-video_source" poster="./images/black.jpg"></video>
+      </div>
+      <div class="qb-video" style="width:25%;height:25%;position:absolute;right:10px;top:30px;border:1px solid #ffffff">
+          <!-- <video id="localVideo" class="qb-video_source" poster="./images/black.jpg"></video> -->
+          <video id="localVideo" class="qb-video_source"></video>
+          <div class="frames__main_timer invisible" id="timer">
+          </div>
+      </div>
+      <!-- <div class=uncalling_btn onclick="state=3;">전화끊기</div> -->
+    </div>
     <!-- TEMPLATES -->
         <!-- stateBoard -->
         <script type="text/template" id="tpl_default">
@@ -196,7 +258,7 @@
     <script type="text/template" id="dashboard_tpl">
         <div class="state_board j-state_board"></div>
 
-        <div class="dashboard__inner inner">
+        <div style="display:none" class="dashboard__inner inner">
             <div class="users j-users_wrap"></div>
 
             <div class="board clearfix j-board"></div>
@@ -204,23 +266,18 @@
     </script>
 
     <script type="text/template" id="frames_tpl">
-        <div class="frames">
+        <div style="display:none" class="frames">
             <div class="frames__main">
-                <div class="frames__main_timer invisible" id="timer">
-                </div>
 
-                <div class="qb-video">
-                    <video id="main_video" class="frames__main_v qb-video_source"></video>
-                </div>
+
+
             </div>
 
             <div class="frames__callees j-callees"></div>
         </div>
 
-        <div class="caller">
-            <div class="caller__ctrl">
-                <button class="caller__ctrl_btn j-actions"></button>
-            </div>
+        <div style="display:none" class="caller">
+
 
             <h4 class="caller__name">
                 <b>You</b>
@@ -228,9 +285,7 @@
             </h4>
 
             <div class="caller__frames">
-                <div class="qb-video">
-                    <video id="localVideo" class="qb-video_source"></video>
-                </div>
+
 
                 <div class="caller__frames_acts">
                     <button class="caller__frames_acts_btn j-caller__ctrl" data-target="video">
@@ -348,8 +403,86 @@
     <script>
       document.addEventListener('deviceready', onDeviceReady, false);
 
+      var phone_number;
+      var lat='';
+      var lng='';
+      var talk_before_url;
+      function splash_animation(duration){
+        setTimeout(()=>{$('#splash').fadeOut(1000,()=>{});},duration);
+      }
+      function login(nick){
+        $('#input_name').val(nick);
+        submit_sign(nick);
+      }
+      //////////////////////////////////////////////////////
+      ///////////////////DB MODULE//////////////////////////
+      //////////////////////////////////////////////////////
+      var myid;
+      function checkLoginStatus(success){
+          db.transaction(function (txn) {
+              txn.executeSql('select * from login', [], function (tx, res) {
+                  var id=res.rows.item(0).id;
+                  myid=id;
+                  success(id);
+              });
+          });
+      }
+      function setLoginStatus(id){
+          db.transaction(function (txn) {
+              txn.executeSql('update login set id=?', [id], function (tx, res) {
+                  myid=id;
+              });
+          });
+      }
+
+      function dropTable(){
+          db.transaction(function (txn) {
+              txn.executeSql('drop table login', [], function (tx, res) {
+              });
+          });
+      }
+      function dbinit(){ //database init.
+          db = sqlitePlugin.openDatabase('login.db', '1.0', '', 1);
+          db.transaction(function (txn) {
+              txn.executeSql('create table if not exists login(id text)', [], function (tx, res) {
+              });
+              txn.executeSql('insert into login values(?)', [''], function (tx, res) {
+      	     });
+          });
+      }
+
+      //////////////////////////////////////////////////////
+      ///////////////////DB MODULE//////////////////////////
+      //////////////////////////////////////////////////////
+      function submit_sign(nick){
+        //중복 이름 제거
+        // $.get("http://hume.co.kr/facechat/sql/select_overap_name.php",{name:name}).done((r)=>{
+        //   if(r=="true"){
+        //     //alert("중복닉네임");
+        //   }else{
+        //     //alert("중복아님");
+        //   }
+        // });
+        document.getElementById('input_name').value=nick;
+        setLoginStatus(nick);
+        $("#submit_log").click();
+        document.getElementById('camera_page').style.display="block";
+      }
+      function onBackFunction(){
+        var status=$('#iframe').css("display");
+        if(status=="block"){
+          document.getElementById('iframe').contentWindow.postMessage("backbutton",'*');
+        }else{
+          document.getElementById('iframe').src=facechat_back_url;
+          $('#iframe').css("display","block");
+          state=3;
+        }
+      }
+      var facechat_back_url='';
       function onDeviceReady() {
           console.log("onDeviceReady");
+          document.addEventListener("backbutton", onBackFunction, false);
+          StatusBar.backgroundColorByHexString("#ff999a");
 
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
@@ -369,10 +502,117 @@
               document.getElementsByTagName("body")[0].appendChild(jsScript);
           }
           loadScriptAsync("https://cdnjs.cloudflare.com/ajax/libs/quickblox/2.4.0/quickblox.min.js");
-          loadScriptAsync("config.js")
-          loadScriptAsync("js/helpers.js")
-          loadScriptAsync("js/stateBoard.js")
-          loadScriptAsync("js/app.js")
+          loadScriptAsync("config.js");
+          loadScriptAsync("js/helpers.js");
+          loadScriptAsync("js/stateBoard.js");
+          loadScriptAsync("js/app.js");
+          dbinit();
+
+
+
+          navigator.geolocation.getCurrentPosition((position)=>{
+            lat=position.coords.latitude;
+            lng=position.coords.longitude;
+            var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
+            document.getElementById('iframe').contentWindow.postMessage(json,'*');
+            alert(json);
+          },(err)=>{/*alert(":"+err.code+err.message)*/}
+          ,{ timeout: 3000 });
+
+          window.onmessage=function(e){
+            if(e.data=="Reload"){
+              load_all_var();
+            }else if(e.data=="GetPst"){
+              if(lat=="" || lng==""){
+                alert("뷰티캠은 GPS를 켜야 올바르게 작동합니다.");
+                navigator.app.exitApp();
+              }
+              document.getElementById('iframe').contentWindow.postMessage('{"title":"location","x":"'+lat+'","y":"'+lng+'"}','*');
+            }else if(e.data=="exit"){
+              navigator.app.exitApp();
+            }else if(e.data=="token"){
+              FCMPlugin.getToken(function(token){
+                $.post("http://hume.co.kr/facechat/sql/insert_token.php",{token:token,phone:phone_number}).done((r)=>{
+                    //alert(r);
+                });
+              });
+            }else if(e.data=="location"){
+              if(lat=="" || lng==""){
+                alert("뷰티캠은 GPS를 켜야 올바르게 작동합니다.");
+                navigator.app.exitApp();
+              }
+              var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
+              document.getElementById('iframe').contentWindow.postMessage(json,'*');
+            }else if(e.data=="chatback"){
+              document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php?back_url="+talk_before_url;
+            }else if(e.data=="Camera"){
+              navigator.camera.getPicture(
+                (result)=>{
+                  //alert("suc"+result);
+                  var imguri=result.split("?")[0];
+                  var options = new FileUploadOptions();
+                  options.fileKey = "file";
+                  options.fileName = imguri.substr(imguri.lastIndexOf('/') + 1);
+                  options.mimeType = "image/jpeg";
+
+                  var ft = new FileTransfer();
+                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat/upload_img_profile.php"), (r)=>{
+                    document.getElementById('iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"'+r.response+'"}','*');
+                  }, (error)=>{
+                    alert("An error has occurred: Code = " + error.code);
+                  }, options);
+                }, (err)=>{alert("err"+err)}, {
+                encodingType:Camera.EncodingType.JEPG,
+                quality: 50,destinationType: Camera.DestinationType.FILE_URI,
+                sourceType:Camera.PictureSourceType.CAMERA,
+                targetHeight:250,
+                targetWidth:250
+              });
+            }else if(e.data=="PhotoLibrary"){
+              navigator.camera.getPicture(
+                (result)=>{
+                  //alert("suc"+result);
+                  var imguri=result.split("?")[0];
+                  var options = new FileUploadOptions();
+                  options.fileKey = "file";
+                  options.fileName = imguri.substr(imguri.lastIndexOf('/') + 1);
+                  options.mimeType = "image/jpeg";
+
+                  var ft = new FileTransfer();
+                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat/upload_img_profile.php"), (r)=>{
+                    document.getElementById('iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"'+r.response+'"}','*');
+                  }, (error)=>{
+                    alert("An error has occurred: Code = " + error.code);
+                  }, options);
+                }, (err)=>{alert("err"+err)}, {
+                encodingType:Camera.EncodingType.JEPG,
+                quality: 50,destinationType: Camera.DestinationType.FILE_URI,
+                sourceType:Camera.PictureSourceType.PHOTOLIBRARY,
+                targetHeight:250,
+                targetWidth:250
+              });
+            }else if(e.data=="Push"){
+              alert("Push");
+            }else if(e.data=="Phone"){
+              var json='{"title":"Phone","Phone":"'+phone_number+'"}';
+              document.getElementById('iframe').contentWindow.postMessage(json,'*');
+            }else{
+              var JSONDATA=JSON.parse(e.data);
+              if(JSONDATA.title=="facechat"){
+                facechat_back_url=document.getElementById('iframe').src;
+                document.getElementById('iframe').style.display="none";
+                selId=JSONDATA.id;
+                selName=JSONDATA.name;
+                state=2;
+                alert(selId+"/"+selName);
+              }else if(JSONDATA.title=="signin"){
+                login(JSONDATA.name);
+              }else if(JSONDATA.title=="chatroom"){
+                talk_before_url=JSONDATA.back_url;
+                document.getElementById('iframe').src=JSONDATA.talk;
+              }
+            }
+          }
       }
 
       // Listen for orientation changes and scroll
@@ -393,5 +633,6 @@
       if ((host == window.location.host) && (window.location.protocol != "https:"))
         window.location.protocol = "https";
     </script>
+    <script src='js/index.js'></script>
 </body>
 </html>

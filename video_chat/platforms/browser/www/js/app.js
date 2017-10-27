@@ -205,6 +205,8 @@
         app.router = new Router();
         Backbone.history.start();
 
+        //cordova auto_login
+        auto_login();
         /**
          * JOIN
          */
@@ -257,6 +259,14 @@
                           localStorage.setItem('isAuth', true);
                         }
                         app.router.navigate('dashboard', { trigger: true });
+                        GetMember();
+
+                        CheckMyid(user.id);
+                        splash_animation(100);
+                        if(document.getElementById('iframe').src.indexOf("http://hume.co.kr/facechat/index.php")==-1){
+                          document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php";
+                        }
+                        //document.getElementById('iframe').contentWindow.postMessage('LoadOff','*');
                     }
                 });
             }).catch(function(error) {
@@ -266,35 +276,42 @@
             return false;
         });
 
-        /**
-         * DASHBOARD
-         */
-        /** REFRESH USERS */
-        $(document).on('click', '.j-users__refresh', function() {
-            var $btn = $(this);
+        function GetMember()
+        {
+          ui.insertOccupants().then(function(users) {
+              user_list=users;
+              app.users = users;
+              $btn.prop('disabled', false);
+              app.helpers.setFooterPosition();
+          }, function() {
+              $btn.prop('disabled', false);
+              app.helpers.setFooterPosition();
+          });
+        }
+        var Istate;
+        Istate=setInterval(CheckState,1000);
 
-            app.callees = {};
-            $btn.prop('disabled', true);
-
-            ui.insertOccupants().then(function(users) {
-                app.users = users;
-
-                $btn.prop('disabled', false);
-                app.helpers.setFooterPosition();
-            }, function() {
-                $btn.prop('disabled', false);
-                app.helpers.setFooterPosition();
-            });
-        });
-
-        /** Check / uncheck user (callee) */
-        $(document).on('click', '.j-user', function() {
+        function CheckState(){
+          if(state==2)
+          {
+            //alert(selId+"/"+selName );
+            SetId(selId,selName);
+            $('#camera_page').css("display","block");
+            Calling();
+            state=1;
+          }else if(state==3){
+            $('#camera_page').css("display","none");
+            unCalling();
+            state=1;
+            $('#iframe').css("display","block");
+          }
+        }
+        function SetId(id,name) {
             var $user = $(this),
                 user = {
-                    id: +$.trim( $user.data('id') ),
-                    name: $.trim( $user.data('name') )
+                    id: $.trim(id),
+                    name: $.trim(name)
                 };
-
             if( $user.hasClass('active') ) {
                 delete app.callees[user.id];
                 $user.removeClass('active');
@@ -302,10 +319,31 @@
                 app.callees[user.id] = user.name;
                 $user.addClass('active');
             }
-        });
+        }
+        function unCalling(){
+          if(!_.isEmpty(app.currentSession)) {
 
-        /** Call / End of call */
-        $(document).on('click', '.j-actions', function() {
+              if(recorder) {
+                  recorder.stop();
+              }
+
+              app.currentSession.stop({});
+              app.currentSession = {};
+
+              app.helpers.stateBoard.update({
+                  'title': 'tpl_default',
+                  'property': {
+                      'tag': app.caller.user_tags,
+                      'name':  app.caller.full_name,
+                  }
+              });
+
+              app.helpers.setFooterPosition();
+
+              return false;
+          }
+        }
+        function Calling(){
             var $btn = $(this),
                 $videoSourceFilter = $(ui.sourceFilter),
                 videoElems = '',
@@ -323,6 +361,7 @@
 
             /** Hangup */
             if ($btn.hasClass('hangup')) {
+
                 if(!_.isEmpty(app.currentSession)) {
 
                     if(recorder) {
@@ -374,6 +413,7 @@
                             }
                         });
                     } else {
+
                         app.currentSession.call({}, function(error) {
                             if(error) {
                                 console.warn(error.detail);
@@ -402,7 +442,33 @@
                     }
                 });
             }
+        }
+        /**
+         * DASHBOARD
+         */
+        /** REFRESH USERS */
+        $(document).on('click', '.j-users__refresh', function() {
+            var $btn = $(this);
+
+            app.callees = {};
+            $btn.prop('disabled', true);
+
+            ui.insertOccupants().then(function(users) {
+                app.users = users;
+
+                $btn.prop('disabled', false);
+                app.helpers.setFooterPosition();
+            }, function() {
+                $btn.prop('disabled', false);
+                app.helpers.setFooterPosition();
+            });
         });
+
+        /** Check / uncheck user (callee) */
+        $(document).on('click', '.j-user', SetId);
+
+        /** Call / End of call */
+        $(document).on('click', '.j-actions', Calling);
 
         /** DECLINE */
         $(document).on('click', '.j-decline', function() {
@@ -416,6 +482,8 @@
 
         /** ACCEPT */
         $(document).on('click', '.j-accept', function() {
+          facechat_back_url=document.getElementById('iframe').src;
+          $('#camera_page').css("display","block");
             var $videoSourceFilter = $(ui.sourceFilter),
                 mediaParams = {
                     audio: true,
@@ -491,6 +559,7 @@
                     });
                     app.helpers.setFooterPosition();
                     app.currentSession.accept({});
+                    document.getElementById('iframe').style.display="none";
                 }
             });
         });

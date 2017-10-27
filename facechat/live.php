@@ -41,7 +41,7 @@
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <div class=profile_btn onclick="request_talk()"><img src="./img/msg.png" width=16 height=16>&nbsp;&nbsp;쪽지</div>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <div class=profile_btn onclick="reload_data()">새로고침</div>
+      <div class=profile_btn onclick="reload_data()">좋아요</div>
     </center>
   </div>
   <div id=rank_box class=rank_list_box>

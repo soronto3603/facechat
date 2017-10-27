@@ -12,7 +12,9 @@
             "cordova-plugin-console": {},
             "cordova-plugin-device": {},
             "cordova-plugin-iosrtc": {},
-            "cordova-plugin-whitelist": {}
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-android-permissions": {},
+            "cordova-open-native-settings": {}
         }
     },
     "dependencies": {
@@ -20,6 +22,9 @@
         "cordova-android": "^6.2.3",
         "cordova-browser": "~4.1.0",
         "cordova-custom-config": "~3.0.14",
+        "cordova-dialog-gps": "^1.0.0",
+        "cordova-open-native-settings": "^1.4.1",
+        "cordova-plugin-android-permissions": "^1.0.0",
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "~1.0.4",
