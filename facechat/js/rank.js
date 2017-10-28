@@ -11,17 +11,11 @@ window.onload=()=>{
 var my_phone;
 var my_lat;
 var my_lng;
-var my_sex;
-function request_sex(){
-  window.parent.postMessage("sex","*");
-}
 function get_users_info(){
   $.post("http://hume.co.kr/facechat/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:my_phone,type:"rank"}).done((r)=>{
     var user_json=JSON.parse(r);
     for(var i=0;i<user_json.length;i++){
-      if(user_json[i][4]==my_sex)continue;
-      else{}
-      add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][14],user_json[i][6],user_json[i][1],user_json[i][8]);
+      add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);
     }
   });
 }
@@ -37,6 +31,7 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   var sex_text;
 
   var a_loc=Math.round(parseFloat(loc));
+  if(a_loc>617)a_loc="???";
 
   if(sex==0){
     sex_color="man";
@@ -72,9 +67,6 @@ window.onmessage=(e)=>{
       my_lat=JSONDATA.lat;
       my_lng=JSONDATA.lng;
       get_users_info();
-    }else if(JSONDATA.title=="sex"){
-      my_sex=JSONDATA.sex;
-      console.log("my_sex:"+my_sex);
     }
 
   }

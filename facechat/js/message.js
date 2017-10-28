@@ -12,12 +12,36 @@ window.onload=()=>{
 var my_phone;
 var my_lat;
 var my_lng;
+
+var chatroom_list=[];
 function get_chatroom_list(){
   document.getElementById('contents').innerHTML="";
   $.get("http://hume.co.kr/facechat/sql/select_chat_user.php",{phone:my_phone}).done((r)=>{
     var chatroom_json=JSON.parse(r);
+    for(var i=0;i<chatroom_json.length;i++){
+      for(var j=0;j<chatroom_json.length;j++){
+        if(i==j){
+          continue;
+        }else if(chatroom_json[i][1]==chatroom_json[j][2] && chatroom_json[i][2]==chatroom_json[j][1]){
+          console.log("equal::"+chatroom_json[i][3]+"/"+chatroom_json[j][3]);
+          var date1=new Date(chatroom_json[i][3]);
+          var date2=new Date(chatroom_json[j][3]);
+          if(date1>date2){
+            chatroom_json.splice(j,1);
+          }else{
+            chatroom_json.splice(i,1);
+          }
+        }
+      }
+    }
+    chatroom_json.sort((a,b)=>{
+      var date1=new Date(a[3]);
+      var date2=new Date(b[3]);
+      return date1>date2 ? -1 : date1<date2 ? 1 : 0;
+    });
 
     for(var i=0;i<chatroom_json.length;i++){
+      chatroom_list.push(chatroom_json[i]);
       var target_phone;
       if(chatroom_json[i][1]==my_phone)target_phone=chatroom_json[i][2];
       else if(chatroom_json[i][2]==my_phone)target_phone=chatroom_json[i][1];
