@@ -40,7 +40,7 @@ function auto_login(){
           $('#input_name').val(e);
           $("#submit_log").click();
         }else{
-          document.getElementById('iframe').src="http://hume.co.kr/facechat/signin.php";
+          document.getElementById('iframe').src="http://hume.co.kr/facechat2/signin.php";
           splash_animation(100);
         }
       });
@@ -63,7 +63,7 @@ function load_all_var(){
 }
 function CheckMyid(id){
   my_id=id;
-  $.get("http://hume.co.kr/facechat/sql/update_id.php",{id:my_id,phone:phone_number}).done((r)=>{
+  $.get("http://hume.co.kr/facechat2/sql/update_id.php",{id:my_id,phone:phone_number}).done((r)=>{
 
     //alert(r);
   });

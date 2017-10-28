@@ -583,7 +583,7 @@
 
             }else if(e.data=="token"){
               FCMPlugin.getToken(function(token){
-                $.post("http://hume.co.kr/facechat/sql/insert_token.php",{token:token,phone:phone_number}).done((r)=>{
+                $.post("http://hume.co.kr/facechat2/sql/insert_token.php",{token:token,phone:phone_number}).done((r)=>{
                     //alert(r);
                 });
               });
@@ -591,7 +591,7 @@
               var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
               document.getElementById('iframe').contentWindow.postMessage(json,'*');
             }else if(e.data=="chatback"){
-              document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php?back_url="+talk_before_url;
+              document.getElementById('iframe').src="http://hume.co.kr/facechat2/index.php?back_url="+talk_before_url;
             }else if(e.data=="Camera"){
               navigator.camera.getPicture(
                 (result)=>{
@@ -603,7 +603,7 @@
                   options.mimeType = "image/jpeg";
 
                   var ft = new FileTransfer();
-                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat/upload_img_profile.php"), (r)=>{
+                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat2/upload_img_profile.php"), (r)=>{
                     document.getElementById('iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"'+r.response+'"}','*');
                   }, (error)=>{
                     alert("An error has occurred: Code = " + error.code);
@@ -626,7 +626,7 @@
                   options.mimeType = "image/jpeg";
 
                   var ft = new FileTransfer();
-                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat/upload_img_profile.php"), (r)=>{
+                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat2/upload_img_profile.php"), (r)=>{
                     document.getElementById('iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"'+r.response+'"}','*');
                   }, (error)=>{
                     alert("An error has occurred: Code = " + error.code);
