@@ -17,11 +17,9 @@
   </div>
   <div class=profile_button_box>
     <center>
-      <div class=profile_btn  onclick="request_face_chat()"><img src="./img/live.png" width=16 height=16>영상통화</div>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <div class=profile_btn onclick="request_talk()"><img src="./img/msg.png" width=16 height=16>&nbsp;&nbsp;쪽지</div>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <div class=profile_btn onclick="reload_data()">좋아요</div>
+      <div class=profile_btn  style="background-color:#e8222c" onclick="request_face_chat()"><img src="./img/facechat_btn.png" width=24 height=16>&nbsp;&nbsp;영상통화</div>
+      <div class=profile_btn style="background-color:#a21a21" onclick="request_talk()"><img src="./img/msg_btn.png" width=24 height=16>&nbsp;&nbsp;쪽지</div>
+      <div class=profile_btn style="background-color:#721119" onclick="reload_data()"><img src="./img/like_btn.png" width=16 height=16>&nbsp;좋아요</div>
     </center>
   </div>
   <div id=rank_box class=rank_list_box>
