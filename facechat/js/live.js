@@ -19,7 +19,7 @@ function request_face_chat_val(id,name){
 }
 function click_like(){
   var swiperno=swiper.activeIndex;
-  $.get("http://hume.co.kr/facechat/sql/update_like_by_phone.php",{phone:user_info_array[swiperno]['phone']}).done((r)=>{
+  $.get("http://hume.co.kr/facechat2/sql/update_like_by_phone.php",{phone:user_info_array[swiperno]['phone']}).done((r)=>{
     console.log("["+user_info_array[swiperno]['phone']+"] plus a like");
     alert("좋아요!");
   });
@@ -114,9 +114,11 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   document.getElementById('rank_box').innerHTML+=html;
 }
 function get_users_info(){
-  $.post("http://hume.co.kr/facechat/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:phone,type:"rank"}).done((r)=>{
-    console.log("live.js:get_users_info function"+r);
+  $.post("http://hume.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:phone,type:"rank"}).done((r)=>{
     var user_json=JSON.parse(r);
+    if(user_json.length==0){
+      document.getElementById('rank_box').innerHTML='<div class=nothing_user_line>접속중인 유저가 없습니다.</div>';
+    }
     for(var i=0;i<user_json.length;i++){
       add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);
     }
@@ -129,8 +131,12 @@ function get_users_info(){
 function get_user_data(){
   swiper.removeAllSlides();
   //phone="821058837630";
-  $.post("http://hume.co.kr/facechat/sql/select_user_point.php",{phone:phone}).done((r)=>{
+  $.post("http://hume.co.kr/facechat2/sql/select_user_point.php",{phone:phone}).done((r)=>{
     var user_json=JSON.parse(r);
+    console.log("live.js"+r);
+    if(user_json.length==0){
+      swiper.appendSlide("<div class='swiper-slide'><div class=nothing_user>접속중인 유저가 없습니다.</div></div>");
+    }
     for(var i=0;i<user_json.length;i++){
       swiperAppendSlide(user_json[i][7],user_json[i][4],user_json[i][2],'',user_json[i][1],user_json[i][9],user_json[i][11]);
       //user_info_array[user_info_array.length]=JSON.parse('{"id":"'+user_json[i][1]+'","name":"'+user_json[2]+'"}');

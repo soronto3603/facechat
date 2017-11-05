@@ -1,19 +1,36 @@
 var state=1;//1이면 iframe , if set 2 , quickblox!
-var selId=32507789;
-var selName='abc';
+var selId=33835596;
+var selName='ㅈㄷㄷㄷ';
 var user_list; //user_list[0].id  full_name
 var Imember;
 var my_id;
 var gift_point;
+
 function send_point_modal(){
   document.getElementById('modal_send_point').style.display='block';
 }
 function send_point(howmuch){
-  //alert(howmuch);
   $('#give_point_modal').css('display','none');
+  $('#send_point_accept_msg').html(selName+"님께 "+howmuch+"포인트를 선물하시겠습니까?");
+  $('#give_point_accept_modal').css("display","block");
+  gift_point=howmuch;
+  // $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:id,point:point,why:5}).done((r)=>{
+  //
+  // });
 }
-function select_gift_point(str,me){
-  gift_point=str;
+function send_point_accetp(){
+  $('#give_point_accept_modal').css('display','none');
+  $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:my_id,point:"-"+gift_point,why:5}).done((r)=>{
+    console.log(r);
+    if(r=="false"){
+      alert("포인트가 모자랍니다.");
+    }else{
+      $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:selId,point:gift_point,why:5}).done((r)=>{
+        console.log(r);
+        alert("선물을 완료했습니다.");
+      });
+    }
+  });
 }
 function close_send_modal(){
   document.getElementById('modal_send_point').style.display="none";

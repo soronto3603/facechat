@@ -43,6 +43,7 @@ b {
   left:0px;
   top:0px;
   z-index:20;
+  background-color:black;
 }
 #splash{
   position:absolute;
@@ -50,14 +51,15 @@ b {
   height:100%;
   left:0px;
   top:0px;
-  z-index:20;
-  background-color:#CB95FD;
+  z-index:30;
+  background-color:black;
+  background-image:url("./images/intro.jpg");
+  background-size: contain;
 }
 .splash_image{
-  margin-top:60%;
+  margin-top: 100%;
   width:200px;
   height:200px;
-  background-color:white;
   z-index:30;
   border-radius:20px;
 }
@@ -829,6 +831,13 @@ b {
   margin-top: 40%;
   border-radius: 5px;
 }
+.give_point_accept_content{
+  width:250px;
+  height:150px;
+  background-color:#ffffff;
+  margin-top: 40%;
+  border-radius: 5px;
+}
 .give_point_line{
   width:100%;
   height:42px;
@@ -846,4 +855,27 @@ b {
 .close_btn{
   position: relative;
   top: 5px;
+}
+.give_point_confirm_btn{
+  width:125px;
+  height:60px;
+  line-height:60px;
+  background-color:yellow;
+  color:white;
+  display:inline-block;
+}
+.give_point_accept_line {
+    width: 100%;
+    height: 90px;
+    line-height: 90px;
+    font-size: 12px;
+}
+.give_point_close_btn{
+  width:125px;
+  height:60px;
+  line-height:60px;
+  background-color:black;
+  color:white;
+  display:inline-block;
+      margin-left: -3.9px;
 }

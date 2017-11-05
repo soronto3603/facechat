@@ -12,7 +12,7 @@ var my_phone;
 var my_lat;
 var my_lng;
 function get_users_info(){
-  $.post("http://hume.co.kr/facechat/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:my_phone,type:"rank"}).done((r)=>{
+  $.post("http://hume.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:my_phone,type:"rank"}).done((r)=>{
     var user_json=JSON.parse(r);
     for(var i=0;i<user_json.length;i++){
       add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);

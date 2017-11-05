@@ -1,54 +1,58 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 body{
+  font-family: 'Hanna', serif;
   margin:0px;
-  background-color:#ff999a;
+  background-color: white;
 }
 label{
-  color:#ffffff;
+  color:gray;
 }
 input{
-  width: 100%;
+  width: 200px;
   background-color: inherit;
   border: none;
-  border: 1px solid #ffffff;
+  border: 1px solid gray;
   border-top: none;
   border-left: none;
   border-right: none;
   border-radius: 1.5px;
   outline: none;
-  color: #ffffff;
+  color: gray;
   height: 40px;
   padding: 10px;
   font-size: 18;
+  display:inline-block;
 }
 .container{
   width:80%;
   margin:10%;
 }
 .button_box{
-  width:100%;
-  height:40px;
-  background-color:#FF6C6C;
-  color:#ffffff;
-  line-height:40px;
-  text-align:center;
-  position:fixed;
-  bottom:0px;
-  left:0px;
+  width: 100%;
+  height: 62px;
+  background-color: #9f1b1f;
+  color: white;
+  line-height: 62px;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
 }
 .line{
   margin-bottom:10px;
 }
 .age_line{
   height:40px;
-  width:100%;
+  width:200px;
   font-size:18;
-  color:#ffffff;
+  color:gray;
   line-height: 40px;
   text-align:center;
-  border:1px solid #ffffff;
+  border:1px solid gray;
   border-top:none;
   border-right:none;
   border-left:none;
+  display:inline-block;
 }
 .age_open_triangle{
   -ms-transform: rotate(180deg); /* IE 9 */
@@ -64,7 +68,7 @@ input{
     to {box-shadow: 0px 0px 14px #ffffff;}*/
 }
 .man{
-  background-color:#6379FF;
+  background-color:#226dc1;
   animation-name:select_shadow;
   animation-duration:0.3s;
   -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
@@ -87,7 +91,7 @@ input{
   display: inline-block;
   height: 40px;
   border-radius:5px;
-  color:#ffffff;
+  color:white;
   line-height:40px;
   text-align:center;
 }
@@ -102,7 +106,7 @@ input{
   z-index:1;
 }
 .modal_top_margin{
-  margin-top:20%;
+  margin-top:50%;
 }
 .modal_exit_content{
   width:200px;
@@ -157,7 +161,7 @@ input{
     }
     to {
       background-color: #ff999a;
-      color:#ffffff;
+      color:gray;
     }
 }
 
@@ -169,7 +173,7 @@ input{
   }
   to {
     background-color: #ff999a;
-    color:#ffffff;
+    color:gray;
   }
 }
 .age_modal_line:hover{
@@ -192,7 +196,7 @@ input{
   width:100%;
   height:100%;
   border-radius: 5px;
-  border: 3px solid #ffffff;
+  border: 3px solid gray;
 }
 .modal_img_content{
   background-color:#ffffff;
@@ -214,7 +218,8 @@ input{
   animation-fill-mode:forwards; /*when the spec is finished*/
 }
 .loading_img{
-  margin-top:40%;
+  margin-top: 60%;
+  width: 120px;
 }
 
-input::-webkit-input-placeholder { color: #ffffff; }
+input::-webkit-input-placeholder { font-family: 'Hanna', serif;color: gray; }

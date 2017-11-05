@@ -44,13 +44,37 @@
       <div style="width:1px;height:1px;margin-top:45%"></div>
     </center>
   </div> -->
+  <div id=give_point_modal class=give_point_modal>
+      <center>
+        <div class=give_point_content>
+          <div class=give_point_line onclick="send_point(100)">100P</div>
+          <div class=give_point_line onclick="send_point(500)">500P</div>
+          <div class=give_point_line onclick="send_point(1000)">1000P</div>
+          <div class=give_point_line onclick="send_point(1500)">1500P</div>
+          <div class=give_point_line onclick="send_point(2000)">2000P</div>
+          <div class=give_point_line onclick="send_point(2500)">2500P</div>
+          <div class=give_point_line onclick="send_point(3000)">3000P</div>
+        </div>
+        <div class=close_btn_box onclick="$('#give_point_modal').css('display','none')"><img class=close_btn src="./images/iconmonstr-x-mark-1-240.png" width=20 height=20></div>
+      </center>
+  </div>
+  <div id=give_point_accept_modal class=give_point_modal>
+      <center>
+        <div class=give_point_accept_content>
+          <div class=give_point_accept_line id=send_point_accept_msg>님께 얼마를 주시겠습니까?</div>
+          <div class=give_point_confirm_btn onclick="send_point_accetp()">네</div>
+          <div class=give_point_close_btn onclick="$('#give_point_accept_modal').css('display','none')">아니오</div>
+        </div>
+      </center>
+  </div>
   <div id=splash>
     <!-- <img class=splash_image src="./images/splash.png"> -->
     <!-- <p class=splash_text>Beauty<br>CAM</p> -->
     <center>
       <div class=splash_image>
-        <img src="./images/splash_logo.png" wdith=100% height=100%>
+        <!-- <img src="./images/splash_logo.png" wdith=100% height=100%> -->
         <img src="./images/Spinnerbc7f80.gif" width=100 height=100>
+        <!-- <div style="margin-top: 50%;font-size: 22px;color: white;text-shadow: 1px 1px 3px #ED7878, 0 0 0px #ED7878, 0 0 0px #ED7878;font-weight: bolder;">"이젠 실시간으로 뷰티캠"</div> -->
       </div>
     </center>
   </div>
@@ -192,8 +216,9 @@
 
     <div class=camera_page id=camera_page>
       <div class=icon_box>
-        <div class=end_call onclick="state=3;">
-          <img src="./images/phone.png" width=20 height=20 style="position:relative;left:10px;top:10px;">
+        <div class=end_call >
+          <img src="./images/phone.png" width=20 height=20 style="position:relative;left:10px;top:10px;" onclick="state=3;">
+          <img src="./images/gift.png" width=20 height=20 style="    position: relative;width: 40px;height: 40px;left: 50px;bottom: 20px;" onclick="$('#give_point_modal').css('display','block')">
         </div>
       </div>
       <!-- <div class=send_point onclick="send_point_modal()zz">
@@ -209,6 +234,36 @@
           <div class="frames__main_timer invisible" id="timer">
           </div>
       </div>
+      <!-- <div class="caller__frames_acts">
+          <button class="caller__frames_acts_btn j-caller__ctrl" data-target="video">
+              <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 19 19" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-290.000000, -80.000000)">
+                    <g transform="translate(288.000000, 78.000000)">
+                      <path d="M0 0L24 0 24 24 0 24 0 0Z"/>
+                      <path class="svg_icon" d="M21 6.5L17 10.5 17 7C17 6.45 16.55 6 16 6L9.82 6 21 17.18 21 6.5 21 6.5ZM3.27 2L2 3.27 4.73 6 4 6C3.45 6 3 6.45 3 7L3 17C3 17.55 3.45 18 4 18L16 18C16.21 18 16.39 17.92 16.54 17.82L19.73 21 21 19.73 3.27 2 3.27 2Z"/>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+          </button>
+
+          <button class="caller__frames_acts_btn j-caller__ctrl" data-target="audio">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" version="1.1">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g transform="translate(-347.000000, -80.000000)">
+                    <g transform="translate(344.000000, 78.000000)">
+                      <path d="M0 0L24 0 24 24 0 24 0 0Z"/>
+                      <path class="svg_icon" d="M19 11L17.3 11C17.3 11.74 17.14 12.43 16.87 13.05L18.1 14.28C18.66 13.3 19 12.19 19 11L19 11ZM14.98 11.17C14.98 11.11 15 11.06 15 11L15 5C15 3.34 13.66 2 12 2 10.34 2 9 3.34 9 5L9 5.18 14.98 11.17 14.98 11.17ZM4.27 3L3 4.27 9.01 10.28 9.01 11C9.01 12.66 10.34 14 12 14 12.22 14 12.44 13.97 12.65 13.92L14.31 15.58C13.6 15.91 12.81 16.1 12 16.1 9.24 16.1 6.7 14 6.7 11L5 11C5 14.41 7.72 17.23 11 17.72L11 21 13 21 13 17.72C13.91 17.59 14.77 17.27 15.54 16.82L19.73 21 21 19.73 4.27 3 4.27 3Z"/>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+          </button>
+
+          <button class="caller__frames_acts_btn_record j-record" alt="record video">
+          </button>
+      </div> -->
       <!-- <div class=uncalling_btn onclick="state=3;">전화끊기</div> -->
     </div>
     <!-- TEMPLATES -->
@@ -404,13 +459,14 @@
       document.addEventListener('deviceready', onDeviceReady, false);
 
       var phone_number;
-      var lat='';
-      var lng='';
+      var lat=0;
+      var lng=0;
       var talk_before_url;
       function splash_animation(duration){
-        setTimeout(()=>{$('#splash').fadeOut(1000,()=>{});},duration);
+        setTimeout(()=>{$('#splash').fadeOut(1000,()=>{StatusBar.backgroundColorByHexString("#e13c3a");});},duration);
       }
       function login(nick){
+        console.log("Cordova:login Function");
         $('#input_name').val(nick);
         submit_sign(nick);
       }
@@ -463,10 +519,10 @@
         //     //alert("중복아님");
         //   }
         // });
+        console.log("Cordova:submit_sign Function");
         document.getElementById('input_name').value=nick;
         setLoginStatus(nick);
         $("#submit_log").click();
-        document.getElementById('camera_page').style.display="block";
       }
       function onBackFunction(){
         var status=$('#iframe').css("display");
@@ -482,7 +538,7 @@
       function onDeviceReady() {
           console.log("onDeviceReady");
           document.addEventListener("backbutton", onBackFunction, false);
-          StatusBar.backgroundColorByHexString("#ff999a");
+          StatusBar.backgroundColorByHexString("#ffffff");
 
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
@@ -509,42 +565,43 @@
           dbinit();
 
 
-
           navigator.geolocation.getCurrentPosition((position)=>{
             lat=position.coords.latitude;
             lng=position.coords.longitude;
-            var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
-            document.getElementById('iframe').contentWindow.postMessage(json,'*');
-            alert(json);
+            // var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
+            // document.getElementById('iframe').contentWindow.postMessage(json,'*');
           },(err)=>{/*alert(":"+err.code+err.message)*/}
           ,{ timeout: 3000 });
 
           window.onmessage=function(e){
+            console.log(e.data);
             if(e.data=="Reload"){
               load_all_var();
-            }else if(e.data=="GetPst"){
-              if(lat=="" || lng==""){
-                alert("뷰티캠은 GPS를 켜야 올바르게 작동합니다.");
-                navigator.app.exitApp();
+            }else if(e.data=="signingps"){
+              // if(lat==""||lng==""){
+              //   document.getElementById('iframe').contentWindow.postMessage(json,'*');
+              // }
+            }else if(e.data=="location_settings"){
+              if(typeof cordova.plugins.settings.openSetting != undefined){
+                  cordova.plugins.settings.open("location", function(){
+                          console.log("opened nfc settings")
+                      },
+                      function(){
+                          console.log("failed to open nfc settings")
+                      });
               }
-              document.getElementById('iframe').contentWindow.postMessage('{"title":"location","x":"'+lat+'","y":"'+lng+'"}','*');
-            }else if(e.data=="exit"){
-              navigator.app.exitApp();
+
             }else if(e.data=="token"){
               FCMPlugin.getToken(function(token){
-                $.post("http://hume.co.kr/facechat/sql/insert_token.php",{token:token,phone:phone_number}).done((r)=>{
+                $.post("http://hume.co.kr/facechat2/sql/insert_token.php",{token:token,phone:phone_number}).done((r)=>{
                     //alert(r);
                 });
               });
             }else if(e.data=="location"){
-              if(lat=="" || lng==""){
-                alert("뷰티캠은 GPS를 켜야 올바르게 작동합니다.");
-                navigator.app.exitApp();
-              }
               var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
               document.getElementById('iframe').contentWindow.postMessage(json,'*');
             }else if(e.data=="chatback"){
-              document.getElementById('iframe').src="http://hume.co.kr/facechat/index.php?back_url="+talk_before_url;
+              document.getElementById('iframe').src="http://hume.co.kr/facechat2/index.php?back_url="+talk_before_url;
             }else if(e.data=="Camera"){
               navigator.camera.getPicture(
                 (result)=>{
@@ -556,7 +613,7 @@
                   options.mimeType = "image/jpeg";
 
                   var ft = new FileTransfer();
-                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat/upload_img_profile.php"), (r)=>{
+                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat2/upload_img_profile.php"), (r)=>{
                     document.getElementById('iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"'+r.response+'"}','*');
                   }, (error)=>{
                     alert("An error has occurred: Code = " + error.code);
@@ -579,7 +636,7 @@
                   options.mimeType = "image/jpeg";
 
                   var ft = new FileTransfer();
-                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat/upload_img_profile.php"), (r)=>{
+                  ft.upload(imguri, encodeURI("http://hume.co.kr/facechat2/upload_img_profile.php"), (r)=>{
                     document.getElementById('iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"'+r.response+'"}','*');
                   }, (error)=>{
                     alert("An error has occurred: Code = " + error.code);
@@ -606,6 +663,7 @@
                 state=2;
                 alert(selId+"/"+selName);
               }else if(JSONDATA.title=="signin"){
+                console.log("Cordova:SigninMessage");
                 login(JSONDATA.name);
               }else if(JSONDATA.title=="chatroom"){
                 talk_before_url=JSONDATA.back_url;

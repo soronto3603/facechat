@@ -9,7 +9,9 @@ var lng=0;
 function camera_message(str){
   window.parent.postMessage(str,"*");
 }
-
+function exit_app(){
+  window.parent.postMessage("exit","*");
+}
 function select_man(){
   $("#man").removeClass("notselected").addClass("man");
   $("#girl").removeClass("girl").addClass("notselected");
@@ -53,16 +55,30 @@ function signin(){
 function request_phone(){
   window.parent.postMessage("Phone","*");
 }
+
 window.onload=()=>{
   //$("#exit_modal").css("display","block");
   age_list_up();
   request_phone();
   //$("#age_modal").css("display","block");
   //$("#img_modal").css("display","block");
+
+  $('#exit_modal').css("display","none");
+  $('#age_modal').css("display","none");
+  $('#img_modal').css("display","none");
 }
 window.onmessage=(e)=>{
   if(e.data=="backbutton"){
-    $('#exit_modal').css("display","block");
+    console.log(document.getElementById('exit_modal').style.display);
+    if(document.getElementById('exit_modal').style.display=='block'||
+    document.getElementById('age_modal').style.display=="block"||
+  document.getElementById('img_modal').style.display=="block" ){
+      $('#exit_modal').css("display","none");
+      $('#age_modal').css("display","none");
+      $('#img_modal').css("display","none");
+    }else{
+      $('#exit_modal').css("display","block");
+    }
   }else{
     var JSONDATA=JSON.parse(e.data);
     if(JSONDATA.title=="ThumbUri"){
@@ -73,7 +89,8 @@ window.onmessage=(e)=>{
       if(img==''){
         alert("이미지를 넣어주세요.")
         return;
-      };
+      }
+      img="http://hume.co.kr/facechat2/profileimg/"+img;
       if(nickname.length<3 || nickname.length>8){
         alert("닉네임은 최소3글자에서 최대 8글자까지 가능합니다.");
         return;
@@ -81,13 +98,21 @@ window.onmessage=(e)=>{
 
       lat=JSONDATA.x;
       lng=JSONDATA.y;
-      var sql="insert into facechat_user values(null,'','"+nickname+"','Hume','"+sex+"','친구만나기',now(),'"+img+"','"+phone+"',3000,123,"+age+","+lat+","+lng+");";
-      $('#loading_modal').css("display","block");
-      $.post("http://hume.co.kr/facechat/sql/insert_user_sigin.php",{
-        sql:sql
+      $.get("http://hume.co.kr/facechat2/sql/select_overap_name.php",{
+        name:nickname
       }).done((r)=>{
-        window.parent.postMessage('{"title":"signin","name":"'+nickname+'"}',"*");
-        alert("회원가입완료");
+        if(r=="true"){
+          alert("중복된 닉네임 입니다.");
+        }else{
+          var sql="insert into facechat_user values(null,'','"+nickname+"','Hume','"+sex+"','친구만나기',now(),'"+img+"','"+phone+"',3000,123,"+age+","+lat+","+lng+");";
+          $('#loading_modal').css("display","block");
+          $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{
+            sql:sql
+          }).done((r)=>{
+            window.parent.postMessage('{"title":"signin","name":"'+nickname+'"}',"*");
+            alert("회원가입완료");
+          });
+        }
       });
     }else if(JSONDATA.title=="Phone"){
       phone=JSONDATA.Phone;

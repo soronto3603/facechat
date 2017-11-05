@@ -48,6 +48,9 @@
         },
         "cordova-open-native-settings": {
             "PACKAGE_NAME": "com.hume.facechat"
+        },
+        "cordova-plugin-inapppurchase": {
+            "PACKAGE_NAME": "com.hume.facechat"
         }
     },
     "dependent_plugins": {

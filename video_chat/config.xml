@@ -17,6 +17,7 @@
         <allow-intent href="market:*" />
         <preference name="android-minSdkVersion" value="21" />
         <preference name="android-targetSdkVersion" value="21" />
+        <preference name="BackgroundColor" value="0x00000000" />
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.RECORD_AUDIO" />
             <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
@@ -42,6 +43,7 @@
     <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <plugin name="cordova-plugin-console" spec="~1.0.4" />
     <plugin name="cordova-plugin-device" spec="~1.1.3" />
+    <plugin name="cordova-plugin-inapppurchase" spec="^1.1.0" />
     <plugin name="cordova-plugin-iosrtc" spec="~3.1.0" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
 </widget>

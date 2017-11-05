@@ -314,7 +314,8 @@ module.exports.metadata =
     "cordova-plugin-geolocation": "2.4.3",
     "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-android-permissions": "1.0.0",
-    "cordova-open-native-settings": "1.4.1"
+    "cordova-open-native-settings": "1.4.1",
+    "cordova-plugin-inapppurchase": "1.1.0"
 }
 // BOTTOM OF METADATA
 });

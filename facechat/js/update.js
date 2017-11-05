@@ -102,14 +102,14 @@ function update_user_info2(){
   age=document.getElementById('age').value;
   sql="UPDATE facechat_user SET imguri='"+imguri+"',name='"+nickname+"',sex='"+sex+"',age='"+age+"' WHERE phone='"+phone+"'";
 
-  $.post("http://hume.co.kr/facechat/sql/insert_user_sigin.php",{
+  $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{
     sql:sql
   }).done((r)=>{
     alert(r+"완료");
   });
 }
 function get_user_info(){
-  $.get("http://hume.co.kr/facechat/sql/select_user_one_by_phone.php",{phone:phone}).done((r)=>{
+  $.get("http://hume.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:phone}).done((r)=>{
     if(r=="false"){
         //alert("사용자를 찾을 수 없습니다.");
         window.parent.postMessage("Siging","*");
@@ -153,7 +153,7 @@ window.onmessage=(e)=>{
       my_lng=obj.lng;
 
       imguri=document.getElementById('input_profile').src;
-      if(imguri=="http://hume.co.kr/facechat/img/man.png"){
+      if(imguri=="http://hume.co.kr/facechat2/img/man.png"){
         alert("프로필 이미지를 등록해 주세요.");
         return;
       }
@@ -176,7 +176,7 @@ window.onmessage=(e)=>{
       }
 
       var sql="insert into facechat_user values(null,'','"+$("#nickname").val()+"','Hume','"+sex+"','친구만나기',now(),'"+document.getElementById('input_profile').src+"','"+phone+"',3000,123,"+$("#age").val()+","+my_lat+","+my_lng+");";
-      $.post("http://hume.co.kr/facechat/sql/insert_user_sigin.php",{
+      $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{
         sql:sql
       }).done((r)=>{
         alert("회원가입 완료");

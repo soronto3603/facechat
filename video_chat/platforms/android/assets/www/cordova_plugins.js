@@ -258,6 +258,14 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.settings"
         ]
+    },
+    {
+        "id": "cordova-plugin-inapppurchase.InAppBillingV3",
+        "file": "plugins/cordova-plugin-inapppurchase/www/index-android.js",
+        "pluginId": "cordova-plugin-inapppurchase",
+        "merges": [
+            "inAppPurchase"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -269,7 +277,8 @@ module.exports.metadata =
     "cordova-plugin-iosrtc": "3.1.0",
     "cordova-plugin-whitelist": "1.3.0",
     "cordova-plugin-android-permissions": "1.0.0",
-    "cordova-open-native-settings": "1.4.1"
+    "cordova-open-native-settings": "1.4.1",
+    "cordova-plugin-inapppurchase": "1.1.0"
 };
 // BOTTOM OF METADATA
 });
