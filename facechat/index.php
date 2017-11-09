@@ -11,7 +11,7 @@
   <div class=top>
     <div class=title_container>
       <p class=title_text>뷰티캠</p>
-      <p id=my_point class=title_point><img src="http://hume.co.kr/facechat2/img/iconmonstr-coin-2-32.png" width="18" height="18" style="position: relative;top: 3px;right:3px;">0P</p>
+      <p id=my_point class=title_point><img src="http://hume.co.kr/facechat2/img/iconmonstr-coin-2-32.png" width="16" height="16" style="position: relative;top: 3px;right:3px;">0P</p>
     </div>
     <div class=navigator_container>
       <div class=menu id=menu1 value=menu1 onclick="click_menu('live')">

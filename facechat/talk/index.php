@@ -11,7 +11,7 @@
       <div id=backbutton style="display:inline-block" onclick="backbutton()">
         <img class=reverse_arrow src="./img/iconmonstr-arrow-25-240.png" width=15 height=15>
         <div class=header_title>채팅방</div>
-        <div class=facechat_btn onclick="request_facechat()"><img src="http://hume.co.kr/facechat/img/live.png" width=25 height=25 style="    position: relative;
+        <div class=facechat_btn onclick="request_facechat()"><img src="http://hume.co.kr/facechat2/img/live.png" width=25 height=25 style="    position: relative;
     left: 10px;
     top: 6px;">
           <p style="    color: gray;

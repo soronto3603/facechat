@@ -1,3 +1,8 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+body{
+  font-family: 'Hanna', serif;
+  margin:0px;
+}
 body{
   margin:0px;
   background-color:#efefef;
@@ -13,7 +18,7 @@ input[type="number"]::-webkit-inner-spin-button {
   top:10px;
 }
 .girl{
-  color:#ff6c6c;
+      color: #e13c3a;
 }
 .man{
   color:#6379FF;
@@ -75,17 +80,17 @@ margin-bottom: 10px;
   clear:both;
 }
 .update_button{
-  position:absolute;
-  left:0px;
-  bottom:0px;
-  width:100%;
-  height:40px;
-  line-height:40px;
-  text-align:center;
-  background-color:#ff999a;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #e13c3a;
   font-weight: bold;
   font-size: 20px;
-  color:#ffffff;
+  color: #ffffff;
 }
 input{
   height:100%;

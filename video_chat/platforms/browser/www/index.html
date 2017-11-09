@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style='    background-color: black;'>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -463,7 +463,7 @@
       var lng=0;
       var talk_before_url;
       function splash_animation(duration){
-        setTimeout(()=>{$('#splash').fadeOut(1000,()=>{StatusBar.backgroundColorByHexString("#e13c3a");});},duration);
+        setTimeout(()=>{$('#splash').fadeOut(1000,()=>{});},duration);
       }
       function login(nick){
         console.log("Cordova:login Function");
@@ -474,6 +474,8 @@
       ///////////////////DB MODULE//////////////////////////
       //////////////////////////////////////////////////////
       var myid;
+
+
       function checkLoginStatus(success){
           db.transaction(function (txn) {
               txn.executeSql('select * from login', [], function (tx, res) {
@@ -538,8 +540,9 @@
       function onDeviceReady() {
           console.log("onDeviceReady");
           document.addEventListener("backbutton", onBackFunction, false);
-          StatusBar.backgroundColorByHexString("#ffffff");
+          StatusBar.backgroundColorByHexString("#9f1b1f");
 
+          iapinit();
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
           if (window.device.platform === 'iOS') {
@@ -548,8 +551,6 @@
             //
           }
 
-          // Load JavaScript files async
-          //
           var loadScriptAsync = function(path){
               var jsScript = document.createElement("script");
               jsScript.type = "text/javascript";
@@ -577,6 +578,8 @@
             console.log(e.data);
             if(e.data=="Reload"){
               load_all_var();
+            }else if(e.data=="exit"){
+              navigator.app.exitApp();
             }else if(e.data=="signingps"){
               // if(lat==""||lng==""){
               //   document.getElementById('iframe').contentWindow.postMessage(json,'*');
@@ -662,6 +665,9 @@
                 selName=JSONDATA.name;
                 state=2;
                 alert(selId+"/"+selName);
+              }else if(JSONDATA.title=="payment"){
+                console.log("payment:facechat.point."+JSONDATA.payment);
+                iapOrder("facechat.point."+JSONDATA.payment);
               }else if(JSONDATA.title=="signin"){
                 console.log("Cordova:SigninMessage");
                 login(JSONDATA.name);

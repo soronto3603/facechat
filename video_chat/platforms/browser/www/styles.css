@@ -43,6 +43,7 @@ b {
   left:0px;
   top:0px;
   z-index:20;
+  background-color:white;
 }
 #splash{
   position:absolute;
@@ -50,9 +51,9 @@ b {
   height:100%;
   left:0px;
   top:0px;
-  z-index:20;
-  background-color:#ffffff;
-  background-image:url("./images/123123.png");
+  z-index:30;
+  background-color:black;
+  background-image:url("./images/intro.jpg");
   background-size: contain;
 }
 .splash_image{

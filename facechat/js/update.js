@@ -117,13 +117,15 @@ function get_user_info(){
       //alert("사용자 정보 있음" +r);
       var obj=JSON.parse(r);
       document.getElementById('nickname').value=obj[2];
-      if(obj[4]==0){
-        document.getElementById('man').checked=true;
-        document.getElementById('girl').checked=false;
+      if(obj[4]=='0'){
+        console.log("update:sex==0");
+        document.getElementById('man_check').checked=true;
+        document.getElementById('girl_check').checked=false;
       }
-      else if(obj[4]==1){
-        document.getElementById('girl').chekced=true;
-        document.getElementById('man').checked=false;
+      else if(obj[4]=='1'){
+        console.log("update:sex==1");
+        document.getElementById('girl_check').chekced=true;
+        document.getElementById('man_check').checked=false;
       }
       document.getElementById('age').value=obj[11];
       document.getElementById('title').value=obj[5];
@@ -151,37 +153,6 @@ window.onmessage=(e)=>{
     }else if(obj.title=="location"){
       my_lat=obj.lat;
       my_lng=obj.lng;
-
-      imguri=document.getElementById('input_profile').src;
-      if(imguri=="http://hume.co.kr/facechat2/img/man.png"){
-        alert("프로필 이미지를 등록해 주세요.");
-        return;
-      }
-      nickname=$("#nickname").val();
-      if(nickname==""){
-        alert("닉네임을 입력해주세요.");
-        return;
-      }
-      age=$("#age").val();
-      if(age==""){
-        alert("나이를 입력해주세요.");
-        return;
-      }
-      sex=0;
-
-      if(document.getElementById('man').checked){
-        sex=0;
-      }else if(document.getElementById('girl').checked){
-        sex=1;
-      }
-
-      var sql="insert into facechat_user values(null,'','"+$("#nickname").val()+"','Hume','"+sex+"','친구만나기',now(),'"+document.getElementById('input_profile').src+"','"+phone+"',3000,123,"+$("#age").val()+","+my_lat+","+my_lng+");";
-      $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{
-        sql:sql
-      }).done((r)=>{
-        alert("회원가입 완료");
-        window.parent.postMessage('{"title":"SigingEnd","name":"'+nickname+'"}',"*");
-      });
     }
   }
 }

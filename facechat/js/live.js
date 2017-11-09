@@ -10,8 +10,10 @@ function select_it(id,name){
 }
 function request_face_chat(){
   var swiperno=swiper.activeIndex;
-  select_it(user_info_array[swiperno]['id'],user_info_array[swiperno]['name']);
-  click_face_chat_btn();
+  if(user_info_array[swiperno]['id']){
+    select_it(user_info_array[swiperno]['id'],user_info_array[swiperno]['name']);
+    click_face_chat_btn();
+  }
 }
 function request_face_chat_val(id,name){
   select_it(id,name);
@@ -26,7 +28,12 @@ function click_like(){
 }
 function request_talk(){
   var swiperno=swiper.activeIndex;
-  window.parent.postMessage('{"title":"talk","phone":"'+user_info_array[swiperno]['phone']+'","img":"'+user_info_array[swiperno]['img']+'"}',"*");
+  if(user_info_array[swiperno]['phone']){
+    window.parent.postMessage('{"title":"talk","phone":"'+user_info_array[swiperno]['phone']+'","img":"'+user_info_array[swiperno]['img']+'"}',"*");
+  }else {
+    alert("대상을 찾을 수 없습니다.");
+  }
+
 }
 function request_talk_val(phone,img){
   window.parent.postMessage('{"title":"talk","phone":"'+phone+'","img":"'+img+'"}',"*");
@@ -98,7 +105,7 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   }
   var html="<div class=line>";
   html+="<div class=img_left>";
-  html+="<div class='image_box line_left_margin'><div class=rank_circle><div class=rank_text>"+rank_count+"</div></div><img class=img src='"+imguri+"' width=100% height=100%></div>";
+  html+="<div class='image_box line_left_margin'><img class=img src='"+imguri+"' width=100% height=100%></div>";
   html+="</div>";
   html+="<div class=line_contents style='width:"+line_text_width+"'>";
   html+="<div class='line_nickname "+sex_color+"'>"+nickname+"</div>";

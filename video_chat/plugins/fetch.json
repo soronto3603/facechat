@@ -103,14 +103,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "cc.fovea.cordova.purchase": {
-        "source": {
-            "type": "registry",
-            "id": "cc.fovea.cordova.purchase@^7.0.2"
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-fcm": {
         "source": {
             "type": "registry",
@@ -138,7 +130,7 @@
     "cordova-plugin-inapppurchase": {
         "source": {
             "type": "registry",
-            "id": "cordova-plugin-inapppurchase@^1.1.0"
+            "id": "cordova-plugin-inapppurchase"
         },
         "is_top_level": true,
         "variables": {}

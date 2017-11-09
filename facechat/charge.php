@@ -15,25 +15,25 @@
       <div class="cash_box">
         <div class=cash_help>포인트 충전으로<br>즐거운 화상채팅을<br>즐겨보세요.</div>
       </div>
-      <div class=cash_box>
-        3,700P
-        <div class=cash_box_help>6,000원</div>
+      <div class=cash_box onclick="request_payment(5500)">
+        5500P
+        <div class=cash_box_help>5,500원</div>
       </div>
-      <div class=cash_box>
-        6,200P
-        <div class=cash_box_help>6,000원</div>
+      <div class=cash_box onclick="request_payment(11000)">
+        11000P
+        <div class=cash_box_help>11,000원</div>
       </div>
-      <div class=cash_box>
-        18,600P
-        <div class=cash_box_help>6,000원</div>
+      <div class=cash_box onclick="request_payment(33000)">
+        33000P
+        <div class=cash_box_help>33,000원</div>
       </div>
-      <div class=cash_box>
-        60,000P
-        <div class=cash_box_help>6,000원</div>
+      <div class=cash_box onclick="request_payment(55000)">
+        55000P
+        <div class=cash_box_help>55,000원</div>
       </div>
-      <div class=cash_box>
-        150,000P
-        <div class=cash_box_help>6,000원</div>
+      <div class=cash_box onclick="request_payment(110000)">
+        110000P
+        <div class=cash_box_help>110,000원</div>
       </div>
 
     </div>

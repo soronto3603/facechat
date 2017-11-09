@@ -3,8 +3,43 @@ var selId=33835596;
 var selName='ㅈㄷㄷㄷ';
 var user_list; //user_list[0].id  full_name
 var Imember;
+var girl_point_interval;
 var my_id;
 var gift_point;
+var sex=-1;
+var isgirl_point=0;
+
+function check_camera_page_is_block(){
+  // clearInterval(girl_point_interval);
+  if($('#camera_page').css("display")=="block"){
+    console.log("camera_page_is_block point:"+isgirl_point);
+    if(sex==-1){
+      $.get("http://hume.co.kr/facechat2/sql/select_user_by_id.php",{id:my_id}).done((r)=>{
+        if(r=="false"){
+
+        }else{
+          var object=JSON.parse(r);
+          sex=object.sex;
+        }
+      });
+    }else{
+      if(sex==0){
+        clearInterval(girl_point_interval);
+      }
+    }
+    isgirl_point++;
+    if(isgirl_point==60){
+      isgirl_point=0;
+      $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:my_id,point:'10',why:1}).done((r)=>{
+
+      });
+    }
+  }else{
+    isgirl_point=0;
+    sex=-1;
+    console.log("camera_page_non_block");
+  }
+}
 
 function send_point_modal(){
   document.getElementById('modal_send_point').style.display='block';
@@ -37,6 +72,7 @@ function close_send_modal(){
 }
 function init(){
   Imember=setInterval(CheckMember,1000);
+  girl_point_interval=setInterval(check_camera_page_is_block,1000);
 }
 function CheckMember(){
   if(user_list){

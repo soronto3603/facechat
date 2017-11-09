@@ -30,18 +30,16 @@
     <div id=sex_line class=normal_line>
       <div class=normal_title>성별</div>
       <!-- <input type=text id=sex class=normal value=남성> -->
-      <div class="label man">남자</div><input id=man onclick="reset_check_box('girl')" type=checkbox checked>
+      <div class="label man">남자</div><input id=man_check onclick="reset_check_box('girl')" type=checkbox disabled>
       &nbsp&nbsp&nbsp&nbsp
-      <div class="label girl">여자</div><input id=girl onclick="reset_check_box('man')" type=checkbox>
+      <div class="label girl">여자</div><input id=girl_check onclick="reset_check_box('man')" type=checkbox disabled>
     </div>
     <div id=title_line class=normal_line style="display:none;">
       <div class=normal_title>주제</div>
       <input type=text id=title class=normal value=친구주세요>
     </div>
   </div>
-  <div id=update_button><div class=update_button onclick="update_user_info();">
-    회원가입
-  </div></div>
+  <div id=update_button><div class=update_button onclick="update_user_info2()">수정하기</div></div>
 
   <script src="./js/update.js"></script>
 </body>

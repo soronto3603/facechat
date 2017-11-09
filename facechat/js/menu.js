@@ -3,6 +3,7 @@ var phone='';
 var lat=0;
 var lng=0;
 var sex;
+var point=0;
 window.onload=()=>{
   document.getElementById('modal_exit').style.display="none";
   menu_size();
@@ -12,7 +13,7 @@ window.onload=()=>{
 
   //앱이 켜져있는동안 번호로 날짜를 업데이트함
   setInterval(session_connecting,3000);
-
+  document.getElementById('modal_exit').style.display="none";
   if(document.getElementById('back_url').value==""){
     click_menu("live");
   }else{
@@ -49,6 +50,7 @@ function get_my_point(){
   $.get("http://hume.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:phone}).done((r)=>{
     var json=JSON.parse(r);
     $('#my_point').html('<img src="http://hume.co.kr/facechat2/img/iconmonstr-coin-2-32.png" width="18" height="18" style="position: relative;top: 3px;right:3px;">'+json[9]+"P");
+    point=json[9];
     sex=json[4];
     console.log("sex:"+sex);
   });
@@ -56,6 +58,8 @@ function get_my_point(){
 window.onmessage=(e)=>{
   if(e.data=="Camera"){
     window.parent.postMessage("Camera","*");
+  }else if(e.data=="point"){
+    document.getElementById('content_iframe').contentWindow.postMessage('{"title":"point","point":"'+point+'"}',"*");
   }else if(e.data=="sex"){
     document.getElementById('content_iframe').contentWindow.postMessage('{"title":"sex","sex":"'+sex+'"}',"*");
   }else if(e.data=="CameraModal"){
@@ -72,10 +76,15 @@ window.onmessage=(e)=>{
     document.getElementById('content_iframe').contentWindow.postMessage('{"title":"location","lat":"'+lat+'","lng":"'+lng+'"}',"*");
   }else if(e.data=="backbutton"){
     var current_url=document.getElementById('content_iframe').src;
-    if(current_url.indexOf("cashback.php")!=-1 || current_url.indexOf("charge.php")!=-1 || current_url.indexOf("notice.php")!=-1 || current_url.indexOf("point_log.php")!=-1){
+    if(current_url.indexOf("cashback.php")!=-1 || current_url.indexOf("charge.php")!=-1 || current_url.indexOf("notice.php")!=-1 || current_url.indexOf("point_log.php")!=-1||current_url.indexOf("update.php")!=-1){
       document.getElementById('content_iframe').src="http://hume.co.kr/facechat2/more.php";
     }else{
-      document.getElementById('modal_exit').style.display="block";
+      if(document.getElementById('modal_exit').style.display=="block" || document.getElementById('modal_send_msg').style.display=="block"){
+        document.getElementById('modal_exit').style.display="none";
+        document.getElementById('modal_send_msg').style.display="none";
+      }else {
+        document.getElementById('modal_exit').style.display="block";
+      }
     }
   }else if(e.data=="Siging"){
     is_signing=1;
@@ -89,11 +98,13 @@ window.onmessage=(e)=>{
     var obj=JSON.parse(e.data);
     if(obj.title=="ThumbUri"){
       document.getElementById('content_iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"http://hume.co.kr/facechat2/profileimg/'+obj.ThumbUri+'"}',"*");
+    }else if(obj.title=="payment"){
+      window.parent.postMessage(e.data,"*");
     }else if(obj.title=="facechat"){
       window.parent.postMessage('{"title":"facechat","id":"'+obj.id+'","name":"'+obj.name+'"}',"*");
     }else if(obj.title=="Phone"){
       phone=obj.Phone;
-      setInterval(get_my_point,5000);
+      setInterval(get_my_point,3000);
       //get_my_point();
     }else if(obj.title=="talk"){
       modal_send_msg(obj.phone,obj.img);

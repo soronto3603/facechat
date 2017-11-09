@@ -474,6 +474,8 @@
       ///////////////////DB MODULE//////////////////////////
       //////////////////////////////////////////////////////
       var myid;
+
+
       function checkLoginStatus(success){
           db.transaction(function (txn) {
               txn.executeSql('select * from login', [], function (tx, res) {
@@ -534,12 +536,43 @@
           state=3;
         }
       }
+      function getProducts(){
+        inAppPurchase
+          .getProducts(['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',])
+          .then(function (products) {
+            console.log(products);
+            /*
+               [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
+            */
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
+      }
+      function buyProduct(id){
+        inAppPurchase
+        .buy(id)
+        .then(function (data) {
+          console.log(data);
+          /*
+            {
+              transactionId: ...
+              receipt: ...
+              signature: ...
+            }
+          */
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+      }
       var facechat_back_url='';
       function onDeviceReady() {
           console.log("onDeviceReady");
           document.addEventListener("backbutton", onBackFunction, false);
           StatusBar.backgroundColorByHexString("#9f1b1f");
 
+          getProducts();
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
           if (window.device.platform === 'iOS') {
@@ -547,19 +580,7 @@
           }else if (window.device.platform === 'Android') {
             //
           }
-          inAppPurchase
-            .getProducts(['com.hume.facechat'])
-            .then(function (products) {
-              console.log("inapp"+products);
-              /*
-                 [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
-              */
-            })
-            .catch(function (err) {
-              console.log(err);
-            });
-          // Load JavaScript files async
-          //
+
           var loadScriptAsync = function(path){
               var jsScript = document.createElement("script");
               jsScript.type = "text/javascript";
@@ -674,6 +695,9 @@
                 selName=JSONDATA.name;
                 state=2;
                 alert(selId+"/"+selName);
+              }else if(JSONDATA.title=="payment"){
+                console.log("payment:facechat.point."+JSONDATA.payment);
+                buyProduct("facechat.point."+JSONDATA.payment);
               }else if(JSONDATA.title=="signin"){
                 console.log("Cordova:SigninMessage");
                 login(JSONDATA.name);

@@ -104,13 +104,16 @@ window.onmessage=(e)=>{
         if(r=="true"){
           alert("중복된 닉네임 입니다.");
         }else{
-          var sql="insert into facechat_user values(null,'','"+nickname+"','Hume','"+sex+"','친구만나기',now(),'"+img+"','"+phone+"',3000,123,"+age+","+lat+","+lng+");";
-          $('#loading_modal').css("display","block");
-          $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{
-            sql:sql
-          }).done((r)=>{
-            window.parent.postMessage('{"title":"signin","name":"'+nickname+'"}',"*");
-            alert("회원가입완료");
+          var sql="delete from facechat_user where phone='"+phone+"'";
+          $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{sql:sql}).done((r)=>{
+            var sql="insert into facechat_user values(null,'','"+nickname+"','Hume','"+sex+"','친구만나기',now(),'"+img+"','"+phone+"',3000,123,"+age+","+lat+","+lng+");";
+            $('#loading_modal').css("display","block");
+            $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{
+              sql:sql
+            }).done((r)=>{
+              window.parent.postMessage('{"title":"signin","name":"'+nickname+'"}',"*");
+              alert("회원가입완료");
+            });
           });
         }
       });
