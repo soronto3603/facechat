@@ -118,14 +118,10 @@ function get_user_info(){
       var obj=JSON.parse(r);
       document.getElementById('nickname').value=obj[2];
       if(obj[4]=='0'){
-        console.log("update:sex==0");
-        document.getElementById('man_check').checked=true;
-        document.getElementById('girl_check').checked=false;
+        document.getElementById('sex_block').innerHTML="<div class=\"label man\">남자</div>";
       }
       else if(obj[4]=='1'){
-        console.log("update:sex==1");
-        document.getElementById('girl_check').chekced=true;
-        document.getElementById('man_check').checked=false;
+        document.getElementById('sex_block').innerHTML="<div class=\"label girl\">여자</div>";
       }
       document.getElementById('age').value=obj[11];
       document.getElementById('title').value=obj[5];

@@ -6,9 +6,9 @@
 </head>
 <body>
   <div class=profile onclick="click_menu('update')">
-    <div class=profile_image><img id=profile_img src="" width=100% height=100%></div>
+    <div class=profile_image><img id=profile_img src="./img/man.png" width=100% height=100%></div>
     <div class=profile_text>
-      <p id=profile_nickname>soronto<font>(남 20세)</font></p>
+      <p id=profile_nickname></p>
       <p class=profile_help>프로필을 수정하려면 터치 해주세요.</p>
     </div>
     <div class=clear></div>

@@ -8,6 +8,9 @@ window.onload=()=>{
   window.parent.postMessage("Phone","*");
   window.parent.postMessage("location","*");
 }
+function imageView(url){
+  window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
+}
 var my_phone;
 var my_lat;
 var my_lng;
@@ -25,8 +28,20 @@ function get_users_info(){
 function request_talk_val(phone,img){
   window.parent.postMessage('{"title":"talk","phone":"'+phone+'","img":"'+img+'"}',"*");
 }
+var request_face_id;
+var request_face_name;
 function request_face_chat_val(id,name){
-  window.parent.postMessage('{"title":"facechat","id":"'+id+'","name":"'+name+'"}',"*");
+  //window.parent.postMessage('{"title":"facechat","id":"'+id+'","name":"'+name+'"}',"*");
+  request_face_id=id;
+  request_face_name=name;
+  $.post("http://hume.co.kr/facechat2/sql/select_user_session.php",{id:id}).done((r)=>{
+    if(r=="True"){
+      alert("접속중");
+      //window.parent.postMessage('{"title":"facechat","id":"'+id+'","name":"'+name+'"}',"*");
+    }{
+      alert("접속 한 상태가 아닙니다.");
+    }
+  });
 }
 function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   var line_text_width=$(window).width()-260;
@@ -45,7 +60,7 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   }
   var html="<div class=line>";
   html+="<div class=img_left>";
-  html+="<div class='image_box line_left_margin'><div style='position: absolute;background-color: white;width: 40px;height: 40px;border-radius: 40px;'><img src='http://hume.co.kr/facechat2/img/iconmonstr-crown-1-240.png' width=20 height=20 style='position: relative;top: 2.5px;'><div style='color: #FCBA2E;position: relative;bottom: 28px;'>"+rank+"</div></div><img class=img src='"+imguri+"' width=100% height=100%></div>";
+  html+="<div class='image_box line_left_margin'><div style='position: absolute;background-color: white;width: 40px;height: 40px;border-radius: 40px;'><img src='http://hume.co.kr/facechat2/img/iconmonstr-crown-1-240.png' width=20 height=20 style='position: relative;top: 2.5px;'><div style='color: #FCBA2E;position: relative;bottom: 28px;'>"+rank+"</div></div><img onclick='imageView(\""+imguri+"\")' class=img src='"+imguri+"' width=100% height=100%></div>";
   html+="</div>";
   html+="<div class=line_contents style='width:"+line_text_width+"'>";
   html+="<div class='line_nickname "+sex_color+"'>"+nickname+"</div>";

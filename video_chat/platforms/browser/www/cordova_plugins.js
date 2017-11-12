@@ -294,6 +294,14 @@ module.exports = [
         "clobbers": [
             "cordova.plugins.settings"
         ]
+    },
+    {
+        "file": "plugins/com-sarriaroman-photoviewer/www/PhotoViewer.js",
+        "id": "com-sarriaroman-photoviewer.PhotoViewer",
+        "pluginId": "com-sarriaroman-photoviewer",
+        "clobbers": [
+            "PhotoViewer"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -315,7 +323,8 @@ module.exports.metadata =
     "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-open-native-settings": "1.4.1",
-    "cordova-plugin-inapppurchase": "1.1.0"
+    "cordova-plugin-inapppurchase": "1.1.0",
+    "com-sarriaroman-photoviewer": "1.1.11"
 }
 // BOTTOM OF METADATA
 });

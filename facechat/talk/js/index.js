@@ -7,6 +7,9 @@ window.onload=()=>{
   get_user_data();
   get_data_interval=setInterval(get_talk_data,1000);
 }
+function imageView(url){
+  window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
+}
 function request_facechat(){
   window.parent.postMessage('{"title":"facechat","id":"'+target_info[1]+'","name":"'+target_info[2]+'"}',"*");
 }

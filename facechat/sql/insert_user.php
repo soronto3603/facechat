@@ -12,6 +12,9 @@
   echo $lng=$_POST['lng'];
   $point=$POST['point'];
 
+  $query="DELETE FROM facechat_chat WHERE fromid='$phone' OR toid='$phone'";
+  mysqli_query($con,$query);
+
   echo $query="SELECT * FROM facechat_user WHERE phone='$phone'";
   if($result=mysqli_query($con,$query)){
     while($row=mysqli_fetch_row($result)){

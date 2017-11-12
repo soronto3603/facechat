@@ -8,6 +8,9 @@ window.onload=()=>{
   window.parent.postMessage("Phone","*");
   window.parent.postMessage("location","*");
 }
+function imageView(url){
+  window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
+}
 var my_phone;
 var my_lat;
 var my_lng;
@@ -42,7 +45,7 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   }
   var html="<div class=line>";
   html+="<div class=img_left>";
-  html+="<div class='image_box line_left_margin'><img class=img src='"+imguri+"' width=100% height=100%></div>";
+  html+="<div class='image_box line_left_margin'><img onclick='imageView(\""+imguri+"\")' class=img src='"+imguri+"' width=100% height=100%></div>";
   html+="</div>";
   html+="<div class=line_contents style='width:"+line_text_width+"'>";
   html+="<div class='line_nickname "+sex_color+"'>"+nickname+"</div>";

@@ -63,15 +63,12 @@ function swiperAppendSlide(imguri,sex,name,loc,id,point,age){
   html+='<center>';
   html+='<div id=content_container'+id+' class=content_container">';
 
-  html+='<div class=content_img_box><img class=content_img src="'+imguri+'" width=200 height=200"></div>';
-  html+='<div class=profile_text><div class=text_detail>'+sex_text+" / "+age+"세 / "+point+"P</div><div class=text_name>"+name+'</div></div>';
+  html+='<div class=content_img_box><img onclick="imageView(\''+imguri+'\')" class=content_img src="'+imguri+'" width=200 height=200"></div>';
+  html+='<div class=profile_text><div class=text_detail>'+sex_text+" / "+age+"세 / "+point+"</div><div class=text_name>"+name+'</div></div>';
   html+='</div></center></div>';
   swiper.appendSlide(html);
 }
-function imageView(img,backurl){
-  // window.location.href="http://hume.co.kr/facechat/imageView.php?image="+img+"?backurl="+backurl;
-  window.parent.postMessage('{"title":"imageView","img":"'+img+'","backurl":"'+backurl+'"}',"*");
-}
+
 function add_testuser(){
   var iu='<div class="swiper-slide"><center><div id=content_container class=content_container onclick="alert(\"테스트유저로서 선택할 수 없습니다.\")"><div class=profile_text>아이유</div><img  class=content_img src="./profileimg/iu.JPG" width=200 height=200><div class=profile_title>그린라이트일까요?</div></div></center></div>'
   swiper.appendSlide(iu);
@@ -81,6 +78,10 @@ window.onload=()=>{
   window.parent.postMessage("Reload","*");
   window.parent.postMessage("Phone","*");
   window.parent.postMessage("location","*");
+  window.parent.postMessage("sex","*");
+}
+function imageView(url){
+  window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
 }
 function rank_box_size(){
   // var height=$(window).height()*0.5-70;
@@ -105,7 +106,7 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   }
   var html="<div class=line>";
   html+="<div class=img_left>";
-  html+="<div class='image_box line_left_margin'><img class=img src='"+imguri+"' width=100% height=100%></div>";
+  html+="<div class='image_box line_left_margin'><img onclick='imageView(\""+imguri+"\")' class=img src='"+imguri+"' width=100% height=100%></div>";
   html+="</div>";
   html+="<div class=line_contents style='width:"+line_text_width+"'>";
   html+="<div class='line_nickname "+sex_color+"'>"+nickname+"</div>";
@@ -127,6 +128,7 @@ function get_users_info(){
       document.getElementById('rank_box').innerHTML='<div class=nothing_user_line>접속중인 유저가 없습니다.</div>';
     }
     for(var i=0;i<user_json.length;i++){
+      if(user_json[i][4]==sex)continue;
       add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);
     }
   });
@@ -145,7 +147,8 @@ function get_user_data(){
       swiper.appendSlide("<div class='swiper-slide'><div class=nothing_user>접속중인 유저가 없습니다.</div></div>");
     }
     for(var i=0;i<user_json.length;i++){
-      swiperAppendSlide(user_json[i][7],user_json[i][4],user_json[i][2],'',user_json[i][1],user_json[i][9],user_json[i][11]);
+      if(user_json[i][4]==sex)continue;
+      swiperAppendSlide(user_json[i][7],user_json[i][4],user_json[i][2],'',user_json[i][1],user_json[i][10],user_json[i][11]);
       //user_info_array[user_info_array.length]=JSON.parse('{"id":"'+user_json[i][1]+'","name":"'+user_json[2]+'"}');
       user_info_array[user_info_array.length]={'id':user_json[i][1],'name':user_json[i][2],'img':user_json[i][7],'phone':user_json[i][8]};
     }
@@ -154,6 +157,7 @@ function get_user_data(){
 
 var user_array;
 var user_info_array=[];
+var my_sex;
 window.onmessage=(e)=>{
   if(e.data==""){
 
@@ -167,6 +171,8 @@ window.onmessage=(e)=>{
       my_lng=JSONDATA.lng;
       rank_count=1;
       get_users_info();
+    }else if(JSONDATA.title=="sex"){
+      my_sex=JSONDATA.sex;
     }
     // user_array=new Array();
     // for(var i=0;i<JSONDATA.length;i++){

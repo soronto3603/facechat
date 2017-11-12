@@ -4,20 +4,33 @@ body{
   margin:0px;
 }
 .half_input_dash{
-  width:20px;
-  height:100%;
-  display:inline-block;
+  width: 20px;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  left: 5px;
+  outline:none;
 }
 .half_input{
   height:100%;
   background-color:#e9e9e9;
   border:none;
+  outline:none;
+  padding:5px;
+}
+.half_input_{
+  height:100%;
+  background-color:#e9e9e9;
+  border:none;
+  outline:none;
 }
 .normal_input{
   width:100%;
   height:100%;
   background-color:#e9e9e9;
   border:none;
+  outline:none;
+  padding:5px;
 }
 .line_input{
   height:40px;

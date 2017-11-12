@@ -508,7 +508,17 @@
       	     });
           });
       }
+      function get_current_position_(){
 
+        navigator.geolocation.getCurrentPosition((position)=>{
+          lat=position.coords.latitude;
+          lng=position.coords.longitude;
+          console.log("Cordova Javascript get Position::"+lat+lng);
+          // var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
+          // document.getElementById('iframe').contentWindow.postMessage(json,'*');
+        },(err)=>{/*alert(":"+err.code+err.message)*/}
+        ,{ timeout: 3000 });
+      }
       //////////////////////////////////////////////////////
       ///////////////////DB MODULE//////////////////////////
       //////////////////////////////////////////////////////
@@ -536,13 +546,48 @@
           state=3;
         }
       }
+      function getProducts(){
+        inAppPurchase
+          .getProducts(['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',])
+          .then(function (products) {
+            console.log(products);
+            /*
+               [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
+            */
+
+          })
+          .catch(function (err) {
+            console.log(err);
+          });
+      }
+      function buyProduct(id){
+        inAppPurchase
+        .buy(id)
+        .then(function (data) {
+          console.log(data.productId);
+          return inAppPurchase.consume(data.productType, data.receipt, data.signature);
+          /*
+            {
+              transactionId: ...
+              receipt: ...
+              signature: ...
+            }
+          */
+        })
+        .then(function(){
+          console.log("product was successfully consumed!");
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+      }
       var facechat_back_url='';
       function onDeviceReady() {
           console.log("onDeviceReady");
           document.addEventListener("backbutton", onBackFunction, false);
           StatusBar.backgroundColorByHexString("#9f1b1f");
 
-          iapinit();
+          getProducts();
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
           if (window.device.platform === 'iOS') {
@@ -565,14 +610,7 @@
           loadScriptAsync("js/app.js");
           dbinit();
 
-
-          navigator.geolocation.getCurrentPosition((position)=>{
-            lat=position.coords.latitude;
-            lng=position.coords.longitude;
-            // var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
-            // document.getElementById('iframe').contentWindow.postMessage(json,'*');
-          },(err)=>{/*alert(":"+err.code+err.message)*/}
-          ,{ timeout: 3000 });
+          setInterval(get_current_position_,10000);
 
           window.onmessage=function(e){
             console.log(e.data);
@@ -667,7 +705,7 @@
                 alert(selId+"/"+selName);
               }else if(JSONDATA.title=="payment"){
                 console.log("payment:facechat.point."+JSONDATA.payment);
-                iapOrder("facechat.point."+JSONDATA.payment);
+                buyProduct("facechat.point."+JSONDATA.payment);
               }else if(JSONDATA.title=="signin"){
                 console.log("Cordova:SigninMessage");
                 login(JSONDATA.name);

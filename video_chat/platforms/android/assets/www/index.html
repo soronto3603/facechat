@@ -508,7 +508,17 @@
       	     });
           });
       }
+      function get_current_position_(){
 
+        navigator.geolocation.getCurrentPosition((position)=>{
+          lat=position.coords.latitude;
+          lng=position.coords.longitude;
+          console.log("Cordova Javascript get Position::"+lat+lng);
+          // var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
+          // document.getElementById('iframe').contentWindow.postMessage(json,'*');
+        },(err)=>{/*alert(":"+err.code+err.message)*/}
+        ,{ timeout: 3000 });
+      }
       //////////////////////////////////////////////////////
       ///////////////////DB MODULE//////////////////////////
       //////////////////////////////////////////////////////
@@ -544,6 +554,7 @@
             /*
                [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
             */
+
           })
           .catch(function (err) {
             console.log(err);
@@ -553,7 +564,12 @@
         inAppPurchase
         .buy(id)
         .then(function (data) {
-          console.log(data);
+          console.log(data.productId);
+
+          $.get("http://hume.co.kr/facechat2/sql/update_user_point_by_phone.php",{phone:phone_number,point:data.productId.replace("facechat.point."),why:4}).done((r)=>{
+            console.log(r);
+          });
+          return inAppPurchase.consume(data.productType, data.receipt, data.signature);
           /*
             {
               transactionId: ...
@@ -561,6 +577,9 @@
               signature: ...
             }
           */
+        })
+        .then(function(){
+          console.log("product was successfully consumed!");
         })
         .catch(function (err) {
           console.log(err);
@@ -595,14 +614,7 @@
           loadScriptAsync("js/app.js");
           dbinit();
 
-
-          navigator.geolocation.getCurrentPosition((position)=>{
-            lat=position.coords.latitude;
-            lng=position.coords.longitude;
-            // var json='{"title":"location","x":"'+lat+'","y":"'+lng+'"}';
-            // document.getElementById('iframe').contentWindow.postMessage(json,'*');
-          },(err)=>{/*alert(":"+err.code+err.message)*/}
-          ,{ timeout: 3000 });
+          setInterval(get_current_position_,10000);
 
           window.onmessage=function(e){
             console.log(e.data);
@@ -653,7 +665,7 @@
                   }, options);
                 }, (err)=>{alert("err"+err)}, {
                 encodingType:Camera.EncodingType.JEPG,
-                quality: 50,destinationType: Camera.DestinationType.FILE_URI,
+                destinationType: Camera.DestinationType.FILE_URI,
                 sourceType:Camera.PictureSourceType.CAMERA,
                 targetHeight:250,
                 targetWidth:250
@@ -676,7 +688,7 @@
                   }, options);
                 }, (err)=>{alert("err"+err)}, {
                 encodingType:Camera.EncodingType.JEPG,
-                quality: 50,destinationType: Camera.DestinationType.FILE_URI,
+                destinationType: Camera.DestinationType.FILE_URI,
                 sourceType:Camera.PictureSourceType.PHOTOLIBRARY,
                 targetHeight:250,
                 targetWidth:250
@@ -701,6 +713,8 @@
               }else if(JSONDATA.title=="signin"){
                 console.log("Cordova:SigninMessage");
                 login(JSONDATA.name);
+              }else if(JSONDATA.title=="photoviewer"){
+                PhotoViewer.show(JSONDATA.url, '', {share:false});
               }else if(JSONDATA.title=="chatroom"){
                 talk_before_url=JSONDATA.back_url;
                 document.getElementById('iframe').src=JSONDATA.talk;

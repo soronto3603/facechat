@@ -90,7 +90,12 @@ window.onmessage=(e)=>{
         alert("이미지를 넣어주세요.")
         return;
       }
-      img="http://hume.co.kr/facechat2/profileimg/"+img;
+      if(img.indexOf("http://hume.co.kr/facechat2/profileimg/")!=-1){
+
+      }else{
+        img="http://hume.co.kr/facechat2/profileimg/"+img;
+      }
+
       if(nickname.length<3 || nickname.length>8){
         alert("닉네임은 최소3글자에서 최대 8글자까지 가능합니다.");
         return;

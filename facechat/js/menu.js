@@ -104,7 +104,7 @@ window.onmessage=(e)=>{
       window.parent.postMessage('{"title":"facechat","id":"'+obj.id+'","name":"'+obj.name+'"}',"*");
     }else if(obj.title=="Phone"){
       phone=obj.Phone;
-      setInterval(get_my_point,3000);
+      setInterval(get_my_point,2000);
       //get_my_point();
     }else if(obj.title=="talk"){
       modal_send_msg(obj.phone,obj.img);
@@ -125,9 +125,7 @@ window.onmessage=(e)=>{
     }else if(obj.title=="chatroom"){
       window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+obj.phone+'","back_url":"message"}',"*");
     }else if(obj.title=="imageView"){
-      // alert(123);
-      // document.getElementById('imageViewIframe').src="http://hume.co.kr/facechat/imageView.php?image="+obj.img+"?backurl="+obj.backurl;
-      // document.getElementById('imageView').style.display="block";
+      photoviewer(obj.url);
     }else{
       user_array=e.data;
       document.getElementById('content_iframe').contentWindow.postMessage(user_array,"*");
@@ -141,6 +139,9 @@ function modal_load(){
   // }else{
   //   document.getElementById('load').style.display="none";
   // }
+}
+function photoviewer(url){
+  window.parent.postMessage('{"title":"photoviewer","url":"'+url+'"}',"*");
 }
 function modal_exit(){
   if(document.getElementById('modal_exit').style.display=="none"){
@@ -171,6 +172,7 @@ function modal_send_msg(phone,img){
   document.getElementById('input_send_msg_phone').value=phone;
   document.getElementById('modal_send_msg').style.display="block";
 }
+var target_phone;
 function send_message(){
   if(sex==0){
     $.get("http://hume.co.kr/facechat2/sql/update_user_point_by_phone.php",{phone:phone,point:"-10",why:2}).done((r)=>{
@@ -184,6 +186,7 @@ function send_message(){
         $.post("http://hume.co.kr/facechat2/sql/insert_chat.php",{fromid:phone,toid:target_phone,content:text}).done((r)=>{
           alert("전송완료");
           document.getElementById('input_send_msg').value='';
+          window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+target_phone+'","back_url":"message"}',"*");
         });
       }
     });

@@ -30,9 +30,7 @@
     <div id=sex_line class=normal_line>
       <div class=normal_title>성별</div>
       <!-- <input type=text id=sex class=normal value=남성> -->
-      <div class="label man">남자</div><input id=man_check onclick="reset_check_box('girl')" type=checkbox disabled>
-      &nbsp&nbsp&nbsp&nbsp
-      <div class="label girl">여자</div><input id=girl_check onclick="reset_check_box('man')" type=checkbox disabled>
+      <div id=sex_block></div>
     </div>
     <div id=title_line class=normal_line style="display:none;">
       <div class=normal_title>주제</div>

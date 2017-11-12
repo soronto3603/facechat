@@ -21,14 +21,14 @@ input[type="number"]::-webkit-inner-spin-button {
       color: #e13c3a;
 }
 .man{
-  color:#6379FF;
+  color:#226dc1;
 }
 .label{
-  display:inline;
-  position:relative;
+  display: inline;
   position: relative;
-bottom: 12px;
-right: 4;
+  position: relative;
+  bottom: -12px;
+  right: 0px;
 }
 .content{
   background-color:#ffffff;
@@ -84,8 +84,8 @@ margin-bottom: 10px;
   left: 0px;
   bottom: 0px;
   width: 100%;
-  height: 40px;
-  line-height: 40px;
+  height: 60px;
+  line-height: 60px;
   text-align: center;
   background-color: #e13c3a;
   font-weight: bold;

@@ -15,10 +15,12 @@
             "cordova-plugin-whitelist": {},
             "cordova-plugin-android-permissions": {},
             "cordova-open-native-settings": {},
-            "cordova-plugin-inapppurchase": {}
+            "cordova-plugin-inapppurchase": {},
+            "com-sarriaroman-photoviewer": {}
         }
     },
     "dependencies": {
+        "com-sarriaroman-photoviewer": "^1.1.11",
         "cordova-android": "^6.2.3",
         "cordova-browser": "~4.1.0",
         "cordova-custom-config": "~3.0.14",

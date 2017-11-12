@@ -51,6 +51,9 @@
         },
         "cordova-plugin-inapppurchase": {
             "PACKAGE_NAME": "com.hume.facechat"
+        },
+        "com-sarriaroman-photoviewer": {
+            "PACKAGE_NAME": "com.hume.facechat"
         }
     },
     "dependent_plugins": {
