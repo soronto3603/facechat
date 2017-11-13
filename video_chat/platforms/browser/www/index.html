@@ -546,40 +546,93 @@
           state=3;
         }
       }
-      function getProducts(){
-        inAppPurchase
-          .getProducts(['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',])
-          .then(function (products) {
-            console.log(products);
-            /*
-               [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
-            */
+      // function getProducts(){
+      //   inAppPurchase
+      //     .getProducts(['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',])
+      //     .then(function (products) {
+      //       console.log(products);
+      //       /*
+      //          [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
+      //       */
+      //
+      //     })
+      //     .catch(function (err) {
+      //       console.log(err);
+      //     });
+      // }
 
-          })
-          .catch(function (err) {
-            console.log(err);
+      // $.get("http://hume.co.kr/facechat2/sql/update_user_point_by_phone.php",{phone:phone_number,point:data.productId.replace("facechat.point."),why:4}).done((r)=>{
+      //   console.log(r);
+      // });
+
+      // function buyProduct(id){
+      //   inAppPurchase
+      //   .buy(id)
+      //   .then(function (data) {
+      //     console.log(data.productId);
+      //
+      //
+      //     return inAppPurchase.consume(data.productType, data.receipt, data.signature);
+      //     /*
+      //       {
+      //         transactionId: ...
+      //         receipt: ...
+      //         signature: ...
+      //       }
+      //     */
+      //   })
+      //   .then(function(){
+      //     console.log("product was successfully consumed!");
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //   });
+      // }
+      //['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',]
+      function iapinit(){
+          store.verbosity = 4;
+          alert(store.verbosity);
+          store.error(function(error) {
+              alert('ERROR ' + error.code + ': ' + error.message);
           });
-      }
-      function buyProduct(id){
-        inAppPurchase
-        .buy(id)
-        .then(function (data) {
-          console.log(data.productId);
-          return inAppPurchase.consume(data.productType, data.receipt, data.signature);
+          store.register({
+            id: 'facechat.point.5500',
+            alias: "1",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.5500',
+            alias: "3",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.11000',
+            alias: "5",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.33000',
+            alias: "7",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.55000',
+            alias: "10",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id:'facechat.point.110000',
+            alias:"13",
+            type:store.CONSUMABLE
+          });
           /*
-            {
-              transactionId: ...
-              receipt: ...
-              signature: ...
-            }
-          */
-        })
-        .then(function(){
-          console.log("product was successfully consumed!");
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+          store.ready(function() {
+              console.log("STORE READY");  // This does get called
+          });
+          store.when("product").updated(function(p){
+              render(p)
+          });*/
+          store.refresh();
       }
       var facechat_back_url='';
       function onDeviceReady() {
@@ -587,7 +640,8 @@
           document.addEventListener("backbutton", onBackFunction, false);
           StatusBar.backgroundColorByHexString("#9f1b1f");
 
-          getProducts();
+          iapinit();
+          //getProducts();
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
           if (window.device.platform === 'iOS') {
@@ -661,7 +715,7 @@
                   }, options);
                 }, (err)=>{alert("err"+err)}, {
                 encodingType:Camera.EncodingType.JEPG,
-                quality: 50,destinationType: Camera.DestinationType.FILE_URI,
+                destinationType: Camera.DestinationType.FILE_URI,
                 sourceType:Camera.PictureSourceType.CAMERA,
                 targetHeight:250,
                 targetWidth:250
@@ -684,7 +738,7 @@
                   }, options);
                 }, (err)=>{alert("err"+err)}, {
                 encodingType:Camera.EncodingType.JEPG,
-                quality: 50,destinationType: Camera.DestinationType.FILE_URI,
+                destinationType: Camera.DestinationType.FILE_URI,
                 sourceType:Camera.PictureSourceType.PHOTOLIBRARY,
                 targetHeight:250,
                 targetWidth:250
@@ -705,10 +759,12 @@
                 alert(selId+"/"+selName);
               }else if(JSONDATA.title=="payment"){
                 console.log("payment:facechat.point."+JSONDATA.payment);
-                buyProduct("facechat.point."+JSONDATA.payment);
+                //buyProduct("facechat.point."+JSONDATA.payment);
               }else if(JSONDATA.title=="signin"){
                 console.log("Cordova:SigninMessage");
                 login(JSONDATA.name);
+              }else if(JSONDATA.title=="photoviewer"){
+                PhotoViewer.show(JSONDATA.url, '', {share:false});
               }else if(JSONDATA.title=="chatroom"){
                 talk_before_url=JSONDATA.back_url;
                 document.getElementById('iframe').src=JSONDATA.talk;

@@ -81,16 +81,16 @@ margin-bottom: 10px;
 }
 .update_button{
   position: absolute;
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  text-align: center;
-  background-color: #e13c3a;
-  font-weight: bold;
-  font-size: 20px;
-  color: #ffffff;
+      left: 0px;
+      bottom: 92px;
+      width: 100%;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      background-color: #e13c3a;
+      font-weight: bold;
+      font-size: 20px;
+      color: #ffffff;
 }
 input{
   height:100%;

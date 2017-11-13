@@ -323,8 +323,8 @@ module.exports.metadata =
     "cordova-plugin-fcm": "2.1.2",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-open-native-settings": "1.4.1",
-    "cordova-plugin-inapppurchase": "1.1.0",
-    "com-sarriaroman-photoviewer": "1.1.11"
+    "com-sarriaroman-photoviewer": "1.1.11",
+    "cc.fovea.cordova.purchase": "7.0.2"
 }
 // BOTTOM OF METADATA
 });

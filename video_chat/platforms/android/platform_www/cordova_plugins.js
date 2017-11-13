@@ -260,19 +260,19 @@ module.exports = [
         ]
     },
     {
-        "id": "cordova-plugin-inapppurchase.InAppBillingV3",
-        "file": "plugins/cordova-plugin-inapppurchase/www/index-android.js",
-        "pluginId": "cordova-plugin-inapppurchase",
-        "merges": [
-            "inAppPurchase"
-        ]
-    },
-    {
         "id": "com-sarriaroman-photoviewer.PhotoViewer",
         "file": "plugins/com-sarriaroman-photoviewer/www/PhotoViewer.js",
         "pluginId": "com-sarriaroman-photoviewer",
         "clobbers": [
             "PhotoViewer"
+        ]
+    },
+    {
+        "id": "cc.fovea.cordova.purchase.InAppBillingPlugin",
+        "file": "plugins/cc.fovea.cordova.purchase/www/store-android.js",
+        "pluginId": "cc.fovea.cordova.purchase",
+        "clobbers": [
+            "store"
         ]
     }
 ];
@@ -286,8 +286,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.0",
     "cordova-plugin-android-permissions": "1.0.0",
     "cordova-open-native-settings": "1.4.1",
-    "cordova-plugin-inapppurchase": "1.1.0",
-    "com-sarriaroman-photoviewer": "1.1.11"
+    "com-sarriaroman-photoviewer": "1.1.11",
+    "cc.fovea.cordova.purchase": "7.0.2"
 };
 // BOTTOM OF METADATA
 });

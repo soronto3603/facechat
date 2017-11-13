@@ -117,7 +117,7 @@ window.onmessage=(e)=>{
               sql:sql
             }).done((r)=>{
               window.parent.postMessage('{"title":"signin","name":"'+nickname+'"}',"*");
-              alert("회원가입완료");
+              //alert("회원가입완료");
             });
           });
         }

@@ -11,7 +11,7 @@
       if(document.body.scrollTop==0){
         setTimeout(()=>{
           document.body.scrollTop=200;
-        },300);
+        },500);
       }
     },300);
 

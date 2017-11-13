@@ -11,6 +11,7 @@ html, body {
     position: relative;
     height: 100%;
     background-color:#ffffff;
+    overflow: hidden;
 }
 body {
     background: #ffffff;
@@ -158,7 +159,7 @@ body {
   height: 258px;
   background-color:white;
   border-radius:20px;
-  margin-top:30%;
+  margin-top: 20%;
 }
 .modal_send_msg_header{
   background-color: #e13c3a;

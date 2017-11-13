@@ -7,6 +7,10 @@ window.onload=()=>{
   get_user_data();
   get_data_interval=setInterval(get_talk_data,1000);
 }
+function scrollBottom(){
+  document.getElementById('content_container').scrollTop=1000;
+  document.body.scrollTop=document.body.scrollHeight;
+}
 function imageView(url){
   window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
 }
@@ -65,6 +69,7 @@ function add_chat(text,date,target,nickname,imguri){
   html+="<div class=time>"+date+"</div></div></div>";
   html+="<div class=clear></div><div class=endline></div>";
   document.getElementById('content_container').innerHTML+=html;
+  scrollBottom();
 }
 var last_talk_number=0;
 function get_talk_data(){
@@ -97,5 +102,7 @@ function send_message(){
     imguri:'',
     towasread:0,
   }).done((r)=>{
+    document.getElementById('talk_input').value="";
+    scrollBottom();
   });
 }

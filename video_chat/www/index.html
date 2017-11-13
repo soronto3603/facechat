@@ -78,8 +78,7 @@
       </div>
     </center>
   </div>
-  <iframe id=iframe style="display:block;"></iframe>
-    <div class="wrapper j-wrapper">
+  <iframe id=iframe style="display:block;"></iframe><div class="wrapper j-wrapper">
         <header style="display:none;" class="header">
             <div class="inner">
                 <div class="header__logo">
@@ -546,44 +545,99 @@
           state=3;
         }
       }
-      function getProducts(){
-        inAppPurchase
-          .getProducts(['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',])
-          .then(function (products) {
-            console.log(products);
-            /*
-               [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
-            */
+      // function getProducts(){
+      //   inAppPurchase
+      //     .getProducts(['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',])
+      //     .then(function (products) {
+      //       console.log(products);
+      //       /*
+      //          [{ productId: 'com.yourapp.prod1', 'title': '...', description: '...', currency: '...', price: '...', priceAsDecimal: '...' }, ...]
+      //       */
+      //
+      //     })
+      //     .catch(function (err) {
+      //       console.log(err);
+      //     });
+      // }
 
-          })
-          .catch(function (err) {
-            console.log(err);
-          });
-      }
-      function buyProduct(id){
-        inAppPurchase
-        .buy(id)
-        .then(function (data) {
-          console.log(data.productId);
 
-          $.get("http://hume.co.kr/facechat2/sql/update_user_point_by_phone.php",{phone:phone_number,point:data.productId.replace("facechat.point."),why:4}).done((r)=>{
-            console.log(r);
+
+      // function buyProduct(id){
+      //   inAppPurchase
+      //   .buy(id)
+      //   .then(function (data) {
+      //     console.log(data.productId);
+      //
+      //
+      //     return inAppPurchase.consume(data.productType, data.receipt, data.signature);
+      //     /*
+      //       {
+      //         transactionId: ...
+      //         receipt: ...
+      //         signature: ...
+      //       }
+      //     */
+      //   })
+      //   .then(function(){
+      //     console.log("product was successfully consumed!");
+      //   })
+      //   .catch(function (err) {
+      //     console.log(err);
+      //   });
+      // }
+      //['facechat.point.5500','facechat.point.5500','facechat.point.11000','facechat.point.33000','facechat.point.55000','facechat.point.110000',]
+      function iapinit(){
+          store.verbosity = 0;
+          store.error(function(error) {
+              alert('ERROR ' + error.code + ': ' + error.message);
           });
-          return inAppPurchase.consume(data.productType, data.receipt, data.signature);
+          store.register({
+            id: 'facechat.point.5500',
+            alias: "5500",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.11000',
+            alias: "11000",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.33000',
+            alias: "33000",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.55000',
+            alias: "55000",
+            type: store.CONSUMABLE
+          });
+          store.register({
+            id: 'facechat.point.110000',
+            alias: "110000",
+            type: store.CONSUMABLE
+          });
           /*
-            {
-              transactionId: ...
-              receipt: ...
-              signature: ...
-            }
-          */
-        })
-        .then(function(){
-          console.log("product was successfully consumed!");
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+          store.ready(function() {
+              console.log("STORE READY");  // This does get called
+          });
+          store.when("product").updated(function(p){
+              render(p)
+          });*/
+          store.refresh();
+      }
+      var current_product;
+      function iapOrder(id){
+        current_product=id;
+          store.order(id);
+
+          store.when(id).approved(function (product) {
+            product.finish();
+              console.log("Purchase Successful");
+              $.get("http://hume.co.kr/facechat2/sql/update_user_point_by_phone.php",{phone:phone_number,point:product.alias,why:4}).done((r)=>{
+                //alert(r);
+              });
+          });
+
       }
       var facechat_back_url='';
       function onDeviceReady() {
@@ -591,7 +645,8 @@
           document.addEventListener("backbutton", onBackFunction, false);
           StatusBar.backgroundColorByHexString("#9f1b1f");
 
-          getProducts();
+          iapinit();
+          //getProducts();
           // Just for iOS devices.
           // Read more here https://github.com/eface2face/cordova-plugin-iosrtc
           if (window.device.platform === 'iOS') {
@@ -666,9 +721,9 @@
                 }, (err)=>{alert("err"+err)}, {
                 encodingType:Camera.EncodingType.JEPG,
                 destinationType: Camera.DestinationType.FILE_URI,
-                sourceType:Camera.PictureSourceType.CAMERA,
-                targetHeight:250,
-                targetWidth:250
+                sourceType:Camera.PictureSourceType.CAMERA
+                // targetHeight:250,
+                // targetWidth:250
               });
             }else if(e.data=="PhotoLibrary"){
               navigator.camera.getPicture(
@@ -687,11 +742,11 @@
                     alert("An error has occurred: Code = " + error.code);
                   }, options);
                 }, (err)=>{alert("err"+err)}, {
-                encodingType:Camera.EncodingType.JEPG,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType:Camera.PictureSourceType.PHOTOLIBRARY,
-                targetHeight:250,
-                targetWidth:250
+                  encodingType:Camera.EncodingType.JEPG,
+                  destinationType: Camera.DestinationType.FILE_URI,
+                  sourceType:Camera.PictureSourceType.PHOTOLIBRARY,
+                  targetHeight:1024,
+                  targetWidth:1024
               });
             }else if(e.data=="Push"){
               alert("Push");
@@ -709,7 +764,8 @@
                 alert(selId+"/"+selName);
               }else if(JSONDATA.title=="payment"){
                 console.log("payment:facechat.point."+JSONDATA.payment);
-                buyProduct("facechat.point."+JSONDATA.payment);
+                //buyProduct("facechat.point."+JSONDATA.payment);
+                iapOrder("facechat.point."+JSONDATA.payment);
               }else if(JSONDATA.title=="signin"){
                 console.log("Cordova:SigninMessage");
                 login(JSONDATA.name);

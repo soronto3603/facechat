@@ -15,11 +15,14 @@
             "cordova-plugin-whitelist": {},
             "cordova-plugin-android-permissions": {},
             "cordova-open-native-settings": {},
-            "cordova-plugin-inapppurchase": {},
-            "com-sarriaroman-photoviewer": {}
+            "com-sarriaroman-photoviewer": {},
+            "cc.fovea.cordova.purchase": {
+                "BILLING_KEY": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlzdcfqErisoH1o+XFPr/EBItcCS0WMFWoFY9wOSXaYU8U7OYWUEifqBJwwqloSuuPujpiOPAJPJKhfcmxZ4uuigi2O+4WTxmSo/EGQrXLxaa/1VA9YdzOkjyHwWqyA5jNy+o/OkA0arOAdkNyUPyvKbAtoxsYIyAzq1GthEhA9o/D03rSjobsn1+BG/MKSeR9yvKR7hfH0XS4NhKUB4cPxg3W1dTSUelzvckQj2PoxdZzLEA9jAZtTKY19zI1aUkvkkDmkhiBfRReTpYWAOtmj/NACr26iRHEwz4MTSeLmMsyxf40uv/akxBAInf2QXMh36AzMx5UW0jt0PqFraP7wIDAQAB"
+            }
         }
     },
     "dependencies": {
+        "cc.fovea.cordova.purchase": "^7.0.2",
         "com-sarriaroman-photoviewer": "^1.1.11",
         "cordova-android": "^6.2.3",
         "cordova-browser": "~4.1.0",
@@ -35,7 +38,6 @@
         "cordova-plugin-file": "^4.0.0",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-geolocation": "^2.4.3",
-        "cordova-plugin-inapppurchase": "^1.1.0",
         "cordova-plugin-iosrtc": "~3.1.0",
         "cordova-plugin-sim": "^1.3.3",
         "cordova-plugin-sqlite-2": "^1.0.4",

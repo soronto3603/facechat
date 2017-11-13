@@ -4,6 +4,9 @@
   $point=$_GET['point'];
   $why=$_GET['why'];
 
+  $point=str_replace($point,"undefined","");
+
+
   if(strpos($point,"-") !== false){
     $query="SELECT points FROM facechat_user WHERE phone='$phone'";
     if($result=mysqli_query($con,$query)){

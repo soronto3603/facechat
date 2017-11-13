@@ -2,6 +2,7 @@
 body{
   font-family: 'Hanna', serif;
   margin:0px;
+  overflow-x : hidden
 }
 body{
   margin:0px;
@@ -35,7 +36,7 @@ bottom: 10px;
   color:gray;
 }
 #profile_nickname{
-  color:#6379FF;
+  color:black;
 }
 #profile_img{
   border-radius:30px;

@@ -6,7 +6,7 @@ window.onload=()=>{
   // add_line("","ㄱㄱㄱㄱ영상","현운용",1,"25","전주","57분전",1234);
   // add_line("","안녕하세요 잘부탁","이정헌",0,"26","익산","58분전",453);
   window.parent.postMessage("Phone","*");
-  window.parent.postMessage("location","*");
+
 }
 function imageView(url){
   window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
@@ -18,6 +18,7 @@ function get_users_info(){
   $.post("http://hume.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:my_phone}).done((r)=>{
     var user_json=JSON.parse(r);
     for(var i=0;i<user_json.length;i++){
+      if(user_json[i][4]==my_sex)continue;
       add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);
     }
   });
@@ -53,12 +54,13 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   html+="<div class=line_normal>"+sex_text+" / "+age+"세 / "+a_loc+"Km</div>";
   html+="</div>";
   html+="<div class=icon_box>";
-  html+="<div class=send_message onclick='request_talk_val(\""+phone+"\",\""+imguri+"\")'><img src='./img/chat.png' width=50 height=50></div>";
+  html+="<div class=send_message onclick='request_talk_val(\""+my_phone+"\",\""+imguri+"\")'><img src='./img/chat.png' width=50 height=50></div>";
   html+="<div class=call_facechat onclick='request_face_chat_val(\""+id+"\",\""+nickname+"\")'><img src='./img/video.png' width=50 height=50></div>";
   html+="</div>";
   html+="</div>";
   document.getElementById('contents').innerHTML+=html;
 }
+var my_sex=-1;
 window.onmessage=(e)=>{
   if(e.data==""){
 
@@ -66,6 +68,10 @@ window.onmessage=(e)=>{
     var JSONDATA=JSON.parse(e.data);
     if(JSONDATA.title=="phone"){
       my_phone=JSONDATA.phone;
+      $.get("http://hume.co.kr/facechat2/sql/select_sex_by_phone.php",{phone:my_phone}).done((r)=>{
+        my_sex=r;
+        window.parent.postMessage("location","*");
+      });
     }else if(JSONDATA.title=="location"){
       my_lat=JSONDATA.lat;
       my_lng=JSONDATA.lng;

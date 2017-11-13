@@ -2,6 +2,7 @@
 body{
   font-family: 'Hanna', serif;
   margin:0px;
+  overflow-x : hidden;
 }
 .header{
   background-color:#E23B3A;

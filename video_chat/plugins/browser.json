@@ -49,10 +49,10 @@
         "cordova-open-native-settings": {
             "PACKAGE_NAME": "com.hume.facechat"
         },
-        "cordova-plugin-inapppurchase": {
+        "com-sarriaroman-photoviewer": {
             "PACKAGE_NAME": "com.hume.facechat"
         },
-        "com-sarriaroman-photoviewer": {
+        "cc.fovea.cordova.purchase": {
             "PACKAGE_NAME": "com.hume.facechat"
         }
     },

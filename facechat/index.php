@@ -50,7 +50,7 @@
           <div class=modal_send_msg_icon_box>
             <div class=modal_send_btn onclick="send_message()">쪽지보내기</div>
             <div class=modal_send_close_btn onclick="close_send_message()">닫기</div>
-          </div>
+          </div
         </div>
     </center>
   </div>

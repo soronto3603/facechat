@@ -21,9 +21,10 @@ function request_face_chat_val(id,name){
 }
 function click_like(){
   var swiperno=swiper.activeIndex;
+  document.getElementById('like'+user_info_array[swiperno]['id']).innerHTML=document.getElementById('like'+user_info_array[swiperno]['id']).innerHTML*1+1;
+
   $.get("http://hume.co.kr/facechat2/sql/update_like_by_phone.php",{phone:user_info_array[swiperno]['phone']}).done((r)=>{
     console.log("["+user_info_array[swiperno]['phone']+"] plus a like");
-    alert("좋아요!");
   });
 }
 function request_talk(){
@@ -64,7 +65,7 @@ function swiperAppendSlide(imguri,sex,name,loc,id,point,age){
   html+='<div id=content_container'+id+' class=content_container">';
 
   html+='<div class=content_img_box><img onclick="imageView(\''+imguri+'\')" class=content_img src="'+imguri+'" width=200 height=200"></div>';
-  html+='<div class=profile_text><div class=text_detail>'+sex_text+" / "+age+"세 / "+point+"</div><div class=text_name>"+name+'</div></div>';
+  html+='<div class=profile_text><div class=text_detail>'+sex_text+" / "+age+"세 / <font id=like"+id+">"+point+"</font></div><div class=text_name>"+name+'</div></div>';
   html+='</div></center></div>';
   swiper.appendSlide(html);
 }
@@ -75,10 +76,8 @@ function add_testuser(){
 }
 window.onload=()=>{
   rank_box_size();
-  window.parent.postMessage("Reload","*");
   window.parent.postMessage("Phone","*");
-  window.parent.postMessage("location","*");
-  window.parent.postMessage("sex","*");
+
 }
 function imageView(url){
   window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
@@ -88,10 +87,12 @@ function rank_box_size(){
   // $('.rank_list_box').css("height",height);
 }
 var rank_count=1;
-function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
+function add_line(imguri,text,nickname,sex,age,loc,time,id,phone_){
   var line_text_width=$(window).width()-260;
   var sex_color;
   var sex_text;
+
+
 
   var a_loc=Math.round(parseFloat(loc));
   //강원도 - 제주도 617km
@@ -114,7 +115,7 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   html+="<div class=line_normal>"+sex_text+" / "+age+"세 / "+a_loc+"Km</div>";
   html+="</div>";
   html+="<div class=icon_box1>";
-  html+="<div class=send_message onclick='request_talk_val(\""+phone+"\",\""+imguri+"\")'><img src='./img/chat.png' width=50 height=50></div>";
+  html+="<div class=send_message onclick='request_talk_val(\""+phone_+"\",\""+imguri+"\")'><img src='./img/chat.png' width=50 height=50></div>";
   html+="<div class=call_facechat onclick='request_face_chat_val(\""+id+"\",\""+nickname+"\")'><img src='./img/video.png' width=50 height=50></div>";
   html+="</div>";
   html+="</div>";
@@ -122,13 +123,13 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
   document.getElementById('rank_box').innerHTML+=html;
 }
 function get_users_info(){
-  $.post("http://hume.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:phone,type:"rank"}).done((r)=>{
+  $.post("http://hume.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:phone,type:""}).done((r)=>{
     var user_json=JSON.parse(r);
     if(user_json.length==0){
       document.getElementById('rank_box').innerHTML='<div class=nothing_user_line>접속중인 유저가 없습니다.</div>';
     }
     for(var i=0;i<user_json.length;i++){
-      if(user_json[i][4]==sex)continue;
+      if(user_json[i][4]==my_sex)continue;
       add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);
     }
   });
@@ -147,7 +148,7 @@ function get_user_data(){
       swiper.appendSlide("<div class='swiper-slide'><div class=nothing_user>접속중인 유저가 없습니다.</div></div>");
     }
     for(var i=0;i<user_json.length;i++){
-      if(user_json[i][4]==sex)continue;
+      if(user_json[i][4]==my_sex)continue;
       swiperAppendSlide(user_json[i][7],user_json[i][4],user_json[i][2],'',user_json[i][1],user_json[i][10],user_json[i][11]);
       //user_info_array[user_info_array.length]=JSON.parse('{"id":"'+user_json[i][1]+'","name":"'+user_json[2]+'"}');
       user_info_array[user_info_array.length]={'id':user_json[i][1],'name':user_json[i][2],'img':user_json[i][7],'phone':user_json[i][8]};
@@ -157,7 +158,7 @@ function get_user_data(){
 
 var user_array;
 var user_info_array=[];
-var my_sex;
+var my_sex=-1;
 window.onmessage=(e)=>{
   if(e.data==""){
 
@@ -165,7 +166,12 @@ window.onmessage=(e)=>{
     var JSONDATA=JSON.parse(e.data);
     if(JSONDATA.title=="phone"){
       phone=JSONDATA.phone;
-      get_user_data();
+      $.get("http://hume.co.kr/facechat2/sql/select_sex_by_phone.php",{phone:phone}).done((r)=>{
+        my_sex=r;
+        window.parent.postMessage("Reload","*");
+        window.parent.postMessage("location","*");
+        get_user_data();
+      });
     }else if(JSONDATA.title=="location"){
       my_lat=JSONDATA.lat;
       my_lng=JSONDATA.lng;

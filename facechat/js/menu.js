@@ -6,9 +6,11 @@ var sex;
 var point=0;
 window.onload=()=>{
   document.getElementById('modal_exit').style.display="none";
-  menu_size();
+  //menu_size();
   request_phone_number();
-  setTimeout(request_loc,3000);
+  setTimeout(()=>{
+    setInterval(request_loc,3000);
+  },3000)
   cordova_get_token();
 
   //앱이 켜져있는동안 번호로 날짜를 업데이트함
@@ -111,11 +113,16 @@ window.onmessage=(e)=>{
       //window.parent.postMessage('{"title":"talk","talk":"'+obj.talk+'","back_url":"'+obj.back_url+'"}',"*");
     }else if(obj.title=="location"){
       console.log("Menu.js:Location / LAT:"+obj.x+"/LNG:"+obj.y);
-      lat=obj.x;
-      lng=obj.y;
       if(obj.x==0 || obj.y==0){
         $('#modal_location').css("display","block");
+      }else{
+        lat=obj.x;
+        lng=obj.y;
+        $('#modal_location').css("display","none");
       }
+      $.get("http://hume.co.kr/facechat2/sql/update_user_loc.php",{phone:phone,x:lat,y:lng}).done((r)=>{
+        console.log("menu.js"+r);
+      });
     }else if(obj.title=="more"){
       document.getElementById('content_iframe').src=obj.more;
     }else if(obj.title=="SigingEnd"){
@@ -184,11 +191,19 @@ function send_message(){
         var text=document.getElementById('input_send_msg').value;
         close_send_message();
         $.post("http://hume.co.kr/facechat2/sql/insert_chat.php",{fromid:phone,toid:target_phone,content:text}).done((r)=>{
-          alert("전송완료");
           document.getElementById('input_send_msg').value='';
           window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+target_phone+'","back_url":"message"}',"*");
         });
       }
+    });
+  }else{
+    target_phone=document.getElementById('input_send_msg_phone').value;
+    var text=document.getElementById('input_send_msg').value;
+    close_send_message();
+    $.post("http://hume.co.kr/facechat2/sql/insert_chat.php",{fromid:phone,toid:target_phone,content:text}).done((r)=>{
+      //alert("전송완료");
+      document.getElementById('input_send_msg').value='';
+      window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+target_phone+'","back_url":"message"}',"*");
     });
   }
 }

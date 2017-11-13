@@ -94,11 +94,7 @@ function update_user_info(){
 function update_user_info2(){
   imguri=document.getElementById('input_profile').src;
   nickname=document.getElementById('nickname').value;
-  if(document.getElementById('man').checked){
-    sex=0;
-  }else{
-    sex=1;
-  }
+
   age=document.getElementById('age').value;
   sql="UPDATE facechat_user SET imguri='"+imguri+"',name='"+nickname+"',sex='"+sex+"',age='"+age+"' WHERE phone='"+phone+"'";
 
