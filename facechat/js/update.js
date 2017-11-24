@@ -122,6 +122,7 @@ function get_user_info(){
       document.getElementById('age').value=obj[11];
       document.getElementById('title').value=obj[5];
       document.getElementById('point').innerHTML=obj[9];
+      document.getElementById('like').innerHTML=obj[10];
 
       document.getElementById('input_profile').src=obj[7];
       document.getElementById('update_button').innerHTML="<div class=update_button onclick=\"update_user_info2();\">수정하기</div>";

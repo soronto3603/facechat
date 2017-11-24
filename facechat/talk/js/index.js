@@ -12,17 +12,21 @@ function scrollBottom(){
   document.body.scrollTop=document.body.scrollHeight;
 }
 function imageView(url){
-  window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
+  window.parent.postMessage('{"title":"photoviewer","url":"'+url+'"}',"*");
+
 }
-function request_facechat(){
-  window.parent.postMessage('{"title":"facechat","id":"'+target_info[1]+'","name":"'+target_info[2]+'"}',"*");
+function request_chat(){
+  window.parent.postMessage('{"title":"chat","id":"'+target_info[1]+'","name":"'+target_info[2]+'"}',"*");
 }
 function get_user_data(){
   phone=document.getElementById('phone').value;
   target=document.getElementById('target').value;
-  $.get("http://hume.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:target}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:target}).done((r)=>{
     target_info=JSON.parse(r);
   });
+}
+function imageView(url){
+  window.parent.postMessage('{"title":"photoviewer","url":"'+url+'"}',"*");
 }
 window.onmessage=(e)=>{
   if(e.data=="backbutton"){
@@ -58,7 +62,7 @@ function add_chat(text,date,target,nickname,imguri){
   }
   html+="<div class=content_"+type+">";
   if(target==1){
-    html+="<img src='"+imguri+"' class='profile_photo ";
+    html+="<img onclick='imageView(\""+imguri+"\")' src='"+imguri+"' class='profile_photo ";
     html+="' width=40 height=40>";
   }
   html+="<div class='line_left ";
@@ -75,7 +79,7 @@ var last_talk_number=0;
 function get_talk_data(){
   var phone=document.getElementById('phone').value;
   var target=document.getElementById('target').value;
-  $.post("http://hume.co.kr/facechat2/sql/select_chat.php",{
+  $.post("http://ksar.co.kr/facechat2/sql/select_chat.php",{
     no:last_talk_number,
     fromid:phone,
     toid:target
@@ -95,7 +99,7 @@ function send_message(){
   var phone=document.getElementById('phone').value;
   var target=document.getElementById('target').value;
   var content=document.getElementById('talk_input').value;
-  $.post("http://hume.co.kr/facechat2/sql/insert_chat.php",{
+  $.post("http://ksar.co.kr/facechat2/sql/insert_chat.php",{
     fromid:phone,
     toid:target,
     content:content,

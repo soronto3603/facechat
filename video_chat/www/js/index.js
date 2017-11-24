@@ -14,7 +14,7 @@ function check_camera_page_is_block(){
   if($('#camera_page').css("display")=="block"){
     console.log("camera_page_is_block point:"+isgirl_point);
     if(sex==-1){
-      $.get("http://hume.co.kr/facechat2/sql/select_user_by_id.php",{id:my_id}).done((r)=>{
+      $.get("http://ksar.co.kr/facechat2/sql/select_user_by_id.php",{id:my_id}).done((r)=>{
         if(r=="false"){
 
         }else{
@@ -30,7 +30,7 @@ function check_camera_page_is_block(){
     isgirl_point++;
     if(isgirl_point==60){
       isgirl_point=0;
-      $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:my_id,point:'10',why:1}).done((r)=>{
+      $.get("http://ksar.co.kr/facechat2/sql/update_user_point.php",{id:my_id,point:'10',why:1}).done((r)=>{
 
       });
     }
@@ -49,18 +49,18 @@ function send_point(howmuch){
   $('#send_point_accept_msg').html(selName+"님께 "+howmuch+"포인트를 선물하시겠습니까?");
   $('#give_point_accept_modal').css("display","block");
   gift_point=howmuch;
-  // $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:id,point:point,why:5}).done((r)=>{
+  // $.get("http://ksar.co.kr/facechat2/sql/update_user_point.php",{id:id,point:point,why:5}).done((r)=>{
   //
   // });
 }
 function send_point_accetp(){
   $('#give_point_accept_modal').css('display','none');
-  $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:my_id,point:"-"+gift_point,why:5}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/update_user_point.php",{id:my_id,point:"-"+gift_point,why:5}).done((r)=>{
     console.log(r);
     if(r=="false"){
       alert("포인트가 모자랍니다.");
     }else{
-      $.get("http://hume.co.kr/facechat2/sql/update_user_point.php",{id:selId,point:gift_point,why:5}).done((r)=>{
+      $.get("http://ksar.co.kr/facechat2/sql/update_user_point.php",{id:selId,point:gift_point,why:5}).done((r)=>{
         console.log(r);
         alert("선물을 완료했습니다.");
       });
@@ -93,7 +93,7 @@ function auto_login(){
           $('#input_name').val(e);
           $("#submit_log").click();
         }else{
-          document.getElementById('iframe').src="http://hume.co.kr/facechat2/signin.php";
+          document.getElementById('iframe').src="http://ksar.co.kr/facechat2/signin.php";
           splash_animation(100);
         }
       });
@@ -116,7 +116,7 @@ function load_all_var(){
 }
 function CheckMyid(id){
   my_id=id;
-  $.get("http://hume.co.kr/facechat2/sql/update_id.php",{id:my_id,phone:phone_number}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/update_id.php",{id:my_id,phone:phone_number}).done((r)=>{
 
     //alert(r);
   });

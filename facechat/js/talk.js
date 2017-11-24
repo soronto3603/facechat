@@ -8,6 +8,23 @@ window.onload=()=>{
   window.parent.postMessage("Phone","*");
 
 }
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  if (typeof(Number.prototype.toRad) === "undefined") {
+    Number.prototype.toRad = function() {
+      return this * Math.PI / 180;
+    }
+  }
+  lat1=lat1*1;lon1=lon1*1;lat2=lat2*1;lon2=lon2*1;
+  var R = 6371; // km
+  var dLat = (lat2-lat1).toRad();
+  var dLon = (lon2-lon1).toRad();
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+          Math.sin(dLon/2) * Math.sin(dLon/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c;
+  return d;
+}
 function imageView(url){
   window.parent.postMessage('{"title":"imageView","url":"'+url+'"}',"*");
 }
@@ -15,11 +32,11 @@ var my_phone;
 var my_lat;
 var my_lng;
 function get_users_info(){
-  $.post("http://hume.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:my_phone}).done((r)=>{
+  $.post("http://ksar.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:my_phone}).done((r)=>{
     var user_json=JSON.parse(r);
     for(var i=0;i<user_json.length;i++){
       if(user_json[i][4]==my_sex)continue;
-      add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);
+      add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8],user_json[i][12],user_json[i][13]);
     }
   });
 }
@@ -29,14 +46,19 @@ function request_talk_val(phone,img){
 function request_face_chat_val(id,name){
   window.parent.postMessage('{"title":"facechat","id":"'+id+'","name":"'+name+'"}',"*");
 }
-function add_line(imguri,text,nickname,sex,age,loc,time,id,phone){
+function add_line(imguri,text,nickname,sex,age,loc,time,id,phone,lat_,lng_){
   var line_text_width=$(window).width()-260;
   var sex_color;
   var sex_text;
 
-  var a_loc=Math.round(parseFloat(loc));
-  if(a_loc>617)a_loc="???";
 
+  a_loc=Math.round(calculateDistance(my_lat,my_lng,lng_,lat_));
+  console.log("distance"+a_loc);
+  if(a_loc>10000)a_loc="???";
+  else{
+    a_loc=a_loc+"";
+    a_loc=a_loc;
+  }
   if(sex==0){
     sex_color="man";
     sex_text="남자";
@@ -68,7 +90,7 @@ window.onmessage=(e)=>{
     var JSONDATA=JSON.parse(e.data);
     if(JSONDATA.title=="phone"){
       my_phone=JSONDATA.phone;
-      $.get("http://hume.co.kr/facechat2/sql/select_sex_by_phone.php",{phone:my_phone}).done((r)=>{
+      $.get("http://ksar.co.kr/facechat2/sql/select_sex_by_phone.php",{phone:my_phone}).done((r)=>{
         my_sex=r;
         window.parent.postMessage("location","*");
       });

@@ -90,10 +90,10 @@ window.onmessage=(e)=>{
         alert("이미지를 넣어주세요.")
         return;
       }
-      if(img.indexOf("http://hume.co.kr/facechat2/profileimg/")!=-1){
+      if(img.indexOf("http://ksar.co.kr/facechat2/profileimg/")!=-1){
 
       }else{
-        img="http://hume.co.kr/facechat2/profileimg/"+img;
+        img="http://ksar.co.kr/facechat2/profileimg/"+img;
       }
 
       if(nickname.length<3 || nickname.length>8){
@@ -103,17 +103,17 @@ window.onmessage=(e)=>{
 
       lat=JSONDATA.x;
       lng=JSONDATA.y;
-      $.get("http://hume.co.kr/facechat2/sql/select_overap_name.php",{
+      $.get("http://ksar.co.kr/facechat2/sql/select_overap_name.php",{
         name:nickname
       }).done((r)=>{
         if(r=="true"){
           alert("중복된 닉네임 입니다.");
         }else{
           var sql="delete from facechat_user where phone='"+phone+"'";
-          $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{sql:sql}).done((r)=>{
-            var sql="insert into facechat_user values(null,'','"+nickname+"','Hume','"+sex+"','친구만나기',now(),'"+img+"','"+phone+"',3000,123,"+age+","+lat+","+lng+");";
+          $.post("http://ksar.co.kr/facechat2/sql/insert_user_sigin.php",{sql:sql}).done((r)=>{
+            var sql="insert into facechat_user values(null,'','"+nickname+"','Hume','"+sex+"','친구만나기',now(),'"+img+"','"+phone+"',3000,0,"+age+","+lat+","+lng+");";
             $('#loading_modal').css("display","block");
-            $.post("http://hume.co.kr/facechat2/sql/insert_user_sigin.php",{
+            $.post("http://ksar.co.kr/facechat2/sql/insert_user_sigin.php",{
               sql:sql
             }).done((r)=>{
               window.parent.postMessage('{"title":"signin","name":"'+nickname+'"}',"*");

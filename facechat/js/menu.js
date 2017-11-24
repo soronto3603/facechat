@@ -23,7 +23,7 @@ window.onload=()=>{
   }
 }
 function session_connecting(){
-  $.get("http://hume.co.kr/facechat2/sql/update_session_connecting.php",{phone:phone}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/update_session_connecting.php",{phone:phone}).done((r)=>{
 
   });
 }
@@ -41,7 +41,7 @@ function togotosettings(){
   window.parent.postMessage("location_settings","*");
 }
 function click_menu(btn){
-  var url="http://hume.co.kr/facechat2/"+btn+".php";
+  var url="http://ksar.co.kr/facechat2/"+btn+".php";
   document.getElementById('content_iframe').src=url;
 }
 function menu_size(){
@@ -49,9 +49,9 @@ function menu_size(){
   $('#content_iframe').css("height",height);
 }
 function get_my_point(){
-  $.get("http://hume.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:phone}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:phone}).done((r)=>{
     var json=JSON.parse(r);
-    $('#my_point').html('<img src="http://hume.co.kr/facechat2/img/iconmonstr-coin-2-32.png" width="18" height="18" style="position: relative;top: 3px;right:3px;">'+json[9]+"P");
+    $('#my_point').html('<img src="http://ksar.co.kr/facechat2/img/iconmonstr-coin-2-32.png" width="18" height="18" style="position: relative;top: 3px;right:3px;">'+json[9]+"P");
     point=json[9];
     sex=json[4];
     console.log("sex:"+sex);
@@ -79,7 +79,7 @@ window.onmessage=(e)=>{
   }else if(e.data=="backbutton"){
     var current_url=document.getElementById('content_iframe').src;
     if(current_url.indexOf("cashback.php")!=-1 || current_url.indexOf("charge.php")!=-1 || current_url.indexOf("notice.php")!=-1 || current_url.indexOf("point_log.php")!=-1||current_url.indexOf("update.php")!=-1){
-      document.getElementById('content_iframe').src="http://hume.co.kr/facechat2/more.php";
+      document.getElementById('content_iframe').src="http://ksar.co.kr/facechat2/more.php";
     }else{
       if(document.getElementById('modal_exit').style.display=="block" || document.getElementById('modal_send_msg').style.display=="block"){
         document.getElementById('modal_exit').style.display="none";
@@ -99,7 +99,7 @@ window.onmessage=(e)=>{
   }else{
     var obj=JSON.parse(e.data);
     if(obj.title=="ThumbUri"){
-      document.getElementById('content_iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"http://hume.co.kr/facechat2/profileimg/'+obj.ThumbUri+'"}',"*");
+      document.getElementById('content_iframe').contentWindow.postMessage('{"title":"ThumbUri","ThumbUri":"http://ksar.co.kr/facechat2/profileimg/'+obj.ThumbUri+'"}',"*");
     }else if(obj.title=="payment"){
       window.parent.postMessage(e.data,"*");
     }else if(obj.title=="facechat"){
@@ -120,7 +120,7 @@ window.onmessage=(e)=>{
         lng=obj.y;
         $('#modal_location').css("display","none");
       }
-      $.get("http://hume.co.kr/facechat2/sql/update_user_loc.php",{phone:phone,x:lat,y:lng}).done((r)=>{
+      $.get("http://ksar.co.kr/facechat2/sql/update_user_loc.php",{phone:phone,x:lat,y:lng}).done((r)=>{
         console.log("menu.js"+r);
       });
     }else if(obj.title=="more"){
@@ -130,7 +130,7 @@ window.onmessage=(e)=>{
       click_menu("live");
       window.parent.postMessage('{"title":"signin","name":"'+obj.name+'"}',"*");
     }else if(obj.title=="chatroom"){
-      window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+obj.phone+'","back_url":"message"}',"*");
+      window.parent.postMessage('{"title":"chatroom","talk":"http://ksar.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+obj.phone+'","back_url":"message"}',"*");
     }else if(obj.title=="imageView"){
       photoviewer(obj.url);
     }else{
@@ -182,7 +182,7 @@ function modal_send_msg(phone,img){
 var target_phone;
 function send_message(){
   if(sex==0){
-    $.get("http://hume.co.kr/facechat2/sql/update_user_point_by_phone.php",{phone:phone,point:"-10",why:2}).done((r)=>{
+    $.get("http://ksar.co.kr/facechat2/sql/update_user_point_by_phone.php",{phone:phone,point:"-10",why:2}).done((r)=>{
       console.log(r);
       if(r=="false"){
         alert("포인트가 모자랍니다.");
@@ -190,9 +190,9 @@ function send_message(){
         target_phone=document.getElementById('input_send_msg_phone').value;
         var text=document.getElementById('input_send_msg').value;
         close_send_message();
-        $.post("http://hume.co.kr/facechat2/sql/insert_chat.php",{fromid:phone,toid:target_phone,content:text}).done((r)=>{
+        $.post("http://ksar.co.kr/facechat2/sql/insert_chat.php",{fromid:phone,toid:target_phone,content:text}).done((r)=>{
           document.getElementById('input_send_msg').value='';
-          window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+target_phone+'","back_url":"message"}',"*");
+          window.parent.postMessage('{"title":"chatroom","talk":"http://ksar.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+target_phone+'","back_url":"message"}',"*");
         });
       }
     });
@@ -200,10 +200,10 @@ function send_message(){
     target_phone=document.getElementById('input_send_msg_phone').value;
     var text=document.getElementById('input_send_msg').value;
     close_send_message();
-    $.post("http://hume.co.kr/facechat2/sql/insert_chat.php",{fromid:phone,toid:target_phone,content:text}).done((r)=>{
+    $.post("http://ksar.co.kr/facechat2/sql/insert_chat.php",{fromid:phone,toid:target_phone,content:text}).done((r)=>{
       //alert("전송완료");
       document.getElementById('input_send_msg').value='';
-      window.parent.postMessage('{"title":"chatroom","talk":"http://hume.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+target_phone+'","back_url":"message"}',"*");
+      window.parent.postMessage('{"title":"chatroom","talk":"http://ksar.co.kr/facechat2/talk/index.php?phone='+phone+'&target='+target_phone+'","back_url":"message"}',"*");
     });
   }
 }

@@ -1,0 +1,48 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+body{
+	font-family: 'Hanna', serif;
+	background-color: #ababab;
+}
+#gv{
+	font-size: 20px;
+	border-right:1px solid white;
+	border-bottom:1px solid white;
+}
+#mem{
+	width: 100%;
+	font-size: 20px;
+	border-right:1px solid white;
+	border-bottom:1px solid white;
+}
+td{
+	border-top:1px solid white;	
+	border-left:1px solid white;
+	padding:5px;	
+}
+.profile{
+	width:100px;
+	height: 100px;
+}
+
+.btn{
+	padding: 10px;
+	width:60px;
+	height: 30px;
+	color:white;
+	text-align: center;
+	line-height: 30px;
+	background-color: #323323;
+	font-size: 15px;
+}
+
+.inputtext{
+	padding:5px;
+	height:30px;
+	font-family: 'Hanna', serif;
+	font-size: 15px;
+}
+.short{
+	width:60px;
+}
+

@@ -265,7 +265,7 @@
                         CheckMyid(user.id);
                         splash_animation(100);
                         console.log("123");
-                        document.getElementById('iframe').src="http://hume.co.kr/facechat2/index.php";
+                        document.getElementById('iframe').src="http://ksar.co.kr/facechat2/index.php";
                         //document.getElementById('iframe').contentWindow.postMessage('LoadOff','*');
                     }
                 });

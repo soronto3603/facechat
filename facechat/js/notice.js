@@ -10,7 +10,7 @@ function open_div(number){
 
 }
 function get_notice(){
-  $.get("http://hume.co.kr/facechat2/sql/select_notice.php").done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/select_notice.php").done((r)=>{
     var obj=JSON.parse(r);
     for(var i=0;i<obj.length;i++){
       var html='<div class="line" onclick="open_div('+obj[i][0]+')">';

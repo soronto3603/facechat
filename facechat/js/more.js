@@ -2,15 +2,15 @@ var my_phone;
 var user_info;
 
 function click_menu(str){
-  var uri="http://hume.co.kr/facechat2/"+str+".php";
+  var uri="http://ksar.co.kr/facechat2/"+str+".php";
   window.parent.postMessage('{"title":"more","more":"'+uri+'"}',"*");
 }
 function daydaycheck(){
   var value=50;
-  $.post("http://hume.co.kr/facechat2/sql/select_daydaycheck.php",{id:my_phone}).done((r)=>{
+  $.post("http://ksar.co.kr/facechat2/sql/select_daydaycheck.php",{id:my_phone}).done((r)=>{
     console.log("more.js:daydaycheck Function"+r);
     if(r=="False"){
-      $.post("http://hume.co.kr/facechat2/sql/insert_point_by_phone.php",{phone:my_phone,value:value,why:"3"}).done((r)=>{
+      $.post("http://ksar.co.kr/facechat2/sql/insert_point_by_phone.php",{phone:my_phone,value:value,why:"3"}).done((r)=>{
 
         alert("50포인트 출첵완료");
       });
@@ -21,7 +21,7 @@ function daydaycheck(){
   });
 }
 function get_user_data(){
-  $.get("http://hume.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:my_phone}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/select_user_one_by_phone.php",{phone:my_phone}).done((r)=>{
     user_info=JSON.parse(r);
     document.getElementById('profile_img').src=user_info[7];
     var sex_text;

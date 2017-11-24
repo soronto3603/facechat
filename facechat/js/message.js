@@ -16,7 +16,7 @@ var my_lng;
 var chatroom_list=[];
 function get_chatroom_list(){
   document.getElementById('contents').innerHTML="";
-  $.get("http://hume.co.kr/facechat2/sql/select_chat_user.php",{phone:my_phone}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/select_chat_user.php",{phone:my_phone}).done((r)=>{
     var chatroom_json=JSON.parse(r);
     for(var i=0;i<chatroom_json.length;i++){
       for(var j=0;j<chatroom_json.length;j++){
@@ -45,7 +45,7 @@ function get_chatroom_list(){
       var target_phone;
       if(chatroom_json[i][1]==my_phone)target_phone=chatroom_json[i][2];
       else if(chatroom_json[i][2]==my_phone)target_phone=chatroom_json[i][1];
-      $.post("http://hume.co.kr/facechat2/sql/select_user_by_chatroom.php",{target:target_phone,phone:my_phone,date:chatroom_json[i][3],last_update:chatroom_json[i][4]}).done((re)=>{
+      $.post("http://ksar.co.kr/facechat2/sql/select_user_by_chatroom.php",{target:target_phone,phone:my_phone,date:chatroom_json[i][3],last_update:chatroom_json[i][4]}).done((re)=>{
         if(re=="false"){
 
         }else{

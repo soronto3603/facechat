@@ -23,7 +23,7 @@ function click_like(){
   var swiperno=swiper.activeIndex;
   document.getElementById('like'+user_info_array[swiperno]['id']).innerHTML=document.getElementById('like'+user_info_array[swiperno]['id']).innerHTML*1+1;
 
-  $.get("http://hume.co.kr/facechat2/sql/update_like_by_phone.php",{phone:user_info_array[swiperno]['phone']}).done((r)=>{
+  $.get("http://ksar.co.kr/facechat2/sql/update_like_by_phone.php",{phone:user_info_array[swiperno]['phone']}).done((r)=>{
     console.log("["+user_info_array[swiperno]['phone']+"] plus a like");
   });
 }
@@ -86,17 +86,40 @@ function rank_box_size(){
   // var height=$(window).height()*0.5-70;
   // $('.rank_list_box').css("height",height);
 }
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  if (typeof(Number.prototype.toRad) === "undefined") {
+    Number.prototype.toRad = function() {
+      return this * Math.PI / 180;
+    }
+  }
+  lat1=lat1*1;lon1=lon1*1;lat2=lat2*1;lon2=lon2*1;
+  var R = 6371; // km
+  var dLat = (lat2-lat1).toRad();
+  var dLon = (lon2-lon1).toRad();
+  var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+          Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+          Math.sin(dLon/2) * Math.sin(dLon/2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c;
+  return d;
+}
 var rank_count=1;
-function add_line(imguri,text,nickname,sex,age,loc,time,id,phone_){
+function add_line(imguri,text,nickname,sex,age,loc,time,id,phone_,lat_,lng_){
   var line_text_width=$(window).width()-260;
   var sex_color;
   var sex_text;
 
 
+  a_loc=Math.round(calculateDistance(my_lat,my_lng,lng_,lat_));
+  console.log("distance"+a_loc);
+  if(a_loc>10000)a_loc="???";
+  else{
+    a_loc=a_loc+"";
+    a_loc=a_loc;
+  }
 
-  var a_loc=Math.round(parseFloat(loc));
+  //var a_loc=Math.round(parseFloat(loc));
   //강원도 - 제주도 617km
-  if(a_loc>617)a_loc="???";
 
   if(sex==0){
     sex_color="man";
@@ -123,14 +146,15 @@ function add_line(imguri,text,nickname,sex,age,loc,time,id,phone_){
   document.getElementById('rank_box').innerHTML+=html;
 }
 function get_users_info(){
-  $.post("http://hume.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:phone,type:""}).done((r)=>{
+  $.post("http://ksar.co.kr/facechat2/sql/select_user.php",{lat:my_lat,lng:my_lng,phone:phone,type:""}).done((r)=>{
     var user_json=JSON.parse(r);
+
     if(user_json.length==0){
       document.getElementById('rank_box').innerHTML='<div class=nothing_user_line>접속중인 유저가 없습니다.</div>';
     }
     for(var i=0;i<user_json.length;i++){
       if(user_json[i][4]==my_sex)continue;
-      add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8]);
+      add_line(user_json[i][7],user_json[i][5],user_json[i][2],user_json[i][4],user_json[i][11],user_json[i][13],user_json[i][6],user_json[i][1],user_json[i][8],user_json[i][12],user_json[i][13]);
     }
   });
 }
@@ -141,7 +165,7 @@ function get_users_info(){
 function get_user_data(){
   swiper.removeAllSlides();
   //phone="821058837630";
-  $.post("http://hume.co.kr/facechat2/sql/select_user_point.php",{phone:phone}).done((r)=>{
+  $.post("http://ksar.co.kr/facechat2/sql/select_user_point.php",{phone:phone}).done((r)=>{
     var user_json=JSON.parse(r);
     console.log("live.js"+r);
     if(user_json.length==0){
@@ -166,7 +190,7 @@ window.onmessage=(e)=>{
     var JSONDATA=JSON.parse(e.data);
     if(JSONDATA.title=="phone"){
       phone=JSONDATA.phone;
-      $.get("http://hume.co.kr/facechat2/sql/select_sex_by_phone.php",{phone:phone}).done((r)=>{
+      $.get("http://ksar.co.kr/facechat2/sql/select_sex_by_phone.php",{phone:phone}).done((r)=>{
         my_sex=r;
         window.parent.postMessage("Reload","*");
         window.parent.postMessage("location","*");

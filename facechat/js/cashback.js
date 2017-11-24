@@ -48,7 +48,7 @@ function insert_cashback(){
     return;
   }
 
-  $.post("http://hume.co.kr/facechat2/sql/insert_cacheback.php",{name:name,phone:phone,number:number,address:address,bank:bank,acoount:account,price:price}).done((r)=>{
+  $.post("http://ksar.co.kr/facechat2/sql/insert_cacheback.php",{name:name,phone:phone,number:number,address:address,bank:bank,acoount:account,price:price}).done((r)=>{
     console.log(r);
     alert("신청되었습니다.")
   });

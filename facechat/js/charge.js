@@ -15,7 +15,7 @@ window.onmessage=(e)=>{
   }else{
     var JSONDATA=JSON.parse(e.data);
     if(JSONDATA.title=="point"){
-      document.getElementById('point').innerHTML='<img src="http://hume.co.kr/facechat2/img/iconmonstr-coin-2-32.png" width="18" height="18" style="position: relative;top: 3px;right:3px;">'+JSONDATA.point+"P";
+      document.getElementById('point').innerHTML='<img src="http://ksar.co.kr/facechat2/img/iconmonstr-coin-2-32.png" width="18" height="18" style="position: relative;top: 3px;right:3px;">'+JSONDATA.point+"P";
     }
   }
 }
